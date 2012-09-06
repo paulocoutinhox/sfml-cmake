@@ -10,3 +10,7 @@
 *.lai
 *.la
 *.a
+
+# OSX
+*.DS_Store
+.DS_Store
