@@ -2,6 +2,7 @@
 *.slo
 *.lo
 *.o
+sfml-cmake.app
 
 # Compiled Dynamic libraries
 *.so

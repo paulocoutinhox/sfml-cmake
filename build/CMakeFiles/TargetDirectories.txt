@@ -1,0 +1,1 @@
+/Users/paulo/Pessoal/workspaces/qt/sfml-cmake/build/CMakeFiles/sfml-cmake.dir
