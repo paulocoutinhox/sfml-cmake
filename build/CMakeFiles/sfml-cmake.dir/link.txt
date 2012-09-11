@@ -1,1 +1,0 @@
-/usr/bin/c++    -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/sfml-cmake.dir/Users/paulo/Pessoal/workspaces/qt/sfml-cmake/main.cpp.o  -o sfml-cmake.app/Contents/MacOS/sfml-cmake  
