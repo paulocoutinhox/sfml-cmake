@@ -9,7 +9,13 @@ set(
     ../main.cpp
 )
 
-set(TARGET_SYSTEM "mac")
+if(APPLE)
+    set(TARGET_SYSTEM "mac")
+elseif(WIN32)
+    set(TARGET_SYSTEM "win32")
+else()
+    set(TARGET_SYSTEM "linux")
+endif()
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/build/cmake/modules")
 
@@ -20,13 +26,6 @@ set(SFML_LIBRARY_DIR "${CMAKE_SOURCE_DIR}/library/sfml/${TARGET_SYSTEM}/lib")
 # nome do projeto
 project(${PROJECT_NAME})
 
-# compila
-add_executable(
-    ${PROJECT_NAME}
-    MACOSX_BUNDLE
-    ${GAME_ALL_SOURCES}
-)
-
 # biblioteca SFML
 find_package(SFML COMPONENTS system window graphics network audio REQUIRED)
 
@@ -34,15 +33,21 @@ include_directories(
     ${SFML_INCLUDE_DIR}
 )
 
-link_directories(
-    ${SFML_LIBRARY_DIR}
+set_source_files_properties(${SFML_LIBRARIES} PROPERTIES MACOSX_PACKAGE_LOCATION Frameworks)
+
+# compila
+add_executable(
+    ${PROJECT_NAME}
+    MACOSX_BUNDLE
+    ${GAME_ALL_SOURCES}
+    ${SFML_LIBRARIES}
 )
 
 # link de bibliotecas
 target_link_libraries(${PROJECT_NAME} ${SFML_LIBRARIES})
 
 # propriedade dos arquivos
-SET_SOURCE_FILES_PROPERTIES(
+set_source_files_properties(
     ../resources/*
     PROPERTIES
     MACOSX_PACKAGE_LOCATION Resources
