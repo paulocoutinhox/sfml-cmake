@@ -25,9 +25,9 @@ add_executable(
 find_package(SFML REQUIRED system window graphics network audio)
 target_link_libraries(${PROJECT_NAME} ${SFML_LIBRARIES})
 
-include_directories(
-    ${CMAKE_SOURCE_DIR}/library/sfml/mac/include
-)
+#include_directories(
+    #${CMAKE_SOURCE_DIR}/library/sfml/mac/include
+#)
 
 #link_directories(
 #    ${CMAKE_CURRENT_SOURCE_DIR}/../library/sfml/mac/lib
