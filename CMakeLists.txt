@@ -9,7 +9,13 @@ set(
     ../main.cpp
 )
 
+set(TARGET_SYSTEM "mac")
+
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/build/cmake/modules")
+
+set(SFML_ROOT "${CMAKE_SOURCE_DIR}/library/sfml/${TARGET_SYSTEM}/lib")
+set(SFML_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/library/sfml/${TARGET_SYSTEM}/include")
+set(SFML_LIBRARY_DIR "${CMAKE_SOURCE_DIR}/library/sfml/${TARGET_SYSTEM}/lib")
 
 # nome do projeto
 project(${PROJECT_NAME})
@@ -22,35 +28,22 @@ add_executable(
 )
 
 # biblioteca SFML
-find_package(SFML REQUIRED system window graphics network audio)
+find_package(SFML COMPONENTS system window graphics network audio REQUIRED)
+
+include_directories(
+    ${SFML_INCLUDE_DIR}
+)
+
+link_directories(
+    ${SFML_LIBRARY_DIR}
+)
+
+# link de bibliotecas
 target_link_libraries(${PROJECT_NAME} ${SFML_LIBRARIES})
 
-#include_directories(
-    #${CMAKE_SOURCE_DIR}/library/sfml/mac/include
-#)
-
-#link_directories(
-#    ${CMAKE_CURRENT_SOURCE_DIR}/../library/sfml/mac/lib
-#)
-
-
-# link com as bibliotecas
-#target_link_libraries(
-#    sfml-main
-#    sfml-system
-#    sfml-window
-#)
-
-#SET_SOURCE_FILES_PROPERTIES(
-    # arquivos
-#    PROPERTIES
-#    MACOSX_PACKAGE_LOCATION MacOSX
-#)
-
+# propriedade dos arquivos
 SET_SOURCE_FILES_PROPERTIES(
     ../resources/*
     PROPERTIES
     MACOSX_PACKAGE_LOCATION Resources
 )
-
-#install(TARGETS sfml-cmake DESTINATION bin)
