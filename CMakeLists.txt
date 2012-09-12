@@ -22,6 +22,7 @@ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/build/cmake/modules")
 set(SFML_ROOT "${CMAKE_SOURCE_DIR}/library/sfml/${TARGET_SYSTEM}/lib")
 set(SFML_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/library/sfml/${TARGET_SYSTEM}/include")
 set(SFML_LIBRARY_DIR "${CMAKE_SOURCE_DIR}/library/sfml/${TARGET_SYSTEM}/lib")
+set(SNDFILE_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/library/sfml/${TARGET_SYSTEM}/lib")
 
 # nome do projeto
 project(${PROJECT_NAME})
@@ -33,7 +34,8 @@ include_directories(
     ${SFML_INCLUDE_DIR}
 )
 
-set_source_files_properties(${SFML_LIBRARIES} PROPERTIES MACOSX_PACKAGE_LOCATION Frameworks)
+# biblioteca SNDFILE
+find_package(SNDFILE REQUIRED)
 
 # compila
 add_executable(
@@ -41,14 +43,20 @@ add_executable(
     MACOSX_BUNDLE
     ${GAME_ALL_SOURCES}
     ${SFML_LIBRARIES}
+    ${SNDFILE_LIBRARY}
 )
 
 # link de bibliotecas
-target_link_libraries(${PROJECT_NAME} ${SFML_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${SFML_LIBRARIES} ${SNDFILE_LIBRARY})
 
-# propriedade dos arquivos
-set_source_files_properties(
-    ../resources/*
-    PROPERTIES
-    MACOSX_PACKAGE_LOCATION Resources
-)
+# copia arquivos
+if(APPLE)
+    add_custom_command(
+        TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory "${SFML_LIBRARY_DIR}" "${CMAKE_SOURCE_DIR}/build/${PROJECT_NAME}.app/Contents/Frameworks"
+    )
+elseif(WIN32)
+    # implementar
+else()
+    # implementar
+endif()
