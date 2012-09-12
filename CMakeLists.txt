@@ -14,6 +14,13 @@ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/build/cmake/modules")
 # nome do projeto
 project(${PROJECT_NAME})
 
+# compila
+add_executable(
+    ${PROJECT_NAME}
+    MACOSX_BUNDLE
+    ${GAME_ALL_SOURCES}
+)
+
 # biblioteca SFML
 find_package(SFML REQUIRED system window graphics network audio)
 target_link_libraries(${PROJECT_NAME} ${SFML_LIBRARIES})
@@ -26,12 +33,6 @@ include_directories(
 #    ${CMAKE_CURRENT_SOURCE_DIR}/../library/sfml/mac/lib
 #)
 
-# compila
-ADD_EXECUTABLE(
-    ${PROJECT_NAME}
-    MACOSX_BUNDLE
-    ${GAME_ALL_SOURCES}
-)
 
 # link com as bibliotecas
 #target_link_libraries(

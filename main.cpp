@@ -4,7 +4,7 @@ int main()
 {
     sf::RenderWindow Window(sf::VideoMode(800, 600, 32), "SFML Sample Application");
 
-    while (Window.isOpened())
+    while (Window.isOpen())
     {
         sf::Event Event;
         while (Window.pollEvent(Event))
@@ -19,7 +19,7 @@ int main()
             }
         }
 
-        Window.clear(sf::Color(0, 255, 255));
+        Window.clear(sf::Color(255, 255, 255));
         Window.display();
     }
 
