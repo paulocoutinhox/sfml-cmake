@@ -9,8 +9,22 @@ set(
     ../main.cpp
 )
 
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/build/cmake/modules")
+
 # nome do projeto
 project(sfml-cmake)
+
+# biblioteca SFML
+find_package(SFML REQUIRED system window graphics network audio)
+target_link_libraries(${EXECUTABLE_NAME} ${SFML_LIBRARIES})
+
+include_directories(
+    ${CMAKE_SOURCE_DIR}/library/sfml/mac/include
+)
+
+#link_directories(
+#    ${CMAKE_CURRENT_SOURCE_DIR}/../library/sfml/mac/lib
+#)
 
 # compila
 ADD_EXECUTABLE(
@@ -18,6 +32,13 @@ ADD_EXECUTABLE(
     MACOSX_BUNDLE
     ${GAME_ALL_SOURCES}
 )
+
+# link com as bibliotecas
+#target_link_libraries(
+#    sfml-main
+#    sfml-system
+#    sfml-window
+#)
 
 #SET_SOURCE_FILES_PROPERTIES(
     # arquivos
@@ -31,4 +52,4 @@ SET_SOURCE_FILES_PROPERTIES(
     MACOSX_PACKAGE_LOCATION Resources
 )
 
-install(TARGETS sfml-cmake DESTINATION bin)
+#install(TARGETS sfml-cmake DESTINATION bin)

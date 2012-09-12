@@ -9,6 +9,5 @@ OTHER_FILES += \
     build/build.sh \
     build/clean.sh \
     CMakeLists.txt \
-    .gitignore \
-    build/build_sfml.sh
+    .gitignore
 
