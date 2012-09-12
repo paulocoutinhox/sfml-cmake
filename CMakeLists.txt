@@ -16,7 +16,7 @@ project(sfml-cmake)
 
 # biblioteca SFML
 find_package(SFML REQUIRED system window graphics network audio)
-target_link_libraries(${EXECUTABLE_NAME} ${SFML_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${SFML_LIBRARIES})
 
 include_directories(
     ${CMAKE_SOURCE_DIR}/library/sfml/mac/include
