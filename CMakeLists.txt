@@ -7,6 +7,8 @@ set(PROJECT_NAME "sfml-project")
 set(
     GAME_ALL_SOURCES
     ../main.cpp
+    ../sf_v8.cpp
+    ../v8wrap.cpp
 )
 
 if(APPLE)
@@ -23,6 +25,8 @@ set(SFML_ROOT "${CMAKE_SOURCE_DIR}/library/sfml/${TARGET_SYSTEM}/lib")
 set(SFML_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/library/sfml/${TARGET_SYSTEM}/include")
 set(SFML_LIBRARY_DIR "${CMAKE_SOURCE_DIR}/library/sfml/${TARGET_SYSTEM}/lib")
 set(SNDFILE_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/library/sfml/${TARGET_SYSTEM}/lib")
+set(V8_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/library/v8/${TARGET_SYSTEM}/include")
+set(V8_LIBRARY_DIR "${CMAKE_SOURCE_DIR}/library/v8/${TARGET_SYSTEM}/lib")
 
 # nome do projeto
 project(${PROJECT_NAME})
@@ -37,6 +41,13 @@ include_directories(
 # biblioteca SNDFILE
 find_package(SNDFILE REQUIRED)
 
+# biblioteca V8
+include_directories(
+    ${V8_INCLUDE_DIR}
+)
+
+find_library(V8_LIBRARIES v8 ${V8_LIBRARY_DIR})
+
 # compila
 add_executable(
     ${PROJECT_NAME}
@@ -44,10 +55,11 @@ add_executable(
     ${GAME_ALL_SOURCES}
     ${SFML_LIBRARIES}
     ${SNDFILE_LIBRARY}
+    ${V8_LIBRARIES}
 )
 
 # link de bibliotecas
-target_link_libraries(${PROJECT_NAME} ${SFML_LIBRARIES} ${SNDFILE_LIBRARY})
+target_link_libraries(${PROJECT_NAME} ${SFML_LIBRARIES} ${SNDFILE_LIBRARY} ${V8_LIBRARIES})
 
 # copia arquivos
 if(APPLE)
