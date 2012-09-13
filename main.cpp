@@ -59,6 +59,11 @@ int main()
 
     sf::RenderWindow window(sf::VideoMode(800, 600, 32), "SFML Sample Application");
 
+    sf::Texture texture;
+    if (!texture.loadFromFile("/tmp/robot1.png"))
+        return EXIT_FAILURE;
+    sf::Sprite sprite(texture);
+
     while (window.isOpen())
     {
         sf::Event Event;
@@ -79,6 +84,7 @@ int main()
         v8::Handle<v8::Value> result = script->Run();
 
         window.clear(sf::Color(255, 255, 255));
+        window.draw(sprite);
         window.display();
     }
 
