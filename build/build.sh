@@ -1,3 +1,2 @@
 cmake ../
 make
-make install
