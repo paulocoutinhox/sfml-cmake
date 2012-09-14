@@ -57,9 +57,9 @@ int main()
 {
     v8::HandleScope handleScope;
     v8::Persistent<v8::Context> context = v8::Context::New();
-    v8::Context::Scope context_scope(context);
+    v8::Context::Scope contextScope(context);
 
-    //context->Global()->Set(v8::String::New("sf"), sf_v8::sf::Init());
+    context->Global()->Set(v8::String::New("sf"), sf_v8::sf::Init());
 
     /*
     // EXEMPLO - IMPRIMIR STRING
