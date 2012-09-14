@@ -7,7 +7,8 @@
     std::string resourcePath(void) { return ""; }
 #endif
 
-#include "character.h"
+#include "Character.h"
+#include "JSCharacter.h"
 
 v8::Persistent<v8::Context> CreateShellContext() {
     v8::Handle<v8::ObjectTemplate> global = v8::ObjectTemplate::New();
@@ -50,13 +51,15 @@ char *get(v8::Handle<v8::String> value, const char *fallback = "") {
     return str;
 }
 
+Character *robot1;
+
 int main()
 {
     v8::HandleScope handleScope;
     v8::Persistent<v8::Context> context = v8::Context::New();
     v8::Context::Scope context_scope(context);
 
-    context->Global()->Set(v8::String::New("sf"), sf_v8::sf::Init());
+    //context->Global()->Set(v8::String::New("sf"), sf_v8::sf::Init());
 
     /*
     // EXEMPLO - IMPRIMIR STRING
@@ -76,21 +79,37 @@ int main()
 
     sf::RenderWindow window(sf::VideoMode(800, 600, 32), "SFML Sample Application");
 
+
+    // teste com classe customizada
+    robot1 = new Character();
+    robot1->setType("robot1");
+
+    /*
+    JSCharacter::InitPOT(JSCharacter::POT);
+    v8::Handle<v8::Object> Result = JSCharacter::POT->NewInstance();
+    JSCharacter::MakeReference(Result, robot1);
+    context->Global()->Set(v8::String::New("robot1"), Result);
+    */
+
+    /*
+    // teste com sprite somente
     sf::Texture texture;
     if (!texture.loadFromFile(resourcePath() + "images/robot1.png"))
         return EXIT_FAILURE;
     sf::Sprite sprite(texture);
 
-    /*
-    Character *robot1 = new Character();
-    v8::Handle<v8::Object> Result = Character::POT->NewInstance();
-    Character::MakeReference(Result, robot1);
-    context->Global()->Set(v8::String::New("robot1"), Result);
-    */
     sf::Sprite *robot1 = &sprite;
     v8::Handle<v8::Object> Result = sf_v8::sf_Sprite::POT->NewInstance();
     sf_v8::sf_Sprite::MakeReference(Result, robot1);
     context->Global()->Set(v8::String::New("robot1"), Result);
+    */
+
+    sf::Texture texture;
+    if (!texture.loadFromFile(resourcePath() + "images/robot1.png"))
+    {
+        throw new std::exception();
+    }
+    sf::Sprite *sprite = new sf::Sprite(texture);
 
     while (window.isOpen())
     {
@@ -112,13 +131,16 @@ int main()
         v8::Handle<v8::Value> result = script->Run();
 
         window.clear(sf::Color(255, 255, 255));
-        window.draw(sprite);
+        window.draw(*robot1->getSprite());
+        window.draw(*sprite);
         window.display();
 
         sleep(1);
     }
 
     context.Dispose();
+    delete robot1;
+    delete sprite;
 
     return 0;
 }

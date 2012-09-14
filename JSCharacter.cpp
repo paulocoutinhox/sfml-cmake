@@ -1,62 +1,47 @@
-#include "character.h"
+#include "JSCharacter.h"
 
-const char *Character::Bases     = "Character\0\0";
-const char *Character::ClassName = "Character";
-/*
-Character::Character()
+const char *JSCharacter::Bases     = "JSCharacter\0\0";
+const char *JSCharacter::ClassName = "JSCharacter";
+
+v8::Handle<v8::Value> JSCharacter::Create(const v8::Arguments &args)
 {
-
-}
-
-Character::Character(const std::string type)
-{
-    this->type = type;
-    loadSprite();
-}
-
-void Character::loadSprite()
-{
-    sf::Texture texture;
-    if (!texture.loadFromFile(resourcePath() + "images/" + type + ".png"))
+    if (args.IsConstructCall())
     {
-        throw new std::exception();
-    }
-    sprite = new sf::Sprite(texture);
-}
-*/
-v8::Handle<v8::Value> Character::Create(const v8::Arguments &args)
-{
-    if ( args.IsConstructCall() ) {
-        if ( args.Length() == 0 ) {
+        if (args.Length() == 0)
+        {
             v8::Handle<v8::Object> JSinst = POT->NewInstance();
             JSinst->SetPrototype(args.This()->GetPrototype());
             MyClass *inst = new MyClass();
             MakeReference(JSinst, inst);
             return JSinst;
-        } else {
+        }
+        else
+        {
             return v8::ThrowException(v8::Exception::Error(v8::String::New(v8wrap::sInvalidArgs)));
         }
-    } else {
+    }
+    else
+    {
         return v8::ThrowException(v8::Exception::Error(v8::String::New(v8wrap::sUseNew)));
     }
 }
 
-void Character::Delete(MyClass *inst)
+void JSCharacter::Delete(MyClass *inst)
 {
     delete inst;
 }
 
-void Character::InitPOT(v8::Handle<v8::ObjectTemplate> target)
+void JSCharacter::InitPOT(v8::Handle<v8::ObjectTemplate> target)
 {
     if ( POT.IsEmpty() )
     {
         POT = v8::Persistent<v8::ObjectTemplate>::New(v8::ObjectTemplate::New());
-        POT->SetInternalFieldCount(1);
+        POT->SetInternalFieldCount(3);
         Register(POT);
     }
 }
 
-void Character::InitPFT(v8::Handle<v8::ObjectTemplate> target)
+void JSCharacter::InitPFT(v8::Handle<v8::ObjectTemplate> target)
 {
     if ( PFT.IsEmpty() )
     {
@@ -68,13 +53,13 @@ void Character::InitPFT(v8::Handle<v8::ObjectTemplate> target)
     target->Set(v8::String::New("Time"), FO);
 }
 
-void Character::Register(v8::Handle<v8::ObjectTemplate> target)
+void JSCharacter::Register(v8::Handle<v8::ObjectTemplate> target)
 {
     target->Set("className", v8::String::New(ClassName));
     target->Set("_delete", v8::FunctionTemplate::New(Object_delete));
 }
 
-void Character::Register(v8::Handle<v8::FunctionTemplate> target)
+void JSCharacter::Register(v8::Handle<v8::FunctionTemplate> target)
 {
     if ( PFT.IsEmpty() )
     {
@@ -84,17 +69,17 @@ void Character::Register(v8::Handle<v8::FunctionTemplate> target)
     }
 }
 
-v8::Handle<v8::Value> Character::Object_copy(const v8::Arguments &args)
+v8::Handle<v8::Value> JSCharacter::Object_copy(const v8::Arguments &args)
 {
     v8::HandleScope scope;
     v8::Handle<v8::Value> result;
     MyClass *inst = ((MyClass*)v8::External::Unwrap(args.Holder()->GetInternalField(0)));
     MyClass *copy = new MyClass(*inst);
-    result = CastToJS(copy);
+    result = v8wrap::CastToJS(copy);
     return scope.Close(result);
 }
 
-v8::Handle<v8::Value> Character::Object_delete(const v8::Arguments &args)
+v8::Handle<v8::Value> JSCharacter::Object_delete(const v8::Arguments &args)
 {
     v8::HandleScope scope;
     v8::Handle<v8::Value> result = v8::Undefined();

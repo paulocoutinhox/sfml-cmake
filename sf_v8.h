@@ -1,5 +1,6 @@
-/*
+/***
 SFML-V8-Binding Project
+The zlib/libpng License
 Copyright (c) 2012 Steven Christy
 
 This software is provided 'as-is', without any express or implied warranty. In no event will
@@ -15,13 +16,11 @@ documentation would be appreciated but is not required.
 being the original software.
 
 3. This notice may not be removed or altered from any source distribution.
-*/
+***/
 
 //----------------------------------------
-// Created: 2012-07-18 05:34:56
+// Created: 2012-07-01 17:32:52
 //----------------------------------------
-#ifndef __sf_v8_H__
-#define __sf_v8_H__
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
@@ -33,780 +32,701 @@ being the original software.
 #include <v8.h>
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Font &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Font &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Font &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Font *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Font *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Font *&CPP);
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Font &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Font &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Font &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Font *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Font *&CPP);
 }
 //----------------------------------------
 #ifndef NO_SFML_NETWORK
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::SocketSelector &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::SocketSelector &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SocketSelector &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::SocketSelector *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::SocketSelector *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SocketSelector *&CPP);
+inline v8::Handle<v8::Value> CastToJS(const ::sf::SocketSelector &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::SocketSelector &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SocketSelector &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::SocketSelector *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SocketSelector *&CPP);
 }
 //----------------------------------------
 #endif
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::View &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::View &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::View &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::View *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::View *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::View *&CPP);
+inline v8::Handle<v8::Value> CastToJS(const ::sf::View &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::View &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::View &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::View *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::View *&CPP);
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::RenderWindow &JS);
-v8::Handle<v8::Value> CastToJS(::sf::RenderWindow *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::RenderWindow *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::RenderWindow *&CPP);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::RenderWindow &JS);
+inline v8::Handle<v8::Value> CastToJS(::sf::RenderWindow *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::RenderWindow *&CPP);
 }
 //----------------------------------------
 #ifndef NO_SFML_NETWORK
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Ftp::Response &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Ftp::Response &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::Response &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Ftp::Response *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Ftp::Response *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::Response *&CPP);
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Ftp::Response &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Ftp::Response &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::Response &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Ftp::Response *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::Response *&CPP);
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(::sf::Ftp::Response::Status JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::Response::Status &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Ftp::Response::Status JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::Response::Status &CPP);
 }
 //----------------------------------------
 #endif
 #ifndef NO_SFML_NETWORK
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Ftp::DirectoryResponse &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Ftp::DirectoryResponse &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::DirectoryResponse &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Ftp::DirectoryResponse *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Ftp::DirectoryResponse *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::DirectoryResponse *&CPP);
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Ftp::DirectoryResponse &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Ftp::DirectoryResponse &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::DirectoryResponse &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Ftp::DirectoryResponse *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::DirectoryResponse *&CPP);
 }
 //----------------------------------------
 #endif
 #ifndef NO_SFML_NETWORK
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Ftp::ListingResponse &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Ftp::ListingResponse &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::ListingResponse &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Ftp::ListingResponse *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Ftp::ListingResponse *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::ListingResponse *&CPP);
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Ftp::ListingResponse &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Ftp::ListingResponse &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::ListingResponse &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Ftp::ListingResponse *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::ListingResponse *&CPP);
 }
 //----------------------------------------
 #endif
 #ifndef NO_SFML_NETWORK
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::Ftp &JS);
-v8::Handle<v8::Value> CastToJS(::sf::Ftp *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Ftp *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp *&CPP);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Ftp &JS);
+inline v8::Handle<v8::Value> CastToJS(::sf::Ftp *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp *&CPP);
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(::sf::Ftp::TransferMode JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::TransferMode &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Ftp::TransferMode JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::TransferMode &CPP);
 }
 //----------------------------------------
 #endif
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::RenderTexture &JS);
-v8::Handle<v8::Value> CastToJS(::sf::RenderTexture *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::RenderTexture *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::RenderTexture *&CPP);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::RenderTexture &JS);
+inline v8::Handle<v8::Value> CastToJS(::sf::RenderTexture *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::RenderTexture *&CPP);
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::SoundStream::Chunk &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::SoundStream::Chunk &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundStream::Chunk &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::SoundStream::Chunk *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::SoundStream::Chunk *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundStream::Chunk *&CPP);
+inline v8::Handle<v8::Value> CastToJS(const ::sf::SoundStream::Chunk &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::SoundStream::Chunk &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundStream::Chunk &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::SoundStream::Chunk *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundStream::Chunk *&CPP);
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::SoundStream &JS);
-v8::Handle<v8::Value> CastToJS(::sf::SoundStream *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::SoundStream *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundStream *&CPP);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::SoundStream &JS);
+inline v8::Handle<v8::Value> CastToJS(::sf::SoundStream *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundStream *&CPP);
 }
 //----------------------------------------
 #ifndef NO_SFML_NETWORK
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Http::Request &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Http::Request &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Http::Request &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Http::Request *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Http::Request *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Http::Request *&CPP);
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Http::Request &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Http::Request &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Http::Request &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Http::Request *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Http::Request *&CPP);
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(::sf::Http::Request::Method JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Http::Request::Method &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Http::Request::Method JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Http::Request::Method &CPP);
 }
 //----------------------------------------
 #endif
 #ifndef NO_SFML_NETWORK
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Http::Response &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Http::Response &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Http::Response &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Http::Response *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Http::Response *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Http::Response *&CPP);
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Http::Response &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Http::Response &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Http::Response &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Http::Response *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Http::Response *&CPP);
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(::sf::Http::Response::Status JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Http::Response::Status &CPP);
-}
-//----------------------------------------
-#endif
-#ifndef NO_SFML_NETWORK
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::Http &JS);
-v8::Handle<v8::Value> CastToJS(::sf::Http *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Http *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Http *&CPP);
-}
-//----------------------------------------
-#endif
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::CircleShape &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::CircleShape &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::CircleShape &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::CircleShape *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::CircleShape *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::CircleShape *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Vector3i &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Vector3i &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector3i &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Vector3i *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Vector3i *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector3i *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::VertexArray &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::VertexArray &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::VertexArray &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::VertexArray *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::VertexArray *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::VertexArray *&CPP);
-}
-//----------------------------------------
-#ifndef NO_SFML_NETWORK
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Packet &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Packet &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Packet &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Packet *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Packet *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Packet *&CPP);
-}
-//----------------------------------------
-#endif
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Text &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Text &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Text &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Text *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Text *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Text *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(::sf::Text::Style JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Text::Style &CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Vertex &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Vertex &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vertex &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Vertex *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Vertex *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vertex *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Shader::CurrentTextureType &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Shader::CurrentTextureType &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Shader::CurrentTextureType &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Shader::CurrentTextureType *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Shader::CurrentTextureType *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Shader::CurrentTextureType *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::Shader &JS);
-v8::Handle<v8::Value> CastToJS(::sf::Shader *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Shader *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Shader *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(::sf::Shader::Type JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Shader::Type &CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::InputStream &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::InputStream &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::InputStream *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::InputStream *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::InputStream *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::IntRect &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::IntRect &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::IntRect &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::IntRect *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::IntRect *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::IntRect *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::String &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::String &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::String &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::String *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::String *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::String *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::RenderStates &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::RenderStates &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::RenderStates &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::RenderStates *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::RenderStates *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::RenderStates *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::VideoMode &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::VideoMode &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::VideoMode &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::VideoMode *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::VideoMode *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::VideoMode *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::SoundBufferRecorder &JS);
-v8::Handle<v8::Value> CastToJS(::sf::SoundBufferRecorder *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::SoundBufferRecorder *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundBufferRecorder *&CPP);
-}
-//----------------------------------------
-#ifndef NO_SFML_NETWORK
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::Socket &JS);
-v8::Handle<v8::Value> CastToJS(::sf::Socket *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Socket *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Socket *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(::sf::Socket::Status JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Socket::Status &CPP);
-}
-//----------------------------------------
-#endif
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Sound &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Sound &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Sound &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Sound *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Sound *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Sound *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::Music &JS);
-v8::Handle<v8::Value> CastToJS(::sf::Music *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Music *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Music *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::Shape &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Shape &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Shape *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Shape *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Shape *&CPP);
-}
-//----------------------------------------
-#ifndef NO_SFML_NETWORK
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::UdpSocket &JS);
-v8::Handle<v8::Value> CastToJS(::sf::UdpSocket *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::UdpSocket *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::UdpSocket *&CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Http::Response::Status JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Http::Response::Status &CPP);
 }
 //----------------------------------------
 #endif
 #ifndef NO_SFML_NETWORK
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::IpAddress &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::IpAddress &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::IpAddress &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::IpAddress *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::IpAddress *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::IpAddress *&CPP);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Http &JS);
+inline v8::Handle<v8::Value> CastToJS(::sf::Http *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Http *&CPP);
 }
 //----------------------------------------
 #endif
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::FloatRect &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::FloatRect &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::FloatRect &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::FloatRect *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::FloatRect *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::FloatRect *&CPP);
+inline v8::Handle<v8::Value> CastToJS(const ::sf::CircleShape &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::CircleShape &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::CircleShape &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::CircleShape *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::CircleShape *&CPP);
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::NonCopyable &JS);
-v8::Handle<v8::Value> CastToJS(::sf::NonCopyable *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::NonCopyable *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::NonCopyable *&CPP);
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Vector3i &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Vector3i &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector3i &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Vector3i *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector3i *&CPP);
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Utf8 &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Utf8 &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Utf8 &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Utf8 *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Utf8 *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Utf8 *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Vector2f &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Vector2f &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector2f &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Vector2f *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Vector2f *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector2f *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Vector2i &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Vector2i &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector2i &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Vector2i *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Vector2i *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector2i *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Vector2u &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Vector2u &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector2u &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Vector2u *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Vector2u *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector2u *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Vector3f &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Vector3f &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector3f &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Vector3f *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Vector3f *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector3f *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Transformable &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Transformable &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Transformable &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Transformable *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Transformable *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Transformable *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Clock &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Clock &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Clock &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Clock *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Clock *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Clock *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Mouse &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Mouse &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Mouse &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Mouse *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Mouse *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Mouse *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(::sf::Mouse::Button JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Mouse::Button &CPP);
+inline v8::Handle<v8::Value> CastToJS(const ::sf::VertexArray &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::VertexArray &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::VertexArray &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::VertexArray *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::VertexArray *&CPP);
 }
 //----------------------------------------
 #ifndef NO_SFML_NETWORK
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::TcpSocket &JS);
-v8::Handle<v8::Value> CastToJS(::sf::TcpSocket *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::TcpSocket *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::TcpSocket *&CPP);
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Packet &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Packet &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Packet &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Packet *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Packet *&CPP);
 }
 //----------------------------------------
 #endif
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::SoundRecorder &JS);
-v8::Handle<v8::Value> CastToJS(::sf::SoundRecorder *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::SoundRecorder *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundRecorder *&CPP);
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Text &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Text &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Text &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Text *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Text *&CPP);
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Color &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Color &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Color &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Color *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Color *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Color *&CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Text::Style JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Text::Style &CPP);
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Texture &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Texture &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Texture &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Texture *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Texture *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Texture *&CPP);
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Vertex &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Vertex &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vertex &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Vertex *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vertex *&CPP);
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(::sf::Texture::CoordinateType JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Texture::CoordinateType &CPP);
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Shader::CurrentTextureType &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Shader::CurrentTextureType &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Shader::CurrentTextureType &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Shader::CurrentTextureType *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Shader::CurrentTextureType *&CPP);
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::ContextSettings &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::ContextSettings &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::ContextSettings &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::ContextSettings *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::ContextSettings *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::ContextSettings *&CPP);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Shader &JS);
+inline v8::Handle<v8::Value> CastToJS(::sf::Shader *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Shader *&CPP);
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::Context &JS);
-v8::Handle<v8::Value> CastToJS(::sf::Context *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Context *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Context *&CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Shader::Type JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Shader::Type &CPP);
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::SoundBuffer &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::SoundBuffer &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundBuffer &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::SoundBuffer *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::SoundBuffer *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundBuffer *&CPP);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::InputStream &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::InputStream &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::InputStream *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::InputStream *&CPP);
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Image &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Image &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Image &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Image *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Image *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Image *&CPP);
+inline v8::Handle<v8::Value> CastToJS(const ::sf::IntRect &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::IntRect &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::IntRect &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::IntRect *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::IntRect *&CPP);
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Sprite &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Sprite &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Sprite &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Sprite *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Sprite *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Sprite *&CPP);
+inline v8::Handle<v8::Value> CastToJS(const ::sf::String &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::String &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::String &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::String *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::String *&CPP);
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::ConvexShape &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::ConvexShape &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::ConvexShape &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::ConvexShape *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::ConvexShape *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::ConvexShape *&CPP);
+inline v8::Handle<v8::Value> CastToJS(const ::sf::RenderStates &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::RenderStates &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::RenderStates &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::RenderStates *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::RenderStates *&CPP);
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::Window &JS);
-v8::Handle<v8::Value> CastToJS(::sf::Window *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Window *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Window *&CPP);
+inline v8::Handle<v8::Value> CastToJS(const ::sf::VideoMode &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::VideoMode &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::VideoMode &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::VideoMode *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::VideoMode *&CPP);
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Time &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Time &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Time &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Time *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Time *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Time *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Glyph &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Glyph &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Glyph &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Glyph *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Glyph *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Glyph *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Transform &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Transform &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Transform &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Transform *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Transform *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Transform *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Joystick &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Joystick &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Joystick &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Joystick *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Joystick *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Joystick *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(::sf::Joystick::Axis JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Joystick::Axis &CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::RenderTarget &JS);
-v8::Handle<v8::Value> CastToJS(::sf::RenderTarget *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::RenderTarget *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::RenderTarget *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Listener &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Listener &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Listener &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Listener *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Listener *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Listener *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::SoundSource &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::SoundSource &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundSource &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::SoundSource *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::SoundSource *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundSource *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(::sf::SoundSource::Status JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundSource::Status &CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Event::SizeEvent &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event::SizeEvent &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::SizeEvent &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Event::SizeEvent *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event::SizeEvent *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::SizeEvent *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Event::KeyEvent &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event::KeyEvent &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::KeyEvent &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Event::KeyEvent *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event::KeyEvent *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::KeyEvent *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Event::TextEvent &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event::TextEvent &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::TextEvent &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Event::TextEvent *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event::TextEvent *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::TextEvent *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Event::MouseMoveEvent &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event::MouseMoveEvent &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::MouseMoveEvent &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Event::MouseMoveEvent *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event::MouseMoveEvent *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::MouseMoveEvent *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Event::MouseButtonEvent &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event::MouseButtonEvent &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::MouseButtonEvent &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Event::MouseButtonEvent *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event::MouseButtonEvent *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::MouseButtonEvent *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Event::MouseWheelEvent &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event::MouseWheelEvent &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::MouseWheelEvent &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Event::MouseWheelEvent *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event::MouseWheelEvent *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::MouseWheelEvent *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Event::JoystickConnectEvent &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event::JoystickConnectEvent &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::JoystickConnectEvent &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Event::JoystickConnectEvent *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event::JoystickConnectEvent *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::JoystickConnectEvent *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Event::JoystickMoveEvent &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event::JoystickMoveEvent &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::JoystickMoveEvent &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Event::JoystickMoveEvent *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event::JoystickMoveEvent *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::JoystickMoveEvent *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Event::JoystickButtonEvent &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event::JoystickButtonEvent &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::JoystickButtonEvent &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Event::JoystickButtonEvent *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event::JoystickButtonEvent *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::JoystickButtonEvent *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Event &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Event *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(::sf::Event::EventType JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::EventType &CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::GlResource &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::GlResource &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::GlResource &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::GlResource *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::GlResource *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::GlResource *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::RectangleShape &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::RectangleShape &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::RectangleShape &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::RectangleShape *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::RectangleShape *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::RectangleShape *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Utf16 &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Utf16 &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Utf16 &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Utf16 *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Utf16 *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Utf16 *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Utf32 &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Utf32 &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Utf32 &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Utf32 *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Utf32 *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Utf32 *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Keyboard &JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Keyboard &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Keyboard &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Keyboard *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Keyboard *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Keyboard *&CPP);
-}
-//----------------------------------------
-namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(::sf::Keyboard::Key JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Keyboard::Key &CPP);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::SoundBufferRecorder &JS);
+inline v8::Handle<v8::Value> CastToJS(::sf::SoundBufferRecorder *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundBufferRecorder *&CPP);
 }
 //----------------------------------------
 #ifndef NO_SFML_NETWORK
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::TcpListener &JS);
-v8::Handle<v8::Value> CastToJS(::sf::TcpListener *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::TcpListener *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::TcpListener *&CPP);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Socket &JS);
+inline v8::Handle<v8::Value> CastToJS(::sf::Socket *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Socket *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(::sf::Socket::Status JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Socket::Status &CPP);
 }
 //----------------------------------------
 #endif
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::Drawable &JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Drawable &CPP);
-v8::Handle<v8::Value> CastToJS(::sf::Drawable *JS);
-v8::Handle<v8::Value> CastToJS2(const ::sf::Drawable *JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Drawable *&CPP);
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Sound &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Sound &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Sound &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Sound *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Sound *&CPP);
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(::sf::PrimitiveType JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::PrimitiveType &CPP);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Music &JS);
+inline v8::Handle<v8::Value> CastToJS(::sf::Music *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Music *&CPP);
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(::sf::BlendMode JS);
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::BlendMode &CPP);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Shape &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Shape &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Shape *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Shape *&CPP);
+}
+//----------------------------------------
+#ifndef NO_SFML_NETWORK
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::UdpSocket &JS);
+inline v8::Handle<v8::Value> CastToJS(::sf::UdpSocket *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::UdpSocket *&CPP);
+}
+//----------------------------------------
+#endif
+#ifndef NO_SFML_NETWORK
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::IpAddress &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::IpAddress &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::IpAddress &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::IpAddress *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::IpAddress *&CPP);
+}
+//----------------------------------------
+#endif
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::FloatRect &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::FloatRect &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::FloatRect &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::FloatRect *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::FloatRect *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::NonCopyable &JS);
+inline v8::Handle<v8::Value> CastToJS(::sf::NonCopyable *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::NonCopyable *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Utf8 &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Utf8 &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Utf8 &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Utf8 *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Utf8 *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Vector2f &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Vector2f &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector2f &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Vector2f *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector2f *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Vector2i &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Vector2i &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector2i &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Vector2i *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector2i *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Vector2u &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Vector2u &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector2u &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Vector2u *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector2u *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Vector3f &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Vector3f &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector3f &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Vector3f *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector3f *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Transformable &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Transformable &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Transformable &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Transformable *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Transformable *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Clock &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Clock &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Clock &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Clock *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Clock *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Mouse &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Mouse &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Mouse &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Mouse *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Mouse *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(::sf::Mouse::Button JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Mouse::Button &CPP);
+}
+//----------------------------------------
+#ifndef NO_SFML_NETWORK
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::TcpSocket &JS);
+inline v8::Handle<v8::Value> CastToJS(::sf::TcpSocket *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::TcpSocket *&CPP);
+}
+//----------------------------------------
+#endif
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::SoundRecorder &JS);
+inline v8::Handle<v8::Value> CastToJS(::sf::SoundRecorder *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundRecorder *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Color &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Color &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Color &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Color *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Color *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Texture &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Texture &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Texture &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Texture *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Texture *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(::sf::Texture::CoordinateType JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Texture::CoordinateType &CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::ContextSettings &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::ContextSettings &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::ContextSettings &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::ContextSettings *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::ContextSettings *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Context &JS);
+inline v8::Handle<v8::Value> CastToJS(::sf::Context *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Context *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::SoundBuffer &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::SoundBuffer &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundBuffer &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::SoundBuffer *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundBuffer *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Image &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Image &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Image &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Image *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Image *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Sprite &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Sprite &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Sprite &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Sprite *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Sprite *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::ConvexShape &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::ConvexShape &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::ConvexShape &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::ConvexShape *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::ConvexShape *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Window &JS);
+inline v8::Handle<v8::Value> CastToJS(::sf::Window *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Window *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Time &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Time &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Time &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Time *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Time *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Glyph &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Glyph &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Glyph &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Glyph *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Glyph *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Transform &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Transform &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Transform &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Transform *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Transform *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Joystick &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Joystick &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Joystick &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Joystick *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Joystick *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(::sf::Joystick::Axis JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Joystick::Axis &CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::RenderTarget &JS);
+inline v8::Handle<v8::Value> CastToJS(::sf::RenderTarget *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::RenderTarget *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Listener &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Listener &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Listener &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Listener *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Listener *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::SoundSource &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::SoundSource &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundSource &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::SoundSource *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundSource *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(::sf::SoundSource::Status JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundSource::Status &CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Event::SizeEvent &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Event::SizeEvent &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::SizeEvent &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Event::SizeEvent *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::SizeEvent *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Event::KeyEvent &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Event::KeyEvent &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::KeyEvent &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Event::KeyEvent *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::KeyEvent *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Event::TextEvent &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Event::TextEvent &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::TextEvent &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Event::TextEvent *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::TextEvent *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Event::MouseMoveEvent &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Event::MouseMoveEvent &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::MouseMoveEvent &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Event::MouseMoveEvent *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::MouseMoveEvent *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Event::MouseButtonEvent &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Event::MouseButtonEvent &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::MouseButtonEvent &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Event::MouseButtonEvent *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::MouseButtonEvent *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Event::MouseWheelEvent &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Event::MouseWheelEvent &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::MouseWheelEvent &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Event::MouseWheelEvent *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::MouseWheelEvent *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Event::JoystickConnectEvent &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Event::JoystickConnectEvent &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::JoystickConnectEvent &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Event::JoystickConnectEvent *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::JoystickConnectEvent *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Event::JoystickMoveEvent &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Event::JoystickMoveEvent &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::JoystickMoveEvent &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Event::JoystickMoveEvent *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::JoystickMoveEvent *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Event::JoystickButtonEvent &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Event::JoystickButtonEvent &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::JoystickButtonEvent &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Event::JoystickButtonEvent *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::JoystickButtonEvent *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Event &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Event &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Event *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(::sf::Event::EventType JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::EventType &CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::GlResource &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::GlResource &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::GlResource &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::GlResource *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::GlResource *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::RectangleShape &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::RectangleShape &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::RectangleShape &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::RectangleShape *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::RectangleShape *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Utf16 &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Utf16 &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Utf16 &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Utf16 *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Utf16 *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Utf32 &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Utf32 &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Utf32 &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Utf32 *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Utf32 *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Keyboard &JS);
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Keyboard &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Keyboard &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Keyboard *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Keyboard *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(::sf::Keyboard::Key JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Keyboard::Key &CPP);
+}
+//----------------------------------------
+#ifndef NO_SFML_NETWORK
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::TcpListener &JS);
+inline v8::Handle<v8::Value> CastToJS(::sf::TcpListener *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::TcpListener *&CPP);
+}
+//----------------------------------------
+#endif
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Drawable &JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Drawable &CPP);
+inline v8::Handle<v8::Value> CastToJS(::sf::Drawable *JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Drawable *&CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(::sf::PrimitiveType JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::PrimitiveType &CPP);
+}
+//----------------------------------------
+namespace v8wrap {
+inline v8::Handle<v8::Value> CastToJS(::sf::BlendMode JS);
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::BlendMode &CPP);
 }
 //----------------------------------------
 #include "v8wrap.h"
@@ -2665,4 +2585,3 @@ public:
 //----------------------------------------
 }
 //----------------------------------------
-#endif

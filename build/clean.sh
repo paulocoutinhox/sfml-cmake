@@ -1,3 +1,4 @@
+find ../ -name '*.DS_Store' -type f -delete
 rm -rf CMakeCache.txt
 rm -rf CMakeFiles
 rm -rf Makefile

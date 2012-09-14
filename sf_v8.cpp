@@ -1,5 +1,6 @@
-/*
+/***
 SFML-V8-Binding Project
+The zlib/libpng License
 Copyright (c) 2012 Steven Christy
 
 This software is provided 'as-is', without any express or implied warranty. In no event will
@@ -15,10 +16,10 @@ documentation would be appreciated but is not required.
 being the original software.
 
 3. This notice may not be removed or altered from any source distribution.
-*/
+***/
 
 //----------------------------------------
-// Created: 2012-07-18 05:34:56
+// Created: 2012-07-01 17:32:52
 //----------------------------------------
 #include "sf_v8.h"
 //----------------------------------------
@@ -143,7 +144,7 @@ v8::Handle<v8::Value> sf_Font::Method_getGlyph(const v8::Arguments &args) {
             ::sf::Uint32 p0 = CastToCPP< ::sf::Uint32 >(ParamMatch.Params[0]);
             unsigned int p1 = CastToCPP< unsigned int >(ParamMatch.Params[1]);
             bool p2 = CastToCPP< bool >(ParamMatch.Params[2]);
-            result = CastToJS2(inst->getGlyph(p0,p1,p2));
+            result = CastToJS(inst->getGlyph(p0,p1,p2));
             break;
         }
     }
@@ -205,7 +206,7 @@ v8::Handle<v8::Value> sf_Font::Method_getTexture(const v8::Arguments &args) {
         default: result = v8::ThrowException(v8::Exception::Error(v8::String::New(sInvalidArgs))); break;
         case 1: {
             unsigned int p0 = CastToCPP< unsigned int >(ParamMatch.Params[0]);
-            result = CastToJS2(inst->getTexture(p0));
+            result = CastToJS(inst->getTexture(p0));
             break;
         }
     }
@@ -4109,7 +4110,7 @@ v8::Handle<v8::Value> sf_CircleShape::Method_setOutlineThickness(const v8::Argum
 v8::Handle<v8::Value> sf_CircleShape::Method_getTexture(const v8::Arguments &args) {
     if ( args.Length() == 0 ) {
         MyClass *inst = ((MyClass*)v8::External::Unwrap(args.Holder()->GetInternalField(0)));
-        return CastToJS2(inst->getTexture());
+        return CastToJS2(*inst->getTexture());
     } else {
         return v8::ThrowException(v8::Exception::Error(v8::String::New(sInvalidArgs)));
     }
@@ -5629,7 +5630,7 @@ v8::Handle<v8::Value> sf_Vertex::Getter_position(v8::Local<v8::String> property,
 void sf_Vertex::Setter_position(v8::Local<v8::String> property, v8::Local<v8::Value> value, const v8::AccessorInfo& info) {
     v8::HandleScope scope;
     ::sf::Vertex *inst = static_cast< ::sf::Vertex * >(v8::External::Unwrap(info.Holder()->GetInternalField(0)));
-    inst->position = *CastToCPP< ::sf::Vector2f* >(value);
+    inst->position = CastToCPP< ::sf::Vector2<float> >(value);
 }
 //----------------------------------------
 v8::Handle<v8::Value> sf_Vertex::Getter_color(v8::Local<v8::String> property, const v8::AccessorInfo& info) {
@@ -5640,7 +5641,7 @@ v8::Handle<v8::Value> sf_Vertex::Getter_color(v8::Local<v8::String> property, co
 void sf_Vertex::Setter_color(v8::Local<v8::String> property, v8::Local<v8::Value> value, const v8::AccessorInfo& info) {
     v8::HandleScope scope;
     ::sf::Vertex *inst = static_cast< ::sf::Vertex * >(v8::External::Unwrap(info.Holder()->GetInternalField(0)));
-    inst->color = *CastToCPP< ::sf::Color* >(value);
+    inst->color = CastToCPP< ::sf::Color >(value);
 }
 //----------------------------------------
 v8::Handle<v8::Value> sf_Vertex::Getter_texCoords(v8::Local<v8::String> property, const v8::AccessorInfo& info) {
@@ -5651,7 +5652,7 @@ v8::Handle<v8::Value> sf_Vertex::Getter_texCoords(v8::Local<v8::String> property
 void sf_Vertex::Setter_texCoords(v8::Local<v8::String> property, v8::Local<v8::Value> value, const v8::AccessorInfo& info) {
     v8::HandleScope scope;
     ::sf::Vertex *inst = static_cast< ::sf::Vertex * >(v8::External::Unwrap(info.Holder()->GetInternalField(0)));
-    inst->texCoords = *CastToCPP< ::sf::Vector2f* >(value);
+    inst->texCoords = CastToCPP< ::sf::Vector2<float> >(value);
 }
 //----------------------------------------
 void sf_Vertex::Delete(MyClass *inst) {
@@ -6016,7 +6017,7 @@ v8::Handle<v8::Value> sf_Shader::Getter_CurrentTexture(v8::Local<v8::String> pro
 
 void sf_Shader::Setter_CurrentTexture(v8::Local<v8::String> property, v8::Local<v8::Value> value, const v8::AccessorInfo& info) {
     v8::HandleScope scope;
-    ::sf::Shader::CurrentTexture = *CastToCPP< ::sf::Shader::CurrentTextureType* >(value);
+    ::sf::Shader::CurrentTexture = CastToCPP< ::sf::Shader::CurrentTextureType >(value);
 }
 //----------------------------------------
 void sf_Shader::Delete(MyClass *inst) {
@@ -6833,12 +6834,12 @@ v8::Handle<v8::Value> sf_RenderStates::Getter_transform(v8::Local<v8::String> pr
 void sf_RenderStates::Setter_transform(v8::Local<v8::String> property, v8::Local<v8::Value> value, const v8::AccessorInfo& info) {
     v8::HandleScope scope;
     ::sf::RenderStates *inst = static_cast< ::sf::RenderStates * >(v8::External::Unwrap(info.Holder()->GetInternalField(0)));
-    inst->transform = *CastToCPP< ::sf::Transform* >(value);
+    inst->transform = CastToCPP< ::sf::Transform >(value);
 }
 //----------------------------------------
 v8::Handle<v8::Value> sf_RenderStates::Getter_texture(v8::Local<v8::String> property, const v8::AccessorInfo& info) {
     ::sf::RenderStates *inst = static_cast< ::sf::RenderStates * >(v8::External::Unwrap(info.Holder()->GetInternalField(0)));
-    return CastToJS2(inst->texture);
+    return CastToJS2(*inst->texture);
 }
 
 void sf_RenderStates::Setter_texture(v8::Local<v8::String> property, v8::Local<v8::Value> value, const v8::AccessorInfo& info) {
@@ -6847,7 +6848,7 @@ void sf_RenderStates::Setter_texture(v8::Local<v8::String> property, v8::Local<v
 //----------------------------------------
 v8::Handle<v8::Value> sf_RenderStates::Getter_shader(v8::Local<v8::String> property, const v8::AccessorInfo& info) {
     ::sf::RenderStates *inst = static_cast< ::sf::RenderStates * >(v8::External::Unwrap(info.Holder()->GetInternalField(0)));
-    return CastToJS2(inst->shader);
+    return CastToJS2(*inst->shader);
 }
 
 void sf_RenderStates::Setter_shader(v8::Local<v8::String> property, v8::Local<v8::Value> value, const v8::AccessorInfo& info) {
@@ -7427,7 +7428,7 @@ v8::Handle<v8::Value> sf_Sound::Method_setPlayingOffset(const v8::Arguments &arg
 v8::Handle<v8::Value> sf_Sound::Method_getBuffer(const v8::Arguments &args) {
     if ( args.Length() == 0 ) {
         MyClass *inst = ((MyClass*)v8::External::Unwrap(args.Holder()->GetInternalField(0)));
-        return CastToJS2(inst->getBuffer());
+        return CastToJS2(*inst->getBuffer());
     } else {
         return v8::ThrowException(v8::Exception::Error(v8::String::New(sInvalidArgs)));
     }
@@ -8325,7 +8326,7 @@ v8::Handle<v8::Value> sf_Shape::Method_setOutlineThickness(const v8::Arguments &
 v8::Handle<v8::Value> sf_Shape::Method_getTexture(const v8::Arguments &args) {
     if ( args.Length() == 0 ) {
         MyClass *inst = ((MyClass*)v8::External::Unwrap(args.Holder()->GetInternalField(0)));
-        return CastToJS2(inst->getTexture());
+        return CastToJS2(*inst->getTexture());
     } else {
         return v8::ThrowException(v8::Exception::Error(v8::String::New(sInvalidArgs)));
     }
@@ -11223,7 +11224,7 @@ v8::Handle<v8::Value> sf_Color::Getter_r(v8::Local<v8::String> property, const v
 void sf_Color::Setter_r(v8::Local<v8::String> property, v8::Local<v8::Value> value, const v8::AccessorInfo& info) {
     v8::HandleScope scope;
     ::sf::Color *inst = static_cast< ::sf::Color * >(v8::External::Unwrap(info.Holder()->GetInternalField(0)));
-    inst->r = CastToCPP< ::sf::Uint8 >(value);
+    inst->r = CastToCPP< unsigned char >(value);
 }
 //----------------------------------------
 v8::Handle<v8::Value> sf_Color::Getter_g(v8::Local<v8::String> property, const v8::AccessorInfo& info) {
@@ -11234,7 +11235,7 @@ v8::Handle<v8::Value> sf_Color::Getter_g(v8::Local<v8::String> property, const v
 void sf_Color::Setter_g(v8::Local<v8::String> property, v8::Local<v8::Value> value, const v8::AccessorInfo& info) {
     v8::HandleScope scope;
     ::sf::Color *inst = static_cast< ::sf::Color * >(v8::External::Unwrap(info.Holder()->GetInternalField(0)));
-    inst->g = CastToCPP< ::sf::Uint8 >(value);
+    inst->g = CastToCPP< unsigned char >(value);
 }
 //----------------------------------------
 v8::Handle<v8::Value> sf_Color::Getter_b(v8::Local<v8::String> property, const v8::AccessorInfo& info) {
@@ -11245,7 +11246,7 @@ v8::Handle<v8::Value> sf_Color::Getter_b(v8::Local<v8::String> property, const v
 void sf_Color::Setter_b(v8::Local<v8::String> property, v8::Local<v8::Value> value, const v8::AccessorInfo& info) {
     v8::HandleScope scope;
     ::sf::Color *inst = static_cast< ::sf::Color * >(v8::External::Unwrap(info.Holder()->GetInternalField(0)));
-    inst->b = CastToCPP< ::sf::Uint8 >(value);
+    inst->b = CastToCPP< unsigned char >(value);
 }
 //----------------------------------------
 v8::Handle<v8::Value> sf_Color::Getter_a(v8::Local<v8::String> property, const v8::AccessorInfo& info) {
@@ -11256,7 +11257,7 @@ v8::Handle<v8::Value> sf_Color::Getter_a(v8::Local<v8::String> property, const v
 void sf_Color::Setter_a(v8::Local<v8::String> property, v8::Local<v8::Value> value, const v8::AccessorInfo& info) {
     v8::HandleScope scope;
     ::sf::Color *inst = static_cast< ::sf::Color * >(v8::External::Unwrap(info.Holder()->GetInternalField(0)));
-    inst->a = CastToCPP< ::sf::Uint8 >(value);
+    inst->a = CastToCPP< unsigned char >(value);
 }
 //----------------------------------------
 //----------------------------------------
@@ -12771,7 +12772,7 @@ v8::Handle<v8::Value> sf_Sprite::Method_setColor(const v8::Arguments &args) {
 v8::Handle<v8::Value> sf_Sprite::Method_getTexture(const v8::Arguments &args) {
     if ( args.Length() == 0 ) {
         MyClass *inst = ((MyClass*)v8::External::Unwrap(args.Holder()->GetInternalField(0)));
-        return CastToJS2(inst->getTexture());
+        return CastToJS2(*inst->getTexture());
     } else {
         return v8::ThrowException(v8::Exception::Error(v8::String::New(sInvalidArgs)));
     }
@@ -13363,7 +13364,7 @@ v8::Handle<v8::Value> sf_ConvexShape::Method_setOutlineThickness(const v8::Argum
 v8::Handle<v8::Value> sf_ConvexShape::Method_getTexture(const v8::Arguments &args) {
     if ( args.Length() == 0 ) {
         MyClass *inst = ((MyClass*)v8::External::Unwrap(args.Holder()->GetInternalField(0)));
-        return CastToJS2(inst->getTexture());
+        return CastToJS2(*inst->getTexture());
     } else {
         return v8::ThrowException(v8::Exception::Error(v8::String::New(sInvalidArgs)));
     }
@@ -14546,7 +14547,7 @@ v8::Handle<v8::Value> sf_Glyph::Getter_bounds(v8::Local<v8::String> property, co
 void sf_Glyph::Setter_bounds(v8::Local<v8::String> property, v8::Local<v8::Value> value, const v8::AccessorInfo& info) {
     v8::HandleScope scope;
     ::sf::Glyph *inst = static_cast< ::sf::Glyph * >(v8::External::Unwrap(info.Holder()->GetInternalField(0)));
-    inst->bounds = *CastToCPP< ::sf::IntRect* >(value);
+    inst->bounds = CastToCPP< ::sf::Rect<int> >(value);
 }
 //----------------------------------------
 v8::Handle<v8::Value> sf_Glyph::Getter_textureRect(v8::Local<v8::String> property, const v8::AccessorInfo& info) {
@@ -14557,7 +14558,7 @@ v8::Handle<v8::Value> sf_Glyph::Getter_textureRect(v8::Local<v8::String> propert
 void sf_Glyph::Setter_textureRect(v8::Local<v8::String> property, v8::Local<v8::Value> value, const v8::AccessorInfo& info) {
     v8::HandleScope scope;
     ::sf::Glyph *inst = static_cast< ::sf::Glyph * >(v8::External::Unwrap(info.Holder()->GetInternalField(0)));
-    inst->textureRect = *CastToCPP< ::sf::IntRect* >(value);
+    inst->textureRect = CastToCPP< ::sf::Rect<int> >(value);
 }
 //----------------------------------------
 void sf_Glyph::Delete(MyClass *inst) {
@@ -16107,7 +16108,7 @@ v8::Handle<v8::Value> sf_Event_TextEvent::Getter_unicode(v8::Local<v8::String> p
 void sf_Event_TextEvent::Setter_unicode(v8::Local<v8::String> property, v8::Local<v8::Value> value, const v8::AccessorInfo& info) {
     v8::HandleScope scope;
     ::sf::Event::TextEvent *inst = static_cast< ::sf::Event::TextEvent * >(v8::External::Unwrap(info.Holder()->GetInternalField(0)));
-    inst->unicode = CastToCPP< ::sf::Uint32 >(value);
+    inst->unicode = CastToCPP< unsigned int >(value);
 }
 //----------------------------------------
 void sf_Event_TextEvent::Delete(MyClass *inst) {
@@ -16795,7 +16796,7 @@ v8::Handle<v8::Value> sf_Event::Getter_size(v8::Local<v8::String> property, cons
 void sf_Event::Setter_size(v8::Local<v8::String> property, v8::Local<v8::Value> value, const v8::AccessorInfo& info) {
     v8::HandleScope scope;
     ::sf::Event *inst = static_cast< ::sf::Event * >(v8::External::Unwrap(info.Holder()->GetInternalField(0)));
-    inst->size = *CastToCPP< ::sf::Event::SizeEvent* >(value);
+    inst->size = CastToCPP< ::sf::Event::SizeEvent >(value);
 }
 //----------------------------------------
 v8::Handle<v8::Value> sf_Event::Getter_key(v8::Local<v8::String> property, const v8::AccessorInfo& info) {
@@ -16806,7 +16807,7 @@ v8::Handle<v8::Value> sf_Event::Getter_key(v8::Local<v8::String> property, const
 void sf_Event::Setter_key(v8::Local<v8::String> property, v8::Local<v8::Value> value, const v8::AccessorInfo& info) {
     v8::HandleScope scope;
     ::sf::Event *inst = static_cast< ::sf::Event * >(v8::External::Unwrap(info.Holder()->GetInternalField(0)));
-    inst->key = *CastToCPP< ::sf::Event::KeyEvent* >(value);
+    inst->key = CastToCPP< ::sf::Event::KeyEvent >(value);
 }
 //----------------------------------------
 v8::Handle<v8::Value> sf_Event::Getter_text(v8::Local<v8::String> property, const v8::AccessorInfo& info) {
@@ -16817,7 +16818,7 @@ v8::Handle<v8::Value> sf_Event::Getter_text(v8::Local<v8::String> property, cons
 void sf_Event::Setter_text(v8::Local<v8::String> property, v8::Local<v8::Value> value, const v8::AccessorInfo& info) {
     v8::HandleScope scope;
     ::sf::Event *inst = static_cast< ::sf::Event * >(v8::External::Unwrap(info.Holder()->GetInternalField(0)));
-    inst->text = *CastToCPP< ::sf::Event::TextEvent* >(value);
+    inst->text = CastToCPP< ::sf::Event::TextEvent >(value);
 }
 //----------------------------------------
 v8::Handle<v8::Value> sf_Event::Getter_mouseMove(v8::Local<v8::String> property, const v8::AccessorInfo& info) {
@@ -16828,7 +16829,7 @@ v8::Handle<v8::Value> sf_Event::Getter_mouseMove(v8::Local<v8::String> property,
 void sf_Event::Setter_mouseMove(v8::Local<v8::String> property, v8::Local<v8::Value> value, const v8::AccessorInfo& info) {
     v8::HandleScope scope;
     ::sf::Event *inst = static_cast< ::sf::Event * >(v8::External::Unwrap(info.Holder()->GetInternalField(0)));
-    inst->mouseMove = *CastToCPP< ::sf::Event::MouseMoveEvent* >(value);
+    inst->mouseMove = CastToCPP< ::sf::Event::MouseMoveEvent >(value);
 }
 //----------------------------------------
 v8::Handle<v8::Value> sf_Event::Getter_mouseButton(v8::Local<v8::String> property, const v8::AccessorInfo& info) {
@@ -16839,7 +16840,7 @@ v8::Handle<v8::Value> sf_Event::Getter_mouseButton(v8::Local<v8::String> propert
 void sf_Event::Setter_mouseButton(v8::Local<v8::String> property, v8::Local<v8::Value> value, const v8::AccessorInfo& info) {
     v8::HandleScope scope;
     ::sf::Event *inst = static_cast< ::sf::Event * >(v8::External::Unwrap(info.Holder()->GetInternalField(0)));
-    inst->mouseButton = *CastToCPP< ::sf::Event::MouseButtonEvent* >(value);
+    inst->mouseButton = CastToCPP< ::sf::Event::MouseButtonEvent >(value);
 }
 //----------------------------------------
 v8::Handle<v8::Value> sf_Event::Getter_mouseWheel(v8::Local<v8::String> property, const v8::AccessorInfo& info) {
@@ -16850,7 +16851,7 @@ v8::Handle<v8::Value> sf_Event::Getter_mouseWheel(v8::Local<v8::String> property
 void sf_Event::Setter_mouseWheel(v8::Local<v8::String> property, v8::Local<v8::Value> value, const v8::AccessorInfo& info) {
     v8::HandleScope scope;
     ::sf::Event *inst = static_cast< ::sf::Event * >(v8::External::Unwrap(info.Holder()->GetInternalField(0)));
-    inst->mouseWheel = *CastToCPP< ::sf::Event::MouseWheelEvent* >(value);
+    inst->mouseWheel = CastToCPP< ::sf::Event::MouseWheelEvent >(value);
 }
 //----------------------------------------
 v8::Handle<v8::Value> sf_Event::Getter_joystickMove(v8::Local<v8::String> property, const v8::AccessorInfo& info) {
@@ -16861,7 +16862,7 @@ v8::Handle<v8::Value> sf_Event::Getter_joystickMove(v8::Local<v8::String> proper
 void sf_Event::Setter_joystickMove(v8::Local<v8::String> property, v8::Local<v8::Value> value, const v8::AccessorInfo& info) {
     v8::HandleScope scope;
     ::sf::Event *inst = static_cast< ::sf::Event * >(v8::External::Unwrap(info.Holder()->GetInternalField(0)));
-    inst->joystickMove = *CastToCPP< ::sf::Event::JoystickMoveEvent* >(value);
+    inst->joystickMove = CastToCPP< ::sf::Event::JoystickMoveEvent >(value);
 }
 //----------------------------------------
 v8::Handle<v8::Value> sf_Event::Getter_joystickButton(v8::Local<v8::String> property, const v8::AccessorInfo& info) {
@@ -16872,7 +16873,7 @@ v8::Handle<v8::Value> sf_Event::Getter_joystickButton(v8::Local<v8::String> prop
 void sf_Event::Setter_joystickButton(v8::Local<v8::String> property, v8::Local<v8::Value> value, const v8::AccessorInfo& info) {
     v8::HandleScope scope;
     ::sf::Event *inst = static_cast< ::sf::Event * >(v8::External::Unwrap(info.Holder()->GetInternalField(0)));
-    inst->joystickButton = *CastToCPP< ::sf::Event::JoystickButtonEvent* >(value);
+    inst->joystickButton = CastToCPP< ::sf::Event::JoystickButtonEvent >(value);
 }
 //----------------------------------------
 v8::Handle<v8::Value> sf_Event::Getter_joystickConnect(v8::Local<v8::String> property, const v8::AccessorInfo& info) {
@@ -16883,7 +16884,7 @@ v8::Handle<v8::Value> sf_Event::Getter_joystickConnect(v8::Local<v8::String> pro
 void sf_Event::Setter_joystickConnect(v8::Local<v8::String> property, v8::Local<v8::Value> value, const v8::AccessorInfo& info) {
     v8::HandleScope scope;
     ::sf::Event *inst = static_cast< ::sf::Event * >(v8::External::Unwrap(info.Holder()->GetInternalField(0)));
-    inst->joystickConnect = *CastToCPP< ::sf::Event::JoystickConnectEvent* >(value);
+    inst->joystickConnect = CastToCPP< ::sf::Event::JoystickConnectEvent >(value);
 }
 //----------------------------------------
 void sf_Event::Delete(MyClass *inst) {
@@ -17244,7 +17245,7 @@ v8::Handle<v8::Value> sf_RectangleShape::Method_setOutlineThickness(const v8::Ar
 v8::Handle<v8::Value> sf_RectangleShape::Method_getTexture(const v8::Arguments &args) {
     if ( args.Length() == 0 ) {
         MyClass *inst = ((MyClass*)v8::External::Unwrap(args.Holder()->GetInternalField(0)));
-        return CastToJS2(inst->getTexture());
+        return CastToJS2(*inst->getTexture());
     } else {
         return v8::ThrowException(v8::Exception::Error(v8::String::New(sInvalidArgs)));
     }
@@ -18496,7 +18497,7 @@ void sf_Style::Init(v8::Handle<v8::ObjectTemplate> target) {
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Font &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Font &JS)
 {
     ::sf::Font *Ptr = new ::sf::Font(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Font::POT->NewInstance();
@@ -18504,7 +18505,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Font &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Font &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Font &JS)
 {
     ::sf::Font *Ptr = (::sf::Font *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Font::POT->NewInstance();
@@ -18512,7 +18513,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Font &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Font &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Font &CPP)
 {
     ::sf::Font *Ptr = sf_v8::sf_Font::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -18521,23 +18522,14 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Font &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Font *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Font *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Font::POT->NewInstance();
     sf_v8::sf_Font::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Font *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Font::POT->NewInstance();
-    sf_v8::sf_Font::MakeReference(Result, const_cast< ::sf::Font * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Font *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Font *&CPP)
 {
     CPP = sf_v8::sf_Font::SafeUnwrap(Value->ToObject());
 }
@@ -18545,7 +18537,7 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Font *&CPP)
 //----------------------------------------
 #ifndef NO_SFML_NETWORK
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::SocketSelector &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::SocketSelector &JS)
 {
     ::sf::SocketSelector *Ptr = new ::sf::SocketSelector(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_SocketSelector::POT->NewInstance();
@@ -18553,7 +18545,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::SocketSelector &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::SocketSelector &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::SocketSelector &JS)
 {
     ::sf::SocketSelector *Ptr = (::sf::SocketSelector *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_SocketSelector::POT->NewInstance();
@@ -18561,7 +18553,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::SocketSelector &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SocketSelector &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SocketSelector &CPP)
 {
     ::sf::SocketSelector *Ptr = sf_v8::sf_SocketSelector::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -18570,23 +18562,14 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SocketSelector &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::SocketSelector *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::SocketSelector *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_SocketSelector::POT->NewInstance();
     sf_v8::sf_SocketSelector::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::SocketSelector *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_SocketSelector::POT->NewInstance();
-    sf_v8::sf_SocketSelector::MakeReference(Result, const_cast< ::sf::SocketSelector * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SocketSelector *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SocketSelector *&CPP)
 {
     CPP = sf_v8::sf_SocketSelector::SafeUnwrap(Value->ToObject());
 }
@@ -18594,7 +18577,7 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SocketSelector *&CPP)
 //----------------------------------------
 #endif
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::View &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::View &JS)
 {
     ::sf::View *Ptr = new ::sf::View(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_View::POT->NewInstance();
@@ -18602,7 +18585,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::View &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::View &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::View &JS)
 {
     ::sf::View *Ptr = (::sf::View *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_View::POT->NewInstance();
@@ -18610,7 +18593,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::View &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::View &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::View &CPP)
 {
     ::sf::View *Ptr = sf_v8::sf_View::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -18619,30 +18602,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::View &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::View *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::View *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_View::POT->NewInstance();
     sf_v8::sf_View::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::View *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_View::POT->NewInstance();
-    sf_v8::sf_View::MakeReference(Result, const_cast< ::sf::View * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::View *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::View *&CPP)
 {
     CPP = sf_v8::sf_View::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::RenderWindow &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::RenderWindow &JS)
 {
     ::sf::RenderWindow *Ptr = (::sf::RenderWindow *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_RenderWindow::POT->NewInstance();
@@ -18650,23 +18624,14 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::RenderWindow &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::RenderWindow *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::RenderWindow *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_RenderWindow::POT->NewInstance();
     sf_v8::sf_RenderWindow::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::RenderWindow *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_RenderWindow::POT->NewInstance();
-    sf_v8::sf_RenderWindow::MakeReference(Result, const_cast< ::sf::RenderWindow * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::RenderWindow *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::RenderWindow *&CPP)
 {
     CPP = sf_v8::sf_RenderWindow::SafeUnwrap(Value->ToObject());
 }
@@ -18674,7 +18639,7 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::RenderWindow *&CPP)
 //----------------------------------------
 #ifndef NO_SFML_NETWORK
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Ftp::Response &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Ftp::Response &JS)
 {
     ::sf::Ftp::Response *Ptr = new ::sf::Ftp::Response(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Ftp_Response::POT->NewInstance();
@@ -18682,7 +18647,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Ftp::Response &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Ftp::Response &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Ftp::Response &JS)
 {
     ::sf::Ftp::Response *Ptr = (::sf::Ftp::Response *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Ftp_Response::POT->NewInstance();
@@ -18690,7 +18655,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Ftp::Response &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::Response &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::Response &CPP)
 {
     ::sf::Ftp::Response *Ptr = sf_v8::sf_Ftp_Response::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -18699,35 +18664,26 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::Response &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Ftp::Response *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Ftp::Response *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Ftp_Response::POT->NewInstance();
     sf_v8::sf_Ftp_Response::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Ftp::Response *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Ftp_Response::POT->NewInstance();
-    sf_v8::sf_Ftp_Response::MakeReference(Result, const_cast< ::sf::Ftp::Response * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::Response *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::Response *&CPP)
 {
     CPP = sf_v8::sf_Ftp_Response::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(::sf::Ftp::Response::Status JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Ftp::Response::Status JS)
 {
     return v8::Number::New(static_cast<int>(JS));
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::Response::Status &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::Response::Status &CPP)
 {
     CPP = static_cast< ::sf::Ftp::Response::Status >(Value->IntegerValue());
 }
@@ -18737,7 +18693,7 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::Response::Status &CPP
 #endif
 #ifndef NO_SFML_NETWORK
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Ftp::DirectoryResponse &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Ftp::DirectoryResponse &JS)
 {
     ::sf::Ftp::DirectoryResponse *Ptr = new ::sf::Ftp::DirectoryResponse(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Ftp_DirectoryResponse::POT->NewInstance();
@@ -18745,7 +18701,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Ftp::DirectoryResponse &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Ftp::DirectoryResponse &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Ftp::DirectoryResponse &JS)
 {
     ::sf::Ftp::DirectoryResponse *Ptr = (::sf::Ftp::DirectoryResponse *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Ftp_DirectoryResponse::POT->NewInstance();
@@ -18753,7 +18709,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Ftp::DirectoryResponse &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::DirectoryResponse &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::DirectoryResponse &CPP)
 {
     ::sf::Ftp::DirectoryResponse *Ptr = sf_v8::sf_Ftp_DirectoryResponse::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -18762,23 +18718,14 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::DirectoryResponse &CP
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Ftp::DirectoryResponse *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Ftp::DirectoryResponse *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Ftp_DirectoryResponse::POT->NewInstance();
     sf_v8::sf_Ftp_DirectoryResponse::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Ftp::DirectoryResponse *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Ftp_DirectoryResponse::POT->NewInstance();
-    sf_v8::sf_Ftp_DirectoryResponse::MakeReference(Result, const_cast< ::sf::Ftp::DirectoryResponse * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::DirectoryResponse *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::DirectoryResponse *&CPP)
 {
     CPP = sf_v8::sf_Ftp_DirectoryResponse::SafeUnwrap(Value->ToObject());
 }
@@ -18787,7 +18734,7 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::DirectoryResponse *&C
 #endif
 #ifndef NO_SFML_NETWORK
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Ftp::ListingResponse &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Ftp::ListingResponse &JS)
 {
     ::sf::Ftp::ListingResponse *Ptr = new ::sf::Ftp::ListingResponse(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Ftp_ListingResponse::POT->NewInstance();
@@ -18795,7 +18742,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Ftp::ListingResponse &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Ftp::ListingResponse &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Ftp::ListingResponse &JS)
 {
     ::sf::Ftp::ListingResponse *Ptr = (::sf::Ftp::ListingResponse *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Ftp_ListingResponse::POT->NewInstance();
@@ -18803,7 +18750,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Ftp::ListingResponse &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::ListingResponse &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::ListingResponse &CPP)
 {
     ::sf::Ftp::ListingResponse *Ptr = sf_v8::sf_Ftp_ListingResponse::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -18812,23 +18759,14 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::ListingResponse &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Ftp::ListingResponse *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Ftp::ListingResponse *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Ftp_ListingResponse::POT->NewInstance();
     sf_v8::sf_Ftp_ListingResponse::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Ftp::ListingResponse *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Ftp_ListingResponse::POT->NewInstance();
-    sf_v8::sf_Ftp_ListingResponse::MakeReference(Result, const_cast< ::sf::Ftp::ListingResponse * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::ListingResponse *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::ListingResponse *&CPP)
 {
     CPP = sf_v8::sf_Ftp_ListingResponse::SafeUnwrap(Value->ToObject());
 }
@@ -18837,7 +18775,7 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::ListingResponse *&CPP
 #endif
 #ifndef NO_SFML_NETWORK
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::Ftp &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Ftp &JS)
 {
     ::sf::Ftp *Ptr = (::sf::Ftp *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Ftp::POT->NewInstance();
@@ -18845,35 +18783,26 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Ftp &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Ftp *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Ftp *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Ftp::POT->NewInstance();
     sf_v8::sf_Ftp::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Ftp *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Ftp::POT->NewInstance();
-    sf_v8::sf_Ftp::MakeReference(Result, const_cast< ::sf::Ftp * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp *&CPP)
 {
     CPP = sf_v8::sf_Ftp::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(::sf::Ftp::TransferMode JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Ftp::TransferMode JS)
 {
     return v8::Number::New(static_cast<int>(JS));
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::TransferMode &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::TransferMode &CPP)
 {
     CPP = static_cast< ::sf::Ftp::TransferMode >(Value->IntegerValue());
 }
@@ -18882,7 +18811,7 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Ftp::TransferMode &CPP)
 //----------------------------------------
 #endif
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::RenderTexture &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::RenderTexture &JS)
 {
     ::sf::RenderTexture *Ptr = (::sf::RenderTexture *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_RenderTexture::POT->NewInstance();
@@ -18890,30 +18819,21 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::RenderTexture &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::RenderTexture *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::RenderTexture *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_RenderTexture::POT->NewInstance();
     sf_v8::sf_RenderTexture::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::RenderTexture *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_RenderTexture::POT->NewInstance();
-    sf_v8::sf_RenderTexture::MakeReference(Result, const_cast< ::sf::RenderTexture * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::RenderTexture *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::RenderTexture *&CPP)
 {
     CPP = sf_v8::sf_RenderTexture::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::SoundStream::Chunk &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::SoundStream::Chunk &JS)
 {
     ::sf::SoundStream::Chunk *Ptr = new ::sf::SoundStream::Chunk(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_SoundStream_Chunk::POT->NewInstance();
@@ -18921,7 +18841,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::SoundStream::Chunk &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::SoundStream::Chunk &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::SoundStream::Chunk &JS)
 {
     ::sf::SoundStream::Chunk *Ptr = (::sf::SoundStream::Chunk *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_SoundStream_Chunk::POT->NewInstance();
@@ -18929,7 +18849,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::SoundStream::Chunk &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundStream::Chunk &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundStream::Chunk &CPP)
 {
     ::sf::SoundStream::Chunk *Ptr = sf_v8::sf_SoundStream_Chunk::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -18938,30 +18858,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundStream::Chunk &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::SoundStream::Chunk *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::SoundStream::Chunk *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_SoundStream_Chunk::POT->NewInstance();
     sf_v8::sf_SoundStream_Chunk::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::SoundStream::Chunk *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_SoundStream_Chunk::POT->NewInstance();
-    sf_v8::sf_SoundStream_Chunk::MakeReference(Result, const_cast< ::sf::SoundStream::Chunk * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundStream::Chunk *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundStream::Chunk *&CPP)
 {
     CPP = sf_v8::sf_SoundStream_Chunk::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::SoundStream &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::SoundStream &JS)
 {
     ::sf::SoundStream *Ptr = (::sf::SoundStream *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_SoundStream::POT->NewInstance();
@@ -18969,23 +18880,14 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::SoundStream &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::SoundStream *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::SoundStream *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_SoundStream::POT->NewInstance();
     sf_v8::sf_SoundStream::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::SoundStream *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_SoundStream::POT->NewInstance();
-    sf_v8::sf_SoundStream::MakeReference(Result, const_cast< ::sf::SoundStream * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundStream *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundStream *&CPP)
 {
     CPP = sf_v8::sf_SoundStream::SafeUnwrap(Value->ToObject());
 }
@@ -18993,7 +18895,7 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundStream *&CPP)
 //----------------------------------------
 #ifndef NO_SFML_NETWORK
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Http::Request &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Http::Request &JS)
 {
     ::sf::Http::Request *Ptr = new ::sf::Http::Request(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Http_Request::POT->NewInstance();
@@ -19001,7 +18903,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Http::Request &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Http::Request &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Http::Request &JS)
 {
     ::sf::Http::Request *Ptr = (::sf::Http::Request *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Http_Request::POT->NewInstance();
@@ -19009,7 +18911,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Http::Request &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Http::Request &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Http::Request &CPP)
 {
     ::sf::Http::Request *Ptr = sf_v8::sf_Http_Request::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -19018,35 +18920,26 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Http::Request &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Http::Request *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Http::Request *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Http_Request::POT->NewInstance();
     sf_v8::sf_Http_Request::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Http::Request *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Http_Request::POT->NewInstance();
-    sf_v8::sf_Http_Request::MakeReference(Result, const_cast< ::sf::Http::Request * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Http::Request *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Http::Request *&CPP)
 {
     CPP = sf_v8::sf_Http_Request::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(::sf::Http::Request::Method JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Http::Request::Method JS)
 {
     return v8::Number::New(static_cast<int>(JS));
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Http::Request::Method &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Http::Request::Method &CPP)
 {
     CPP = static_cast< ::sf::Http::Request::Method >(Value->IntegerValue());
 }
@@ -19056,7 +18949,7 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Http::Request::Method &CPP
 #endif
 #ifndef NO_SFML_NETWORK
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Http::Response &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Http::Response &JS)
 {
     ::sf::Http::Response *Ptr = new ::sf::Http::Response(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Http_Response::POT->NewInstance();
@@ -19064,7 +18957,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Http::Response &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Http::Response &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Http::Response &JS)
 {
     ::sf::Http::Response *Ptr = (::sf::Http::Response *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Http_Response::POT->NewInstance();
@@ -19072,7 +18965,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Http::Response &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Http::Response &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Http::Response &CPP)
 {
     ::sf::Http::Response *Ptr = sf_v8::sf_Http_Response::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -19081,35 +18974,26 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Http::Response &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Http::Response *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Http::Response *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Http_Response::POT->NewInstance();
     sf_v8::sf_Http_Response::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Http::Response *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Http_Response::POT->NewInstance();
-    sf_v8::sf_Http_Response::MakeReference(Result, const_cast< ::sf::Http::Response * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Http::Response *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Http::Response *&CPP)
 {
     CPP = sf_v8::sf_Http_Response::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(::sf::Http::Response::Status JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Http::Response::Status JS)
 {
     return v8::Number::New(static_cast<int>(JS));
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Http::Response::Status &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Http::Response::Status &CPP)
 {
     CPP = static_cast< ::sf::Http::Response::Status >(Value->IntegerValue());
 }
@@ -19119,7 +19003,7 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Http::Response::Status &CP
 #endif
 #ifndef NO_SFML_NETWORK
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::Http &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Http &JS)
 {
     ::sf::Http *Ptr = (::sf::Http *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Http::POT->NewInstance();
@@ -19127,23 +19011,14 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Http &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Http *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Http *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Http::POT->NewInstance();
     sf_v8::sf_Http::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Http *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Http::POT->NewInstance();
-    sf_v8::sf_Http::MakeReference(Result, const_cast< ::sf::Http * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Http *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Http *&CPP)
 {
     CPP = sf_v8::sf_Http::SafeUnwrap(Value->ToObject());
 }
@@ -19151,7 +19026,7 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Http *&CPP)
 //----------------------------------------
 #endif
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::CircleShape &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::CircleShape &JS)
 {
     ::sf::CircleShape *Ptr = new ::sf::CircleShape(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_CircleShape::POT->NewInstance();
@@ -19159,7 +19034,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::CircleShape &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::CircleShape &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::CircleShape &JS)
 {
     ::sf::CircleShape *Ptr = (::sf::CircleShape *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_CircleShape::POT->NewInstance();
@@ -19167,7 +19042,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::CircleShape &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::CircleShape &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::CircleShape &CPP)
 {
     ::sf::CircleShape *Ptr = sf_v8::sf_CircleShape::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -19176,30 +19051,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::CircleShape &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::CircleShape *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::CircleShape *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_CircleShape::POT->NewInstance();
     sf_v8::sf_CircleShape::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::CircleShape *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_CircleShape::POT->NewInstance();
-    sf_v8::sf_CircleShape::MakeReference(Result, const_cast< ::sf::CircleShape * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::CircleShape *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::CircleShape *&CPP)
 {
     CPP = sf_v8::sf_CircleShape::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Vector3i &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Vector3i &JS)
 {
     ::sf::Vector3i *Ptr = new ::sf::Vector3i(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Vector3i::POT->NewInstance();
@@ -19207,7 +19073,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Vector3i &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Vector3i &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Vector3i &JS)
 {
     ::sf::Vector3i *Ptr = (::sf::Vector3i *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Vector3i::POT->NewInstance();
@@ -19215,7 +19081,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Vector3i &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector3i &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector3i &CPP)
 {
     ::sf::Vector3i *Ptr = sf_v8::sf_Vector3i::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -19224,30 +19090,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector3i &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Vector3i *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Vector3i *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Vector3i::POT->NewInstance();
     sf_v8::sf_Vector3i::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Vector3i *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Vector3i::POT->NewInstance();
-    sf_v8::sf_Vector3i::MakeReference(Result, const_cast< ::sf::Vector3i * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector3i *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector3i *&CPP)
 {
     CPP = sf_v8::sf_Vector3i::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::VertexArray &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::VertexArray &JS)
 {
     ::sf::VertexArray *Ptr = new ::sf::VertexArray(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_VertexArray::POT->NewInstance();
@@ -19255,7 +19112,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::VertexArray &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::VertexArray &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::VertexArray &JS)
 {
     ::sf::VertexArray *Ptr = (::sf::VertexArray *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_VertexArray::POT->NewInstance();
@@ -19263,7 +19120,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::VertexArray &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::VertexArray &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::VertexArray &CPP)
 {
     ::sf::VertexArray *Ptr = sf_v8::sf_VertexArray::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -19272,23 +19129,14 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::VertexArray &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::VertexArray *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::VertexArray *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_VertexArray::POT->NewInstance();
     sf_v8::sf_VertexArray::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::VertexArray *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_VertexArray::POT->NewInstance();
-    sf_v8::sf_VertexArray::MakeReference(Result, const_cast< ::sf::VertexArray * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::VertexArray *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::VertexArray *&CPP)
 {
     CPP = sf_v8::sf_VertexArray::SafeUnwrap(Value->ToObject());
 }
@@ -19296,7 +19144,7 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::VertexArray *&CPP)
 //----------------------------------------
 #ifndef NO_SFML_NETWORK
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Packet &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Packet &JS)
 {
     ::sf::Packet *Ptr = new ::sf::Packet(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Packet::POT->NewInstance();
@@ -19304,7 +19152,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Packet &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Packet &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Packet &JS)
 {
     ::sf::Packet *Ptr = (::sf::Packet *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Packet::POT->NewInstance();
@@ -19312,7 +19160,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Packet &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Packet &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Packet &CPP)
 {
     ::sf::Packet *Ptr = sf_v8::sf_Packet::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -19321,23 +19169,14 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Packet &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Packet *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Packet *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Packet::POT->NewInstance();
     sf_v8::sf_Packet::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Packet *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Packet::POT->NewInstance();
-    sf_v8::sf_Packet::MakeReference(Result, const_cast< ::sf::Packet * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Packet *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Packet *&CPP)
 {
     CPP = sf_v8::sf_Packet::SafeUnwrap(Value->ToObject());
 }
@@ -19345,7 +19184,7 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Packet *&CPP)
 //----------------------------------------
 #endif
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Text &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Text &JS)
 {
     ::sf::Text *Ptr = new ::sf::Text(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Text::POT->NewInstance();
@@ -19353,7 +19192,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Text &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Text &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Text &JS)
 {
     ::sf::Text *Ptr = (::sf::Text *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Text::POT->NewInstance();
@@ -19361,7 +19200,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Text &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Text &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Text &CPP)
 {
     ::sf::Text *Ptr = sf_v8::sf_Text::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -19370,35 +19209,26 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Text &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Text *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Text *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Text::POT->NewInstance();
     sf_v8::sf_Text::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Text *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Text::POT->NewInstance();
-    sf_v8::sf_Text::MakeReference(Result, const_cast< ::sf::Text * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Text *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Text *&CPP)
 {
     CPP = sf_v8::sf_Text::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(::sf::Text::Style JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Text::Style JS)
 {
     return v8::Number::New(static_cast<int>(JS));
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Text::Style &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Text::Style &CPP)
 {
     CPP = static_cast< ::sf::Text::Style >(Value->IntegerValue());
 }
@@ -19406,7 +19236,7 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Text::Style &CPP)
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Vertex &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Vertex &JS)
 {
     ::sf::Vertex *Ptr = new ::sf::Vertex(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Vertex::POT->NewInstance();
@@ -19414,7 +19244,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Vertex &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Vertex &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Vertex &JS)
 {
     ::sf::Vertex *Ptr = (::sf::Vertex *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Vertex::POT->NewInstance();
@@ -19422,7 +19252,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Vertex &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vertex &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vertex &CPP)
 {
     ::sf::Vertex *Ptr = sf_v8::sf_Vertex::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -19431,30 +19261,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vertex &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Vertex *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Vertex *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Vertex::POT->NewInstance();
     sf_v8::sf_Vertex::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Vertex *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Vertex::POT->NewInstance();
-    sf_v8::sf_Vertex::MakeReference(Result, const_cast< ::sf::Vertex * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vertex *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vertex *&CPP)
 {
     CPP = sf_v8::sf_Vertex::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Shader::CurrentTextureType &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Shader::CurrentTextureType &JS)
 {
     ::sf::Shader::CurrentTextureType *Ptr = new ::sf::Shader::CurrentTextureType(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Shader_CurrentTextureType::POT->NewInstance();
@@ -19462,7 +19283,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Shader::CurrentTextureType &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Shader::CurrentTextureType &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Shader::CurrentTextureType &JS)
 {
     ::sf::Shader::CurrentTextureType *Ptr = (::sf::Shader::CurrentTextureType *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Shader_CurrentTextureType::POT->NewInstance();
@@ -19470,7 +19291,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Shader::CurrentTextureType &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Shader::CurrentTextureType &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Shader::CurrentTextureType &CPP)
 {
     ::sf::Shader::CurrentTextureType *Ptr = sf_v8::sf_Shader_CurrentTextureType::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -19479,30 +19300,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Shader::CurrentTextureType
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Shader::CurrentTextureType *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Shader::CurrentTextureType *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Shader_CurrentTextureType::POT->NewInstance();
     sf_v8::sf_Shader_CurrentTextureType::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Shader::CurrentTextureType *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Shader_CurrentTextureType::POT->NewInstance();
-    sf_v8::sf_Shader_CurrentTextureType::MakeReference(Result, const_cast< ::sf::Shader::CurrentTextureType * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Shader::CurrentTextureType *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Shader::CurrentTextureType *&CPP)
 {
     CPP = sf_v8::sf_Shader_CurrentTextureType::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::Shader &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Shader &JS)
 {
     ::sf::Shader *Ptr = (::sf::Shader *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Shader::POT->NewInstance();
@@ -19510,35 +19322,26 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Shader &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Shader *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Shader *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Shader::POT->NewInstance();
     sf_v8::sf_Shader::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Shader *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Shader::POT->NewInstance();
-    sf_v8::sf_Shader::MakeReference(Result, const_cast< ::sf::Shader * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Shader *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Shader *&CPP)
 {
     CPP = sf_v8::sf_Shader::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(::sf::Shader::Type JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Shader::Type JS)
 {
     return v8::Number::New(static_cast<int>(JS));
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Shader::Type &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Shader::Type &CPP)
 {
     CPP = static_cast< ::sf::Shader::Type >(Value->IntegerValue());
 }
@@ -19546,7 +19349,7 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Shader::Type &CPP)
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::InputStream &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::InputStream &JS)
 {
     ::sf::InputStream *Ptr = (::sf::InputStream *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_InputStream::POT->NewInstance();
@@ -19554,7 +19357,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::InputStream &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::InputStream &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::InputStream &CPP)
 {
     ::sf::InputStream *Ptr = sf_v8::sf_InputStream::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -19563,30 +19366,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::InputStream &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::InputStream *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::InputStream *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_InputStream::POT->NewInstance();
     sf_v8::sf_InputStream::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::InputStream *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_InputStream::POT->NewInstance();
-    sf_v8::sf_InputStream::MakeReference(Result, const_cast< ::sf::InputStream * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::InputStream *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::InputStream *&CPP)
 {
     CPP = sf_v8::sf_InputStream::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::IntRect &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::IntRect &JS)
 {
     ::sf::IntRect *Ptr = new ::sf::IntRect(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_IntRect::POT->NewInstance();
@@ -19594,7 +19388,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::IntRect &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::IntRect &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::IntRect &JS)
 {
     ::sf::IntRect *Ptr = (::sf::IntRect *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_IntRect::POT->NewInstance();
@@ -19602,7 +19396,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::IntRect &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::IntRect &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::IntRect &CPP)
 {
     ::sf::IntRect *Ptr = sf_v8::sf_IntRect::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -19611,30 +19405,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::IntRect &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::IntRect *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::IntRect *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_IntRect::POT->NewInstance();
     sf_v8::sf_IntRect::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::IntRect *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_IntRect::POT->NewInstance();
-    sf_v8::sf_IntRect::MakeReference(Result, const_cast< ::sf::IntRect * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::IntRect *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::IntRect *&CPP)
 {
     CPP = sf_v8::sf_IntRect::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::String &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::String &JS)
 {
     ::sf::String *Ptr = new ::sf::String(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_String::POT->NewInstance();
@@ -19642,7 +19427,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::String &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::String &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::String &JS)
 {
     ::sf::String *Ptr = (::sf::String *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_String::POT->NewInstance();
@@ -19650,7 +19435,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::String &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::String &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::String &CPP)
 {
     ::sf::String *Ptr = sf_v8::sf_String::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -19659,30 +19444,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::String &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::String *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::String *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_String::POT->NewInstance();
     sf_v8::sf_String::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::String *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_String::POT->NewInstance();
-    sf_v8::sf_String::MakeReference(Result, const_cast< ::sf::String * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::String *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::String *&CPP)
 {
     CPP = sf_v8::sf_String::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::RenderStates &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::RenderStates &JS)
 {
     ::sf::RenderStates *Ptr = new ::sf::RenderStates(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_RenderStates::POT->NewInstance();
@@ -19690,7 +19466,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::RenderStates &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::RenderStates &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::RenderStates &JS)
 {
     ::sf::RenderStates *Ptr = (::sf::RenderStates *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_RenderStates::POT->NewInstance();
@@ -19698,7 +19474,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::RenderStates &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::RenderStates &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::RenderStates &CPP)
 {
     ::sf::RenderStates *Ptr = sf_v8::sf_RenderStates::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -19707,30 +19483,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::RenderStates &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::RenderStates *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::RenderStates *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_RenderStates::POT->NewInstance();
     sf_v8::sf_RenderStates::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::RenderStates *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_RenderStates::POT->NewInstance();
-    sf_v8::sf_RenderStates::MakeReference(Result, const_cast< ::sf::RenderStates * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::RenderStates *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::RenderStates *&CPP)
 {
     CPP = sf_v8::sf_RenderStates::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::VideoMode &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::VideoMode &JS)
 {
     ::sf::VideoMode *Ptr = new ::sf::VideoMode(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_VideoMode::POT->NewInstance();
@@ -19738,7 +19505,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::VideoMode &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::VideoMode &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::VideoMode &JS)
 {
     ::sf::VideoMode *Ptr = (::sf::VideoMode *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_VideoMode::POT->NewInstance();
@@ -19746,7 +19513,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::VideoMode &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::VideoMode &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::VideoMode &CPP)
 {
     ::sf::VideoMode *Ptr = sf_v8::sf_VideoMode::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -19755,30 +19522,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::VideoMode &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::VideoMode *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::VideoMode *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_VideoMode::POT->NewInstance();
     sf_v8::sf_VideoMode::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::VideoMode *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_VideoMode::POT->NewInstance();
-    sf_v8::sf_VideoMode::MakeReference(Result, const_cast< ::sf::VideoMode * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::VideoMode *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::VideoMode *&CPP)
 {
     CPP = sf_v8::sf_VideoMode::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::SoundBufferRecorder &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::SoundBufferRecorder &JS)
 {
     ::sf::SoundBufferRecorder *Ptr = (::sf::SoundBufferRecorder *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_SoundBufferRecorder::POT->NewInstance();
@@ -19786,23 +19544,14 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::SoundBufferRecorder &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::SoundBufferRecorder *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::SoundBufferRecorder *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_SoundBufferRecorder::POT->NewInstance();
     sf_v8::sf_SoundBufferRecorder::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::SoundBufferRecorder *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_SoundBufferRecorder::POT->NewInstance();
-    sf_v8::sf_SoundBufferRecorder::MakeReference(Result, const_cast< ::sf::SoundBufferRecorder * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundBufferRecorder *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundBufferRecorder *&CPP)
 {
     CPP = sf_v8::sf_SoundBufferRecorder::SafeUnwrap(Value->ToObject());
 }
@@ -19810,7 +19559,7 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundBufferRecorder *&CPP)
 //----------------------------------------
 #ifndef NO_SFML_NETWORK
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::Socket &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Socket &JS)
 {
     ::sf::Socket *Ptr = (::sf::Socket *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Socket::POT->NewInstance();
@@ -19818,35 +19567,26 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Socket &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Socket *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Socket *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Socket::POT->NewInstance();
     sf_v8::sf_Socket::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Socket *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Socket::POT->NewInstance();
-    sf_v8::sf_Socket::MakeReference(Result, const_cast< ::sf::Socket * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Socket *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Socket *&CPP)
 {
     CPP = sf_v8::sf_Socket::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(::sf::Socket::Status JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Socket::Status JS)
 {
     return v8::Number::New(static_cast<int>(JS));
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Socket::Status &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Socket::Status &CPP)
 {
     CPP = static_cast< ::sf::Socket::Status >(Value->IntegerValue());
 }
@@ -19855,7 +19595,7 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Socket::Status &CPP)
 //----------------------------------------
 #endif
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Sound &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Sound &JS)
 {
     ::sf::Sound *Ptr = new ::sf::Sound(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Sound::POT->NewInstance();
@@ -19863,7 +19603,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Sound &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Sound &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Sound &JS)
 {
     ::sf::Sound *Ptr = (::sf::Sound *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Sound::POT->NewInstance();
@@ -19871,7 +19611,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Sound &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Sound &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Sound &CPP)
 {
     ::sf::Sound *Ptr = sf_v8::sf_Sound::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -19880,30 +19620,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Sound &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Sound *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Sound *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Sound::POT->NewInstance();
     sf_v8::sf_Sound::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Sound *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Sound::POT->NewInstance();
-    sf_v8::sf_Sound::MakeReference(Result, const_cast< ::sf::Sound * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Sound *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Sound *&CPP)
 {
     CPP = sf_v8::sf_Sound::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::Music &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Music &JS)
 {
     ::sf::Music *Ptr = (::sf::Music *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Music::POT->NewInstance();
@@ -19911,30 +19642,21 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Music &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Music *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Music *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Music::POT->NewInstance();
     sf_v8::sf_Music::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Music *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Music::POT->NewInstance();
-    sf_v8::sf_Music::MakeReference(Result, const_cast< ::sf::Music * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Music *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Music *&CPP)
 {
     CPP = sf_v8::sf_Music::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::Shape &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Shape &JS)
 {
     ::sf::Shape *Ptr = (::sf::Shape *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Shape::POT->NewInstance();
@@ -19942,7 +19664,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Shape &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Shape &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Shape &CPP)
 {
     ::sf::Shape *Ptr = sf_v8::sf_Shape::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -19951,23 +19673,14 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Shape &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Shape *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Shape *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Shape::POT->NewInstance();
     sf_v8::sf_Shape::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Shape *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Shape::POT->NewInstance();
-    sf_v8::sf_Shape::MakeReference(Result, const_cast< ::sf::Shape * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Shape *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Shape *&CPP)
 {
     CPP = sf_v8::sf_Shape::SafeUnwrap(Value->ToObject());
 }
@@ -19975,7 +19688,7 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Shape *&CPP)
 //----------------------------------------
 #ifndef NO_SFML_NETWORK
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::UdpSocket &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::UdpSocket &JS)
 {
     ::sf::UdpSocket *Ptr = (::sf::UdpSocket *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_UdpSocket::POT->NewInstance();
@@ -19983,23 +19696,14 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::UdpSocket &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::UdpSocket *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::UdpSocket *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_UdpSocket::POT->NewInstance();
     sf_v8::sf_UdpSocket::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::UdpSocket *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_UdpSocket::POT->NewInstance();
-    sf_v8::sf_UdpSocket::MakeReference(Result, const_cast< ::sf::UdpSocket * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::UdpSocket *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::UdpSocket *&CPP)
 {
     CPP = sf_v8::sf_UdpSocket::SafeUnwrap(Value->ToObject());
 }
@@ -20008,7 +19712,7 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::UdpSocket *&CPP)
 #endif
 #ifndef NO_SFML_NETWORK
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::IpAddress &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::IpAddress &JS)
 {
     ::sf::IpAddress *Ptr = new ::sf::IpAddress(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_IpAddress::POT->NewInstance();
@@ -20016,7 +19720,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::IpAddress &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::IpAddress &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::IpAddress &JS)
 {
     ::sf::IpAddress *Ptr = (::sf::IpAddress *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_IpAddress::POT->NewInstance();
@@ -20024,7 +19728,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::IpAddress &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::IpAddress &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::IpAddress &CPP)
 {
     ::sf::IpAddress *Ptr = sf_v8::sf_IpAddress::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -20033,23 +19737,14 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::IpAddress &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::IpAddress *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::IpAddress *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_IpAddress::POT->NewInstance();
     sf_v8::sf_IpAddress::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::IpAddress *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_IpAddress::POT->NewInstance();
-    sf_v8::sf_IpAddress::MakeReference(Result, const_cast< ::sf::IpAddress * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::IpAddress *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::IpAddress *&CPP)
 {
     CPP = sf_v8::sf_IpAddress::SafeUnwrap(Value->ToObject());
 }
@@ -20057,7 +19752,7 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::IpAddress *&CPP)
 //----------------------------------------
 #endif
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::FloatRect &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::FloatRect &JS)
 {
     ::sf::FloatRect *Ptr = new ::sf::FloatRect(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_FloatRect::POT->NewInstance();
@@ -20065,7 +19760,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::FloatRect &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::FloatRect &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::FloatRect &JS)
 {
     ::sf::FloatRect *Ptr = (::sf::FloatRect *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_FloatRect::POT->NewInstance();
@@ -20073,7 +19768,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::FloatRect &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::FloatRect &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::FloatRect &CPP)
 {
     ::sf::FloatRect *Ptr = sf_v8::sf_FloatRect::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -20082,30 +19777,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::FloatRect &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::FloatRect *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::FloatRect *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_FloatRect::POT->NewInstance();
     sf_v8::sf_FloatRect::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::FloatRect *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_FloatRect::POT->NewInstance();
-    sf_v8::sf_FloatRect::MakeReference(Result, const_cast< ::sf::FloatRect * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::FloatRect *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::FloatRect *&CPP)
 {
     CPP = sf_v8::sf_FloatRect::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::NonCopyable &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::NonCopyable &JS)
 {
     ::sf::NonCopyable *Ptr = (::sf::NonCopyable *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_NonCopyable::POT->NewInstance();
@@ -20113,30 +19799,21 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::NonCopyable &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::NonCopyable *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::NonCopyable *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_NonCopyable::POT->NewInstance();
     sf_v8::sf_NonCopyable::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::NonCopyable *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_NonCopyable::POT->NewInstance();
-    sf_v8::sf_NonCopyable::MakeReference(Result, const_cast< ::sf::NonCopyable * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::NonCopyable *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::NonCopyable *&CPP)
 {
     CPP = sf_v8::sf_NonCopyable::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Utf8 &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Utf8 &JS)
 {
     ::sf::Utf8 *Ptr = new ::sf::Utf8(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Utf8::POT->NewInstance();
@@ -20144,7 +19821,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Utf8 &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Utf8 &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Utf8 &JS)
 {
     ::sf::Utf8 *Ptr = (::sf::Utf8 *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Utf8::POT->NewInstance();
@@ -20152,7 +19829,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Utf8 &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Utf8 &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Utf8 &CPP)
 {
     ::sf::Utf8 *Ptr = sf_v8::sf_Utf8::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -20161,30 +19838,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Utf8 &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Utf8 *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Utf8 *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Utf8::POT->NewInstance();
     sf_v8::sf_Utf8::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Utf8 *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Utf8::POT->NewInstance();
-    sf_v8::sf_Utf8::MakeReference(Result, const_cast< ::sf::Utf8 * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Utf8 *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Utf8 *&CPP)
 {
     CPP = sf_v8::sf_Utf8::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Vector2f &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Vector2f &JS)
 {
     ::sf::Vector2f *Ptr = new ::sf::Vector2f(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Vector2f::POT->NewInstance();
@@ -20192,7 +19860,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Vector2f &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Vector2f &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Vector2f &JS)
 {
     ::sf::Vector2f *Ptr = (::sf::Vector2f *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Vector2f::POT->NewInstance();
@@ -20200,7 +19868,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Vector2f &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector2f &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector2f &CPP)
 {
     ::sf::Vector2f *Ptr = sf_v8::sf_Vector2f::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -20209,30 +19877,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector2f &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Vector2f *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Vector2f *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Vector2f::POT->NewInstance();
     sf_v8::sf_Vector2f::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Vector2f *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Vector2f::POT->NewInstance();
-    sf_v8::sf_Vector2f::MakeReference(Result, const_cast< ::sf::Vector2f * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector2f *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector2f *&CPP)
 {
     CPP = sf_v8::sf_Vector2f::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Vector2i &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Vector2i &JS)
 {
     ::sf::Vector2i *Ptr = new ::sf::Vector2i(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Vector2i::POT->NewInstance();
@@ -20240,7 +19899,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Vector2i &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Vector2i &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Vector2i &JS)
 {
     ::sf::Vector2i *Ptr = (::sf::Vector2i *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Vector2i::POT->NewInstance();
@@ -20248,7 +19907,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Vector2i &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector2i &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector2i &CPP)
 {
     ::sf::Vector2i *Ptr = sf_v8::sf_Vector2i::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -20257,30 +19916,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector2i &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Vector2i *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Vector2i *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Vector2i::POT->NewInstance();
     sf_v8::sf_Vector2i::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Vector2i *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Vector2i::POT->NewInstance();
-    sf_v8::sf_Vector2i::MakeReference(Result, const_cast< ::sf::Vector2i * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector2i *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector2i *&CPP)
 {
     CPP = sf_v8::sf_Vector2i::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Vector2u &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Vector2u &JS)
 {
     ::sf::Vector2u *Ptr = new ::sf::Vector2u(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Vector2u::POT->NewInstance();
@@ -20288,7 +19938,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Vector2u &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Vector2u &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Vector2u &JS)
 {
     ::sf::Vector2u *Ptr = (::sf::Vector2u *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Vector2u::POT->NewInstance();
@@ -20296,7 +19946,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Vector2u &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector2u &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector2u &CPP)
 {
     ::sf::Vector2u *Ptr = sf_v8::sf_Vector2u::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -20305,30 +19955,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector2u &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Vector2u *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Vector2u *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Vector2u::POT->NewInstance();
     sf_v8::sf_Vector2u::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Vector2u *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Vector2u::POT->NewInstance();
-    sf_v8::sf_Vector2u::MakeReference(Result, const_cast< ::sf::Vector2u * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector2u *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector2u *&CPP)
 {
     CPP = sf_v8::sf_Vector2u::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Vector3f &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Vector3f &JS)
 {
     ::sf::Vector3f *Ptr = new ::sf::Vector3f(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Vector3f::POT->NewInstance();
@@ -20336,7 +19977,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Vector3f &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Vector3f &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Vector3f &JS)
 {
     ::sf::Vector3f *Ptr = (::sf::Vector3f *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Vector3f::POT->NewInstance();
@@ -20344,7 +19985,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Vector3f &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector3f &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector3f &CPP)
 {
     ::sf::Vector3f *Ptr = sf_v8::sf_Vector3f::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -20353,30 +19994,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector3f &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Vector3f *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Vector3f *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Vector3f::POT->NewInstance();
     sf_v8::sf_Vector3f::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Vector3f *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Vector3f::POT->NewInstance();
-    sf_v8::sf_Vector3f::MakeReference(Result, const_cast< ::sf::Vector3f * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector3f *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Vector3f *&CPP)
 {
     CPP = sf_v8::sf_Vector3f::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Transformable &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Transformable &JS)
 {
     ::sf::Transformable *Ptr = new ::sf::Transformable(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Transformable::POT->NewInstance();
@@ -20384,7 +20016,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Transformable &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Transformable &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Transformable &JS)
 {
     ::sf::Transformable *Ptr = (::sf::Transformable *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Transformable::POT->NewInstance();
@@ -20392,7 +20024,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Transformable &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Transformable &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Transformable &CPP)
 {
     ::sf::Transformable *Ptr = sf_v8::sf_Transformable::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -20401,30 +20033,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Transformable &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Transformable *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Transformable *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Transformable::POT->NewInstance();
     sf_v8::sf_Transformable::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Transformable *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Transformable::POT->NewInstance();
-    sf_v8::sf_Transformable::MakeReference(Result, const_cast< ::sf::Transformable * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Transformable *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Transformable *&CPP)
 {
     CPP = sf_v8::sf_Transformable::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Clock &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Clock &JS)
 {
     ::sf::Clock *Ptr = new ::sf::Clock(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Clock::POT->NewInstance();
@@ -20432,7 +20055,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Clock &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Clock &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Clock &JS)
 {
     ::sf::Clock *Ptr = (::sf::Clock *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Clock::POT->NewInstance();
@@ -20440,7 +20063,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Clock &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Clock &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Clock &CPP)
 {
     ::sf::Clock *Ptr = sf_v8::sf_Clock::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -20449,30 +20072,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Clock &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Clock *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Clock *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Clock::POT->NewInstance();
     sf_v8::sf_Clock::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Clock *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Clock::POT->NewInstance();
-    sf_v8::sf_Clock::MakeReference(Result, const_cast< ::sf::Clock * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Clock *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Clock *&CPP)
 {
     CPP = sf_v8::sf_Clock::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Mouse &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Mouse &JS)
 {
     ::sf::Mouse *Ptr = new ::sf::Mouse(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Mouse::POT->NewInstance();
@@ -20480,7 +20094,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Mouse &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Mouse &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Mouse &JS)
 {
     ::sf::Mouse *Ptr = (::sf::Mouse *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Mouse::POT->NewInstance();
@@ -20488,7 +20102,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Mouse &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Mouse &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Mouse &CPP)
 {
     ::sf::Mouse *Ptr = sf_v8::sf_Mouse::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -20497,35 +20111,26 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Mouse &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Mouse *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Mouse *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Mouse::POT->NewInstance();
     sf_v8::sf_Mouse::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Mouse *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Mouse::POT->NewInstance();
-    sf_v8::sf_Mouse::MakeReference(Result, const_cast< ::sf::Mouse * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Mouse *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Mouse *&CPP)
 {
     CPP = sf_v8::sf_Mouse::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(::sf::Mouse::Button JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Mouse::Button JS)
 {
     return v8::Number::New(static_cast<int>(JS));
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Mouse::Button &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Mouse::Button &CPP)
 {
     CPP = static_cast< ::sf::Mouse::Button >(Value->IntegerValue());
 }
@@ -20534,7 +20139,7 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Mouse::Button &CPP)
 //----------------------------------------
 #ifndef NO_SFML_NETWORK
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::TcpSocket &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::TcpSocket &JS)
 {
     ::sf::TcpSocket *Ptr = (::sf::TcpSocket *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_TcpSocket::POT->NewInstance();
@@ -20542,23 +20147,14 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::TcpSocket &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::TcpSocket *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::TcpSocket *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_TcpSocket::POT->NewInstance();
     sf_v8::sf_TcpSocket::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::TcpSocket *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_TcpSocket::POT->NewInstance();
-    sf_v8::sf_TcpSocket::MakeReference(Result, const_cast< ::sf::TcpSocket * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::TcpSocket *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::TcpSocket *&CPP)
 {
     CPP = sf_v8::sf_TcpSocket::SafeUnwrap(Value->ToObject());
 }
@@ -20566,7 +20162,7 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::TcpSocket *&CPP)
 //----------------------------------------
 #endif
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::SoundRecorder &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::SoundRecorder &JS)
 {
     ::sf::SoundRecorder *Ptr = (::sf::SoundRecorder *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_SoundRecorder::POT->NewInstance();
@@ -20574,30 +20170,21 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::SoundRecorder &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::SoundRecorder *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::SoundRecorder *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_SoundRecorder::POT->NewInstance();
     sf_v8::sf_SoundRecorder::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::SoundRecorder *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_SoundRecorder::POT->NewInstance();
-    sf_v8::sf_SoundRecorder::MakeReference(Result, const_cast< ::sf::SoundRecorder * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundRecorder *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundRecorder *&CPP)
 {
     CPP = sf_v8::sf_SoundRecorder::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Color &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Color &JS)
 {
     ::sf::Color *Ptr = new ::sf::Color(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Color::POT->NewInstance();
@@ -20605,7 +20192,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Color &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Color &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Color &JS)
 {
     ::sf::Color *Ptr = (::sf::Color *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Color::POT->NewInstance();
@@ -20613,7 +20200,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Color &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Color &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Color &CPP)
 {
     ::sf::Color *Ptr = sf_v8::sf_Color::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -20622,30 +20209,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Color &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Color *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Color *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Color::POT->NewInstance();
     sf_v8::sf_Color::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Color *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Color::POT->NewInstance();
-    sf_v8::sf_Color::MakeReference(Result, const_cast< ::sf::Color * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Color *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Color *&CPP)
 {
     CPP = sf_v8::sf_Color::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Texture &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Texture &JS)
 {
     ::sf::Texture *Ptr = new ::sf::Texture(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Texture::POT->NewInstance();
@@ -20653,7 +20231,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Texture &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Texture &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Texture &JS)
 {
     ::sf::Texture *Ptr = (::sf::Texture *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Texture::POT->NewInstance();
@@ -20661,7 +20239,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Texture &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Texture &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Texture &CPP)
 {
     ::sf::Texture *Ptr = sf_v8::sf_Texture::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -20670,35 +20248,26 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Texture &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Texture *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Texture *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Texture::POT->NewInstance();
     sf_v8::sf_Texture::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Texture *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Texture::POT->NewInstance();
-    sf_v8::sf_Texture::MakeReference(Result, const_cast< ::sf::Texture * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Texture *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Texture *&CPP)
 {
     CPP = sf_v8::sf_Texture::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(::sf::Texture::CoordinateType JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Texture::CoordinateType JS)
 {
     return v8::Number::New(static_cast<int>(JS));
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Texture::CoordinateType &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Texture::CoordinateType &CPP)
 {
     CPP = static_cast< ::sf::Texture::CoordinateType >(Value->IntegerValue());
 }
@@ -20706,7 +20275,7 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Texture::CoordinateType &C
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::ContextSettings &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::ContextSettings &JS)
 {
     ::sf::ContextSettings *Ptr = new ::sf::ContextSettings(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_ContextSettings::POT->NewInstance();
@@ -20714,7 +20283,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::ContextSettings &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::ContextSettings &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::ContextSettings &JS)
 {
     ::sf::ContextSettings *Ptr = (::sf::ContextSettings *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_ContextSettings::POT->NewInstance();
@@ -20722,7 +20291,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::ContextSettings &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::ContextSettings &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::ContextSettings &CPP)
 {
     ::sf::ContextSettings *Ptr = sf_v8::sf_ContextSettings::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -20731,30 +20300,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::ContextSettings &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::ContextSettings *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::ContextSettings *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_ContextSettings::POT->NewInstance();
     sf_v8::sf_ContextSettings::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::ContextSettings *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_ContextSettings::POT->NewInstance();
-    sf_v8::sf_ContextSettings::MakeReference(Result, const_cast< ::sf::ContextSettings * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::ContextSettings *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::ContextSettings *&CPP)
 {
     CPP = sf_v8::sf_ContextSettings::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::Context &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Context &JS)
 {
     ::sf::Context *Ptr = (::sf::Context *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Context::POT->NewInstance();
@@ -20762,30 +20322,21 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Context &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Context *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Context *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Context::POT->NewInstance();
     sf_v8::sf_Context::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Context *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Context::POT->NewInstance();
-    sf_v8::sf_Context::MakeReference(Result, const_cast< ::sf::Context * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Context *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Context *&CPP)
 {
     CPP = sf_v8::sf_Context::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::SoundBuffer &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::SoundBuffer &JS)
 {
     ::sf::SoundBuffer *Ptr = new ::sf::SoundBuffer(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_SoundBuffer::POT->NewInstance();
@@ -20793,7 +20344,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::SoundBuffer &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::SoundBuffer &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::SoundBuffer &JS)
 {
     ::sf::SoundBuffer *Ptr = (::sf::SoundBuffer *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_SoundBuffer::POT->NewInstance();
@@ -20801,7 +20352,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::SoundBuffer &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundBuffer &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundBuffer &CPP)
 {
     ::sf::SoundBuffer *Ptr = sf_v8::sf_SoundBuffer::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -20810,30 +20361,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundBuffer &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::SoundBuffer *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::SoundBuffer *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_SoundBuffer::POT->NewInstance();
     sf_v8::sf_SoundBuffer::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::SoundBuffer *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_SoundBuffer::POT->NewInstance();
-    sf_v8::sf_SoundBuffer::MakeReference(Result, const_cast< ::sf::SoundBuffer * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundBuffer *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundBuffer *&CPP)
 {
     CPP = sf_v8::sf_SoundBuffer::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Image &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Image &JS)
 {
     ::sf::Image *Ptr = new ::sf::Image(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Image::POT->NewInstance();
@@ -20841,7 +20383,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Image &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Image &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Image &JS)
 {
     ::sf::Image *Ptr = (::sf::Image *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Image::POT->NewInstance();
@@ -20849,7 +20391,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Image &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Image &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Image &CPP)
 {
     ::sf::Image *Ptr = sf_v8::sf_Image::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -20858,30 +20400,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Image &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Image *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Image *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Image::POT->NewInstance();
     sf_v8::sf_Image::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Image *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Image::POT->NewInstance();
-    sf_v8::sf_Image::MakeReference(Result, const_cast< ::sf::Image * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Image *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Image *&CPP)
 {
     CPP = sf_v8::sf_Image::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Sprite &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Sprite &JS)
 {
     ::sf::Sprite *Ptr = new ::sf::Sprite(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Sprite::POT->NewInstance();
@@ -20889,7 +20422,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Sprite &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Sprite &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Sprite &JS)
 {
     ::sf::Sprite *Ptr = (::sf::Sprite *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Sprite::POT->NewInstance();
@@ -20897,7 +20430,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Sprite &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Sprite &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Sprite &CPP)
 {
     ::sf::Sprite *Ptr = sf_v8::sf_Sprite::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -20906,30 +20439,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Sprite &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Sprite *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Sprite *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Sprite::POT->NewInstance();
     sf_v8::sf_Sprite::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Sprite *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Sprite::POT->NewInstance();
-    sf_v8::sf_Sprite::MakeReference(Result, const_cast< ::sf::Sprite * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Sprite *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Sprite *&CPP)
 {
     CPP = sf_v8::sf_Sprite::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::ConvexShape &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::ConvexShape &JS)
 {
     ::sf::ConvexShape *Ptr = new ::sf::ConvexShape(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_ConvexShape::POT->NewInstance();
@@ -20937,7 +20461,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::ConvexShape &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::ConvexShape &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::ConvexShape &JS)
 {
     ::sf::ConvexShape *Ptr = (::sf::ConvexShape *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_ConvexShape::POT->NewInstance();
@@ -20945,7 +20469,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::ConvexShape &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::ConvexShape &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::ConvexShape &CPP)
 {
     ::sf::ConvexShape *Ptr = sf_v8::sf_ConvexShape::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -20954,30 +20478,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::ConvexShape &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::ConvexShape *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::ConvexShape *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_ConvexShape::POT->NewInstance();
     sf_v8::sf_ConvexShape::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::ConvexShape *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_ConvexShape::POT->NewInstance();
-    sf_v8::sf_ConvexShape::MakeReference(Result, const_cast< ::sf::ConvexShape * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::ConvexShape *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::ConvexShape *&CPP)
 {
     CPP = sf_v8::sf_ConvexShape::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::Window &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Window &JS)
 {
     ::sf::Window *Ptr = (::sf::Window *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Window::POT->NewInstance();
@@ -20985,30 +20500,21 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Window &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Window *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Window *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Window::POT->NewInstance();
     sf_v8::sf_Window::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Window *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Window::POT->NewInstance();
-    sf_v8::sf_Window::MakeReference(Result, const_cast< ::sf::Window * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Window *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Window *&CPP)
 {
     CPP = sf_v8::sf_Window::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Time &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Time &JS)
 {
     ::sf::Time *Ptr = new ::sf::Time(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Time::POT->NewInstance();
@@ -21016,7 +20522,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Time &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Time &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Time &JS)
 {
     ::sf::Time *Ptr = (::sf::Time *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Time::POT->NewInstance();
@@ -21024,7 +20530,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Time &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Time &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Time &CPP)
 {
     ::sf::Time *Ptr = sf_v8::sf_Time::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -21033,30 +20539,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Time &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Time *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Time *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Time::POT->NewInstance();
     sf_v8::sf_Time::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Time *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Time::POT->NewInstance();
-    sf_v8::sf_Time::MakeReference(Result, const_cast< ::sf::Time * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Time *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Time *&CPP)
 {
     CPP = sf_v8::sf_Time::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Glyph &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Glyph &JS)
 {
     ::sf::Glyph *Ptr = new ::sf::Glyph(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Glyph::POT->NewInstance();
@@ -21064,7 +20561,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Glyph &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Glyph &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Glyph &JS)
 {
     ::sf::Glyph *Ptr = (::sf::Glyph *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Glyph::POT->NewInstance();
@@ -21072,7 +20569,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Glyph &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Glyph &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Glyph &CPP)
 {
     ::sf::Glyph *Ptr = sf_v8::sf_Glyph::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -21081,30 +20578,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Glyph &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Glyph *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Glyph *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Glyph::POT->NewInstance();
     sf_v8::sf_Glyph::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Glyph *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Glyph::POT->NewInstance();
-    sf_v8::sf_Glyph::MakeReference(Result, const_cast< ::sf::Glyph * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Glyph *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Glyph *&CPP)
 {
     CPP = sf_v8::sf_Glyph::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Transform &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Transform &JS)
 {
     ::sf::Transform *Ptr = new ::sf::Transform(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Transform::POT->NewInstance();
@@ -21112,7 +20600,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Transform &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Transform &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Transform &JS)
 {
     ::sf::Transform *Ptr = (::sf::Transform *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Transform::POT->NewInstance();
@@ -21120,7 +20608,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Transform &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Transform &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Transform &CPP)
 {
     ::sf::Transform *Ptr = sf_v8::sf_Transform::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -21129,30 +20617,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Transform &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Transform *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Transform *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Transform::POT->NewInstance();
     sf_v8::sf_Transform::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Transform *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Transform::POT->NewInstance();
-    sf_v8::sf_Transform::MakeReference(Result, const_cast< ::sf::Transform * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Transform *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Transform *&CPP)
 {
     CPP = sf_v8::sf_Transform::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Joystick &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Joystick &JS)
 {
     ::sf::Joystick *Ptr = new ::sf::Joystick(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Joystick::POT->NewInstance();
@@ -21160,7 +20639,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Joystick &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Joystick &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Joystick &JS)
 {
     ::sf::Joystick *Ptr = (::sf::Joystick *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Joystick::POT->NewInstance();
@@ -21168,7 +20647,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Joystick &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Joystick &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Joystick &CPP)
 {
     ::sf::Joystick *Ptr = sf_v8::sf_Joystick::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -21177,35 +20656,26 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Joystick &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Joystick *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Joystick *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Joystick::POT->NewInstance();
     sf_v8::sf_Joystick::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Joystick *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Joystick::POT->NewInstance();
-    sf_v8::sf_Joystick::MakeReference(Result, const_cast< ::sf::Joystick * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Joystick *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Joystick *&CPP)
 {
     CPP = sf_v8::sf_Joystick::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(::sf::Joystick::Axis JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Joystick::Axis JS)
 {
     return v8::Number::New(static_cast<int>(JS));
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Joystick::Axis &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Joystick::Axis &CPP)
 {
     CPP = static_cast< ::sf::Joystick::Axis >(Value->IntegerValue());
 }
@@ -21213,7 +20683,7 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Joystick::Axis &CPP)
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::RenderTarget &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::RenderTarget &JS)
 {
     ::sf::RenderTarget *Ptr = (::sf::RenderTarget *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_RenderTarget::POT->NewInstance();
@@ -21221,30 +20691,21 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::RenderTarget &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::RenderTarget *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::RenderTarget *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_RenderTarget::POT->NewInstance();
     sf_v8::sf_RenderTarget::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::RenderTarget *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_RenderTarget::POT->NewInstance();
-    sf_v8::sf_RenderTarget::MakeReference(Result, const_cast< ::sf::RenderTarget * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::RenderTarget *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::RenderTarget *&CPP)
 {
     CPP = sf_v8::sf_RenderTarget::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Listener &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Listener &JS)
 {
     ::sf::Listener *Ptr = new ::sf::Listener(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Listener::POT->NewInstance();
@@ -21252,7 +20713,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Listener &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Listener &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Listener &JS)
 {
     ::sf::Listener *Ptr = (::sf::Listener *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Listener::POT->NewInstance();
@@ -21260,7 +20721,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Listener &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Listener &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Listener &CPP)
 {
     ::sf::Listener *Ptr = sf_v8::sf_Listener::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -21269,30 +20730,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Listener &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Listener *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Listener *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Listener::POT->NewInstance();
     sf_v8::sf_Listener::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Listener *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Listener::POT->NewInstance();
-    sf_v8::sf_Listener::MakeReference(Result, const_cast< ::sf::Listener * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Listener *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Listener *&CPP)
 {
     CPP = sf_v8::sf_Listener::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::SoundSource &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::SoundSource &JS)
 {
     ::sf::SoundSource *Ptr = new ::sf::SoundSource(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_SoundSource::POT->NewInstance();
@@ -21300,7 +20752,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::SoundSource &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::SoundSource &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::SoundSource &JS)
 {
     ::sf::SoundSource *Ptr = (::sf::SoundSource *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_SoundSource::POT->NewInstance();
@@ -21308,7 +20760,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::SoundSource &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundSource &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundSource &CPP)
 {
     ::sf::SoundSource *Ptr = sf_v8::sf_SoundSource::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -21317,35 +20769,26 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundSource &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::SoundSource *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::SoundSource *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_SoundSource::POT->NewInstance();
     sf_v8::sf_SoundSource::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::SoundSource *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_SoundSource::POT->NewInstance();
-    sf_v8::sf_SoundSource::MakeReference(Result, const_cast< ::sf::SoundSource * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundSource *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundSource *&CPP)
 {
     CPP = sf_v8::sf_SoundSource::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(::sf::SoundSource::Status JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::SoundSource::Status JS)
 {
     return v8::Number::New(static_cast<int>(JS));
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundSource::Status &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundSource::Status &CPP)
 {
     CPP = static_cast< ::sf::SoundSource::Status >(Value->IntegerValue());
 }
@@ -21353,7 +20796,7 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::SoundSource::Status &CPP)
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Event::SizeEvent &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Event::SizeEvent &JS)
 {
     ::sf::Event::SizeEvent *Ptr = new ::sf::Event::SizeEvent(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Event_SizeEvent::POT->NewInstance();
@@ -21361,7 +20804,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Event::SizeEvent &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event::SizeEvent &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Event::SizeEvent &JS)
 {
     ::sf::Event::SizeEvent *Ptr = (::sf::Event::SizeEvent *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Event_SizeEvent::POT->NewInstance();
@@ -21369,7 +20812,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Event::SizeEvent &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::SizeEvent &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::SizeEvent &CPP)
 {
     ::sf::Event::SizeEvent *Ptr = sf_v8::sf_Event_SizeEvent::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -21378,30 +20821,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::SizeEvent &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Event::SizeEvent *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Event::SizeEvent *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Event_SizeEvent::POT->NewInstance();
     sf_v8::sf_Event_SizeEvent::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event::SizeEvent *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Event_SizeEvent::POT->NewInstance();
-    sf_v8::sf_Event_SizeEvent::MakeReference(Result, const_cast< ::sf::Event::SizeEvent * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::SizeEvent *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::SizeEvent *&CPP)
 {
     CPP = sf_v8::sf_Event_SizeEvent::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Event::KeyEvent &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Event::KeyEvent &JS)
 {
     ::sf::Event::KeyEvent *Ptr = new ::sf::Event::KeyEvent(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Event_KeyEvent::POT->NewInstance();
@@ -21409,7 +20843,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Event::KeyEvent &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event::KeyEvent &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Event::KeyEvent &JS)
 {
     ::sf::Event::KeyEvent *Ptr = (::sf::Event::KeyEvent *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Event_KeyEvent::POT->NewInstance();
@@ -21417,7 +20851,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Event::KeyEvent &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::KeyEvent &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::KeyEvent &CPP)
 {
     ::sf::Event::KeyEvent *Ptr = sf_v8::sf_Event_KeyEvent::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -21426,30 +20860,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::KeyEvent &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Event::KeyEvent *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Event::KeyEvent *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Event_KeyEvent::POT->NewInstance();
     sf_v8::sf_Event_KeyEvent::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event::KeyEvent *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Event_KeyEvent::POT->NewInstance();
-    sf_v8::sf_Event_KeyEvent::MakeReference(Result, const_cast< ::sf::Event::KeyEvent * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::KeyEvent *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::KeyEvent *&CPP)
 {
     CPP = sf_v8::sf_Event_KeyEvent::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Event::TextEvent &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Event::TextEvent &JS)
 {
     ::sf::Event::TextEvent *Ptr = new ::sf::Event::TextEvent(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Event_TextEvent::POT->NewInstance();
@@ -21457,7 +20882,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Event::TextEvent &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event::TextEvent &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Event::TextEvent &JS)
 {
     ::sf::Event::TextEvent *Ptr = (::sf::Event::TextEvent *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Event_TextEvent::POT->NewInstance();
@@ -21465,7 +20890,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Event::TextEvent &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::TextEvent &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::TextEvent &CPP)
 {
     ::sf::Event::TextEvent *Ptr = sf_v8::sf_Event_TextEvent::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -21474,30 +20899,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::TextEvent &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Event::TextEvent *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Event::TextEvent *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Event_TextEvent::POT->NewInstance();
     sf_v8::sf_Event_TextEvent::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event::TextEvent *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Event_TextEvent::POT->NewInstance();
-    sf_v8::sf_Event_TextEvent::MakeReference(Result, const_cast< ::sf::Event::TextEvent * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::TextEvent *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::TextEvent *&CPP)
 {
     CPP = sf_v8::sf_Event_TextEvent::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Event::MouseMoveEvent &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Event::MouseMoveEvent &JS)
 {
     ::sf::Event::MouseMoveEvent *Ptr = new ::sf::Event::MouseMoveEvent(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Event_MouseMoveEvent::POT->NewInstance();
@@ -21505,7 +20921,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Event::MouseMoveEvent &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event::MouseMoveEvent &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Event::MouseMoveEvent &JS)
 {
     ::sf::Event::MouseMoveEvent *Ptr = (::sf::Event::MouseMoveEvent *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Event_MouseMoveEvent::POT->NewInstance();
@@ -21513,7 +20929,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Event::MouseMoveEvent &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::MouseMoveEvent &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::MouseMoveEvent &CPP)
 {
     ::sf::Event::MouseMoveEvent *Ptr = sf_v8::sf_Event_MouseMoveEvent::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -21522,30 +20938,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::MouseMoveEvent &CPP
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Event::MouseMoveEvent *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Event::MouseMoveEvent *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Event_MouseMoveEvent::POT->NewInstance();
     sf_v8::sf_Event_MouseMoveEvent::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event::MouseMoveEvent *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Event_MouseMoveEvent::POT->NewInstance();
-    sf_v8::sf_Event_MouseMoveEvent::MakeReference(Result, const_cast< ::sf::Event::MouseMoveEvent * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::MouseMoveEvent *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::MouseMoveEvent *&CPP)
 {
     CPP = sf_v8::sf_Event_MouseMoveEvent::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Event::MouseButtonEvent &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Event::MouseButtonEvent &JS)
 {
     ::sf::Event::MouseButtonEvent *Ptr = new ::sf::Event::MouseButtonEvent(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Event_MouseButtonEvent::POT->NewInstance();
@@ -21553,7 +20960,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Event::MouseButtonEvent &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event::MouseButtonEvent &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Event::MouseButtonEvent &JS)
 {
     ::sf::Event::MouseButtonEvent *Ptr = (::sf::Event::MouseButtonEvent *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Event_MouseButtonEvent::POT->NewInstance();
@@ -21561,7 +20968,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Event::MouseButtonEvent &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::MouseButtonEvent &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::MouseButtonEvent &CPP)
 {
     ::sf::Event::MouseButtonEvent *Ptr = sf_v8::sf_Event_MouseButtonEvent::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -21570,30 +20977,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::MouseButtonEvent &C
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Event::MouseButtonEvent *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Event::MouseButtonEvent *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Event_MouseButtonEvent::POT->NewInstance();
     sf_v8::sf_Event_MouseButtonEvent::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event::MouseButtonEvent *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Event_MouseButtonEvent::POT->NewInstance();
-    sf_v8::sf_Event_MouseButtonEvent::MakeReference(Result, const_cast< ::sf::Event::MouseButtonEvent * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::MouseButtonEvent *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::MouseButtonEvent *&CPP)
 {
     CPP = sf_v8::sf_Event_MouseButtonEvent::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Event::MouseWheelEvent &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Event::MouseWheelEvent &JS)
 {
     ::sf::Event::MouseWheelEvent *Ptr = new ::sf::Event::MouseWheelEvent(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Event_MouseWheelEvent::POT->NewInstance();
@@ -21601,7 +20999,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Event::MouseWheelEvent &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event::MouseWheelEvent &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Event::MouseWheelEvent &JS)
 {
     ::sf::Event::MouseWheelEvent *Ptr = (::sf::Event::MouseWheelEvent *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Event_MouseWheelEvent::POT->NewInstance();
@@ -21609,7 +21007,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Event::MouseWheelEvent &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::MouseWheelEvent &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::MouseWheelEvent &CPP)
 {
     ::sf::Event::MouseWheelEvent *Ptr = sf_v8::sf_Event_MouseWheelEvent::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -21618,30 +21016,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::MouseWheelEvent &CP
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Event::MouseWheelEvent *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Event::MouseWheelEvent *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Event_MouseWheelEvent::POT->NewInstance();
     sf_v8::sf_Event_MouseWheelEvent::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event::MouseWheelEvent *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Event_MouseWheelEvent::POT->NewInstance();
-    sf_v8::sf_Event_MouseWheelEvent::MakeReference(Result, const_cast< ::sf::Event::MouseWheelEvent * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::MouseWheelEvent *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::MouseWheelEvent *&CPP)
 {
     CPP = sf_v8::sf_Event_MouseWheelEvent::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Event::JoystickConnectEvent &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Event::JoystickConnectEvent &JS)
 {
     ::sf::Event::JoystickConnectEvent *Ptr = new ::sf::Event::JoystickConnectEvent(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Event_JoystickConnectEvent::POT->NewInstance();
@@ -21649,7 +21038,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Event::JoystickConnectEvent &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event::JoystickConnectEvent &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Event::JoystickConnectEvent &JS)
 {
     ::sf::Event::JoystickConnectEvent *Ptr = (::sf::Event::JoystickConnectEvent *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Event_JoystickConnectEvent::POT->NewInstance();
@@ -21657,7 +21046,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Event::JoystickConnectEvent &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::JoystickConnectEvent &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::JoystickConnectEvent &CPP)
 {
     ::sf::Event::JoystickConnectEvent *Ptr = sf_v8::sf_Event_JoystickConnectEvent::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -21666,30 +21055,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::JoystickConnectEven
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Event::JoystickConnectEvent *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Event::JoystickConnectEvent *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Event_JoystickConnectEvent::POT->NewInstance();
     sf_v8::sf_Event_JoystickConnectEvent::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event::JoystickConnectEvent *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Event_JoystickConnectEvent::POT->NewInstance();
-    sf_v8::sf_Event_JoystickConnectEvent::MakeReference(Result, const_cast< ::sf::Event::JoystickConnectEvent * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::JoystickConnectEvent *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::JoystickConnectEvent *&CPP)
 {
     CPP = sf_v8::sf_Event_JoystickConnectEvent::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Event::JoystickMoveEvent &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Event::JoystickMoveEvent &JS)
 {
     ::sf::Event::JoystickMoveEvent *Ptr = new ::sf::Event::JoystickMoveEvent(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Event_JoystickMoveEvent::POT->NewInstance();
@@ -21697,7 +21077,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Event::JoystickMoveEvent &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event::JoystickMoveEvent &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Event::JoystickMoveEvent &JS)
 {
     ::sf::Event::JoystickMoveEvent *Ptr = (::sf::Event::JoystickMoveEvent *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Event_JoystickMoveEvent::POT->NewInstance();
@@ -21705,7 +21085,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Event::JoystickMoveEvent &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::JoystickMoveEvent &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::JoystickMoveEvent &CPP)
 {
     ::sf::Event::JoystickMoveEvent *Ptr = sf_v8::sf_Event_JoystickMoveEvent::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -21714,30 +21094,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::JoystickMoveEvent &
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Event::JoystickMoveEvent *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Event::JoystickMoveEvent *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Event_JoystickMoveEvent::POT->NewInstance();
     sf_v8::sf_Event_JoystickMoveEvent::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event::JoystickMoveEvent *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Event_JoystickMoveEvent::POT->NewInstance();
-    sf_v8::sf_Event_JoystickMoveEvent::MakeReference(Result, const_cast< ::sf::Event::JoystickMoveEvent * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::JoystickMoveEvent *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::JoystickMoveEvent *&CPP)
 {
     CPP = sf_v8::sf_Event_JoystickMoveEvent::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Event::JoystickButtonEvent &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Event::JoystickButtonEvent &JS)
 {
     ::sf::Event::JoystickButtonEvent *Ptr = new ::sf::Event::JoystickButtonEvent(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Event_JoystickButtonEvent::POT->NewInstance();
@@ -21745,7 +21116,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Event::JoystickButtonEvent &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event::JoystickButtonEvent &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Event::JoystickButtonEvent &JS)
 {
     ::sf::Event::JoystickButtonEvent *Ptr = (::sf::Event::JoystickButtonEvent *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Event_JoystickButtonEvent::POT->NewInstance();
@@ -21753,7 +21124,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Event::JoystickButtonEvent &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::JoystickButtonEvent &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::JoystickButtonEvent &CPP)
 {
     ::sf::Event::JoystickButtonEvent *Ptr = sf_v8::sf_Event_JoystickButtonEvent::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -21762,30 +21133,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::JoystickButtonEvent
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Event::JoystickButtonEvent *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Event::JoystickButtonEvent *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Event_JoystickButtonEvent::POT->NewInstance();
     sf_v8::sf_Event_JoystickButtonEvent::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event::JoystickButtonEvent *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Event_JoystickButtonEvent::POT->NewInstance();
-    sf_v8::sf_Event_JoystickButtonEvent::MakeReference(Result, const_cast< ::sf::Event::JoystickButtonEvent * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::JoystickButtonEvent *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::JoystickButtonEvent *&CPP)
 {
     CPP = sf_v8::sf_Event_JoystickButtonEvent::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Event &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Event &JS)
 {
     ::sf::Event *Ptr = new ::sf::Event(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Event::POT->NewInstance();
@@ -21793,7 +21155,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Event &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Event &JS)
 {
     ::sf::Event *Ptr = (::sf::Event *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Event::POT->NewInstance();
@@ -21801,7 +21163,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Event &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event &CPP)
 {
     ::sf::Event *Ptr = sf_v8::sf_Event::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -21810,35 +21172,26 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Event *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Event *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Event::POT->NewInstance();
     sf_v8::sf_Event::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Event *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Event::POT->NewInstance();
-    sf_v8::sf_Event::MakeReference(Result, const_cast< ::sf::Event * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event *&CPP)
 {
     CPP = sf_v8::sf_Event::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(::sf::Event::EventType JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Event::EventType JS)
 {
     return v8::Number::New(static_cast<int>(JS));
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::EventType &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::EventType &CPP)
 {
     CPP = static_cast< ::sf::Event::EventType >(Value->IntegerValue());
 }
@@ -21846,7 +21199,7 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Event::EventType &CPP)
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::GlResource &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::GlResource &JS)
 {
     ::sf::GlResource *Ptr = new ::sf::GlResource(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_GlResource::POT->NewInstance();
@@ -21854,7 +21207,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::GlResource &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::GlResource &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::GlResource &JS)
 {
     ::sf::GlResource *Ptr = (::sf::GlResource *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_GlResource::POT->NewInstance();
@@ -21862,7 +21215,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::GlResource &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::GlResource &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::GlResource &CPP)
 {
     ::sf::GlResource *Ptr = sf_v8::sf_GlResource::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -21871,30 +21224,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::GlResource &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::GlResource *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::GlResource *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_GlResource::POT->NewInstance();
     sf_v8::sf_GlResource::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::GlResource *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_GlResource::POT->NewInstance();
-    sf_v8::sf_GlResource::MakeReference(Result, const_cast< ::sf::GlResource * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::GlResource *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::GlResource *&CPP)
 {
     CPP = sf_v8::sf_GlResource::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::RectangleShape &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::RectangleShape &JS)
 {
     ::sf::RectangleShape *Ptr = new ::sf::RectangleShape(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_RectangleShape::POT->NewInstance();
@@ -21902,7 +21246,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::RectangleShape &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::RectangleShape &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::RectangleShape &JS)
 {
     ::sf::RectangleShape *Ptr = (::sf::RectangleShape *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_RectangleShape::POT->NewInstance();
@@ -21910,7 +21254,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::RectangleShape &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::RectangleShape &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::RectangleShape &CPP)
 {
     ::sf::RectangleShape *Ptr = sf_v8::sf_RectangleShape::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -21919,30 +21263,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::RectangleShape &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::RectangleShape *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::RectangleShape *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_RectangleShape::POT->NewInstance();
     sf_v8::sf_RectangleShape::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::RectangleShape *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_RectangleShape::POT->NewInstance();
-    sf_v8::sf_RectangleShape::MakeReference(Result, const_cast< ::sf::RectangleShape * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::RectangleShape *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::RectangleShape *&CPP)
 {
     CPP = sf_v8::sf_RectangleShape::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Utf16 &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Utf16 &JS)
 {
     ::sf::Utf16 *Ptr = new ::sf::Utf16(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Utf16::POT->NewInstance();
@@ -21950,7 +21285,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Utf16 &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Utf16 &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Utf16 &JS)
 {
     ::sf::Utf16 *Ptr = (::sf::Utf16 *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Utf16::POT->NewInstance();
@@ -21958,7 +21293,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Utf16 &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Utf16 &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Utf16 &CPP)
 {
     ::sf::Utf16 *Ptr = sf_v8::sf_Utf16::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -21967,30 +21302,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Utf16 &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Utf16 *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Utf16 *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Utf16::POT->NewInstance();
     sf_v8::sf_Utf16::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Utf16 *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Utf16::POT->NewInstance();
-    sf_v8::sf_Utf16::MakeReference(Result, const_cast< ::sf::Utf16 * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Utf16 *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Utf16 *&CPP)
 {
     CPP = sf_v8::sf_Utf16::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Utf32 &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Utf32 &JS)
 {
     ::sf::Utf32 *Ptr = new ::sf::Utf32(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Utf32::POT->NewInstance();
@@ -21998,7 +21324,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Utf32 &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Utf32 &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Utf32 &JS)
 {
     ::sf::Utf32 *Ptr = (::sf::Utf32 *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Utf32::POT->NewInstance();
@@ -22006,7 +21332,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Utf32 &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Utf32 &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Utf32 &CPP)
 {
     ::sf::Utf32 *Ptr = sf_v8::sf_Utf32::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -22015,30 +21341,21 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Utf32 &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Utf32 *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Utf32 *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Utf32::POT->NewInstance();
     sf_v8::sf_Utf32::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Utf32 *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Utf32::POT->NewInstance();
-    sf_v8::sf_Utf32::MakeReference(Result, const_cast< ::sf::Utf32 * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Utf32 *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Utf32 *&CPP)
 {
     CPP = sf_v8::sf_Utf32::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(const ::sf::Keyboard &JS)
+inline v8::Handle<v8::Value> CastToJS(const ::sf::Keyboard &JS)
 {
     ::sf::Keyboard *Ptr = new ::sf::Keyboard(JS);
     v8::Handle<v8::Object> Result = sf_v8::sf_Keyboard::POT->NewInstance();
@@ -22046,7 +21363,7 @@ v8::Handle<v8::Value> CastToJS(const ::sf::Keyboard &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Keyboard &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Keyboard &JS)
 {
     ::sf::Keyboard *Ptr = (::sf::Keyboard *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Keyboard::POT->NewInstance();
@@ -22054,7 +21371,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Keyboard &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Keyboard &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Keyboard &CPP)
 {
     ::sf::Keyboard *Ptr = sf_v8::sf_Keyboard::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -22063,35 +21380,26 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Keyboard &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Keyboard *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Keyboard *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Keyboard::POT->NewInstance();
     sf_v8::sf_Keyboard::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Keyboard *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Keyboard::POT->NewInstance();
-    sf_v8::sf_Keyboard::MakeReference(Result, const_cast< ::sf::Keyboard * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Keyboard *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Keyboard *&CPP)
 {
     CPP = sf_v8::sf_Keyboard::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(::sf::Keyboard::Key JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Keyboard::Key JS)
 {
     return v8::Number::New(static_cast<int>(JS));
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Keyboard::Key &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Keyboard::Key &CPP)
 {
     CPP = static_cast< ::sf::Keyboard::Key >(Value->IntegerValue());
 }
@@ -22100,7 +21408,7 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Keyboard::Key &CPP)
 //----------------------------------------
 #ifndef NO_SFML_NETWORK
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::TcpListener &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::TcpListener &JS)
 {
     ::sf::TcpListener *Ptr = (::sf::TcpListener *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_TcpListener::POT->NewInstance();
@@ -22108,23 +21416,14 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::TcpListener &JS)
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::TcpListener *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::TcpListener *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_TcpListener::POT->NewInstance();
     sf_v8::sf_TcpListener::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::TcpListener *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_TcpListener::POT->NewInstance();
-    sf_v8::sf_TcpListener::MakeReference(Result, const_cast< ::sf::TcpListener * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::TcpListener *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::TcpListener *&CPP)
 {
     CPP = sf_v8::sf_TcpListener::SafeUnwrap(Value->ToObject());
 }
@@ -22132,7 +21431,7 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::TcpListener *&CPP)
 //----------------------------------------
 #endif
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS2(const ::sf::Drawable &JS)
+inline v8::Handle<v8::Value> CastToJS2(const ::sf::Drawable &JS)
 {
     ::sf::Drawable *Ptr = (::sf::Drawable *)&JS;
     v8::Handle<v8::Object> Result = sf_v8::sf_Drawable::POT->NewInstance();
@@ -22140,7 +21439,7 @@ v8::Handle<v8::Value> CastToJS2(const ::sf::Drawable &JS)
     return Result;
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Drawable &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Drawable &CPP)
 {
     ::sf::Drawable *Ptr = sf_v8::sf_Drawable::SafeUnwrap(Value->ToObject());
     if ( Ptr )
@@ -22149,35 +21448,26 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Drawable &CPP)
     }
 }
 
-v8::Handle<v8::Value> CastToJS(::sf::Drawable *JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::Drawable *JS)
 {
-    if ( JS == NULL ) return v8::Null();
     v8::Handle<v8::Object> Result = sf_v8::sf_Drawable::POT->NewInstance();
     sf_v8::sf_Drawable::MakeReference(Result, JS);
     return Result;
 }
 
-v8::Handle<v8::Value> CastToJS2(const ::sf::Drawable *JS)
-{
-    if ( JS == NULL ) return v8::Null();
-    v8::Handle<v8::Object> Result = sf_v8::sf_Drawable::POT->NewInstance();
-    sf_v8::sf_Drawable::MakeReference(Result, const_cast< ::sf::Drawable * >(JS), false);
-    return Result;
-}
-
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Drawable *&CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::Drawable *&CPP)
 {
     CPP = sf_v8::sf_Drawable::SafeUnwrap(Value->ToObject());
 }
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(::sf::PrimitiveType JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::PrimitiveType JS)
 {
     return v8::Number::New(static_cast<int>(JS));
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::PrimitiveType &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::PrimitiveType &CPP)
 {
     CPP = static_cast< ::sf::PrimitiveType >(Value->IntegerValue());
 }
@@ -22185,12 +21475,12 @@ void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::PrimitiveType &CPP)
 }
 //----------------------------------------
 namespace v8wrap {
-v8::Handle<v8::Value> CastToJS(::sf::BlendMode JS)
+inline v8::Handle<v8::Value> CastToJS(::sf::BlendMode JS)
 {
     return v8::Number::New(static_cast<int>(JS));
 }
 
-void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::BlendMode &CPP)
+inline void AutoCastToCPP(v8::Handle<v8::Value> Value, ::sf::BlendMode &CPP)
 {
     CPP = static_cast< ::sf::BlendMode >(Value->IntegerValue());
 }

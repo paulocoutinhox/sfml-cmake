@@ -9,15 +9,15 @@ set(
     ../main.cpp
     ../sf_v8.cpp
     ../v8wrap.cpp
-    ../character.cpp
+    ../JSCharacter.cpp
+    ../Character.cpp
 )
 
 if(APPLE)
     list(APPEND GAME_ALL_SOURCES ../ResourcePath.mm)
 endif()
 
-#if(ARCH_32BITS) // usar depois
-
+# define target
 if(APPLE)
     set(TARGET_SYSTEM "mac")
     set(MACOSX_BUNDLE true)
@@ -119,4 +119,13 @@ elseif(WIN32)
     # implementar
 else()
     # implementar
+endif()
+
+# define target mode "debug" ou "release"
+set(TARGET_MODE "debug")
+
+if(TARGET_MODE STREQUAL "debug")
+    set(CMAKE_BUILD_TYPE Debug)
+else()
+    set(CMAKE_BUILD_TYPE Release)
 endif()
