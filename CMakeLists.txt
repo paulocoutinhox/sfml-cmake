@@ -13,6 +13,7 @@ set(
 
 if(APPLE)
     set(TARGET_SYSTEM "mac")
+    SET(CMAKE_CXX_COMPILER "g++")
 elseif(WIN32)
     set(TARGET_SYSTEM "win32")
 else()
