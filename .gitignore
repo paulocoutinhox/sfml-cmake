@@ -2,7 +2,7 @@
 *.slo
 *.lo
 *.o
-sfml-cmake.app
+*.app
 build/*
 !build/build.sh
 !build/clean.sh
@@ -11,11 +11,13 @@ build/*
 
 # Compiled Dynamic libraries
 *.so
+!library/*
 
 # Compiled Static libraries
 *.lai
 *.la
 *.a
+!library/*
 
 # OSX
 *.DS_Store
