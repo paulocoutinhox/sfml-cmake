@@ -6,6 +6,7 @@ sfml-cmake.app
 build/*
 !build/build.sh
 !build/clean.sh
+!build/rebuild.sh
 !build/cmake
 
 # Compiled Dynamic libraries

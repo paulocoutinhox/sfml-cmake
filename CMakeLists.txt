@@ -24,7 +24,8 @@ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/build/cmake/modules")
 set(SFML_ROOT "${CMAKE_SOURCE_DIR}/library/sfml/${TARGET_SYSTEM}/lib")
 set(SFML_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/library/sfml/${TARGET_SYSTEM}/include")
 set(SFML_LIBRARY_DIR "${CMAKE_SOURCE_DIR}/library/sfml/${TARGET_SYSTEM}/lib")
-set(SNDFILE_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/library/sfml/${TARGET_SYSTEM}/lib")
+set(SNDFILE_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/library/sndfile/${TARGET_SYSTEM}/include")
+set(SNDFILE_LIBRARY_DIR "${CMAKE_SOURCE_DIR}/library/sndfile/${TARGET_SYSTEM}/lib")
 set(V8_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/library/v8/${TARGET_SYSTEM}/include")
 set(V8_LIBRARY_DIR "${CMAKE_SOURCE_DIR}/library/v8/${TARGET_SYSTEM}/lib")
 
@@ -40,6 +41,10 @@ include_directories(
 
 # biblioteca SNDFILE
 find_package(SNDFILE REQUIRED)
+
+include_directories(
+    ${SNDFILE_INCLUDE_DIR}
+)
 
 # biblioteca V8
 include_directories(
@@ -66,6 +71,10 @@ if(APPLE)
     add_custom_command(
         TARGET ${PROJECT_NAME} POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory "${SFML_LIBRARY_DIR}" "${CMAKE_SOURCE_DIR}/build/${PROJECT_NAME}.app/Contents/Frameworks"
+    )
+    add_custom_command(
+        TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory "${SNDFILE_LIBRARY_DIR}" "${CMAKE_SOURCE_DIR}/build/${PROJECT_NAME}.app/Contents/Frameworks"
     )
 elseif(WIN32)
     # implementar

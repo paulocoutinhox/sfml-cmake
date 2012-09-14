@@ -11,7 +11,10 @@ OTHER_FILES += \
     build/build.sh \
     build/clean.sh \
     CMakeLists.txt \
-    .gitignore
+    .gitignore \
+    build/cmake/modules/FindSndfile.cmake \
+    build/cmake/modules/FindSFML.cmake \
+    build/cmake/modules/FindGLEW.cmake
 
 HEADERS += \
     v8wrap.h \
