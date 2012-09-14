@@ -3,6 +3,7 @@ build/*
 !build/build.sh
 !build/clean.sh
 !build/rebuild.sh
+!build/clean-dsstore.sh
 !build/cmake
 !library
 
