@@ -15,6 +15,7 @@ set(
 
 if(APPLE)
     set(TARGET_SYSTEM "mac")
+    set(MACOSX_BUNDLE true)
 elseif(WIN32)
     set(TARGET_SYSTEM "win32")
 else()
@@ -36,6 +37,15 @@ set(V8_LIBRARY_DIR "${CMAKE_SOURCE_DIR}/library/v8/${TARGET_SYSTEM}/lib")
 
 # nome do projeto
 project(${PROJECT_NAME})
+
+# icone do projeto
+if(APPLE)
+    set(MACOSX_BUNDLE_ICON_FILE "${RESOURCES_DIR}/icons/osx.icns")
+elseif(WIN32)
+    # implementar
+else()
+    # implementar
+endif()
 
 # biblioteca SFML
 find_package(SFML COMPONENTS system window graphics network audio REQUIRED)
@@ -66,7 +76,6 @@ add_executable(
     ${SFML_LIBRARIES}
     ${SNDFILE_LIBRARY}
     ${V8_LIBRARIES}
-    ${RESOURCES_DIR}
 )
 
 #set_target_properties(${PROJECT_NAME} PROPERTIES RESOURCE "${RESOURCES_DIR}")
@@ -86,7 +95,11 @@ if(APPLE)
     )
     add_custom_command(
         TARGET ${PROJECT_NAME} POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_directory "${JS_DIR}" "${CMAKE_SOURCE_DIR}/build/${PROJECT_NAME}.app/Contents/Resources"
+        COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_SOURCE_DIR}/build/${PROJECT_NAME}.app/Contents/Resources/js"
+    )
+    add_custom_command(
+        TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory "${JS_DIR}" "${CMAKE_SOURCE_DIR}/build/${PROJECT_NAME}.app/Contents/Resources/js"
     )
     add_custom_command(
         TARGET ${PROJECT_NAME} POST_BUILD
