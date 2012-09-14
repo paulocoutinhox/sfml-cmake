@@ -60,7 +60,7 @@ int main()
     sf::RenderWindow window(sf::VideoMode(800, 600, 32), "SFML Sample Application");
 
     sf::Texture texture;
-    if (!texture.loadFromFile("/tmp/robot1.png"))
+    if (!texture.loadFromFile("images/robot1.png"))
         return EXIT_FAILURE;
     sf::Sprite sprite(texture);
 

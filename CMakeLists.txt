@@ -23,6 +23,9 @@ endif()
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/build/cmake/modules")
 
+set(RESOURCES_DIR "${CMAKE_SOURCE_DIR}/resources")
+set(JS_DIR "${CMAKE_SOURCE_DIR}/js")
+
 set(SFML_ROOT "${CMAKE_SOURCE_DIR}/library/sfml/${TARGET_SYSTEM}/lib")
 set(SFML_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/library/sfml/${TARGET_SYSTEM}/include")
 set(SFML_LIBRARY_DIR "${CMAKE_SOURCE_DIR}/library/sfml/${TARGET_SYSTEM}/lib")
@@ -63,7 +66,10 @@ add_executable(
     ${SFML_LIBRARIES}
     ${SNDFILE_LIBRARY}
     ${V8_LIBRARIES}
+    ${RESOURCES_DIR}
 )
+
+#set_target_properties(${PROJECT_NAME} PROPERTIES RESOURCE "${RESOURCES_DIR}")
 
 # link de bibliotecas
 target_link_libraries(${PROJECT_NAME} ${SFML_LIBRARIES} ${SNDFILE_LIBRARY} ${V8_LIBRARIES})
@@ -77,6 +83,14 @@ if(APPLE)
     add_custom_command(
         TARGET ${PROJECT_NAME} POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory "${SNDFILE_LIBRARY_DIR}" "${CMAKE_SOURCE_DIR}/build/${PROJECT_NAME}.app/Contents/Frameworks"
+    )
+    add_custom_command(
+        TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory "${JS_DIR}" "${CMAKE_SOURCE_DIR}/build/${PROJECT_NAME}.app/Contents/Resources"
+    )
+    add_custom_command(
+        TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory "${RESOURCES_DIR}" "${CMAKE_SOURCE_DIR}/build/${PROJECT_NAME}.app/Contents/Resources"
     )
 elseif(WIN32)
     # implementar
