@@ -12,7 +12,8 @@ OTHER_FILES += \
     build/clean.sh \
     CMakeLists.txt \
     .gitignore \
-    build/cmake/modules/FindSFML.cmake
+    build/cmake/modules/FindSFML.cmake \
+    build/clean-dsstore.sh
 
 HEADERS += \
     v8wrap.h \
