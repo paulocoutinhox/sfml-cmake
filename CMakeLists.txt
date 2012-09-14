@@ -11,6 +11,8 @@ set(
     ../v8wrap.cpp
 )
 
+#if(ARCH_32BITS) // usar depois
+
 if(APPLE)
     set(TARGET_SYSTEM "mac")
 elseif(WIN32)
