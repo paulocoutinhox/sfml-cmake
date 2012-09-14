@@ -18,6 +18,9 @@ being the original software.
 3. This notice may not be removed or altered from any source distribution.
 ***/
 
+#ifndef SF_V8_H
+#define SF_V8_H
+
 //----------------------------------------
 // Created: 2012-07-01 17:32:52
 //----------------------------------------
@@ -2585,3 +2588,5 @@ public:
 //----------------------------------------
 }
 //----------------------------------------
+
+#endif SF_V8_H

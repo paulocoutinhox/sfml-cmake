@@ -9,7 +9,12 @@ set(
     ../main.cpp
     ../sf_v8.cpp
     ../v8wrap.cpp
+    ../character.cpp
 )
+
+if(APPLE)
+    list(APPEND GAME_ALL_SOURCES ../ResourcePath.mm)
+endif()
 
 #if(ARCH_32BITS) // usar depois
 
@@ -67,6 +72,11 @@ include_directories(
 )
 
 find_library(V8_LIBRARIES v8 ${V8_LIBRARY_DIR})
+
+# biblioteca core foundation
+if(APPLE)
+    set(CMAKE_EXE_LINKER_FLAGS "-framework Foundation -w")
+endif()
 
 # compila
 add_executable(

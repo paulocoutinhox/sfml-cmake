@@ -13,3 +13,6 @@ build/*
 
 # QtCreator
 *.pro.user
+
+# Build files
+.sconsign.dblite
