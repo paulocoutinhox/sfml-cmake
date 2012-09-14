@@ -84,12 +84,10 @@ int main()
     robot1 = new Character();
     robot1->setType("robot1");
 
-    /*
     JSCharacter::InitPOT(JSCharacter::POT);
     v8::Handle<v8::Object> Result = JSCharacter::POT->NewInstance();
     JSCharacter::MakeReference(Result, robot1);
     context->Global()->Set(v8::String::New("robot1"), Result);
-    */
 
     /*
     // teste com sprite somente
