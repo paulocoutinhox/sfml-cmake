@@ -42,11 +42,11 @@ include_directories(
 )
 
 # biblioteca SNDFILE
-find_package(SNDFILE REQUIRED)
-
 include_directories(
     ${SNDFILE_INCLUDE_DIR}
 )
+
+find_library(SNDFILE_LIBRARY sndfile ${SNDFILE_LIBRARY_DIR})
 
 # biblioteca V8
 include_directories(
