@@ -1,4 +1,6 @@
 #include <SFML/Graphics.hpp>
+#include <v8.h>
+#include <v8-debug.h>
 #include "sf_v8.h"
 
 #if __APPLE__
