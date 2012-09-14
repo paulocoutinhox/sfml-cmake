@@ -126,6 +126,6 @@ set(TARGET_MODE "debug")
 
 if(TARGET_MODE STREQUAL "debug")
     set(CMAKE_BUILD_TYPE Debug)
-else()
+elseif(TARGET_MODE STREQUAL "release")
     set(CMAKE_BUILD_TYPE Release)
 endif()
