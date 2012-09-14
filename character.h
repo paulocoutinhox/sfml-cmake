@@ -14,8 +14,8 @@ class Character : public v8wrap::V8ClassTemplate<Character, Character>
 {
 
 public:
-    Character();
-    Character(const std::string type);
+    //Character();
+    //Character(const std::string type);
 
     static const char *Bases;
     static const char *ClassName;
@@ -27,9 +27,12 @@ public:
     static void Register(v8::Handle<v8::ObjectTemplate> target);
 
 private:
-    sf::Sprite *sprite;
-    std::string type;
-    void loadSprite();
+    //sf::Sprite *sprite;
+    //std::string type;
+    //void loadSprite();
+    static v8::Handle<v8::Value> Object_copy(const v8::Arguments &args);
+    static v8::Handle<v8::Value> Object_delete(const v8::Arguments &args);
+
 };
 
 #endif // CHARACTER_H

@@ -81,9 +81,15 @@ int main()
         return EXIT_FAILURE;
     sf::Sprite sprite(texture);
 
-    Character *robot1 = new Character("robot1");
+    /*
+    Character *robot1 = new Character();
     v8::Handle<v8::Object> Result = Character::POT->NewInstance();
     Character::MakeReference(Result, robot1);
+    context->Global()->Set(v8::String::New("robot1"), Result);
+    */
+    sf::Sprite *robot1 = &sprite;
+    v8::Handle<v8::Object> Result = sf_v8::sf_Sprite::POT->NewInstance();
+    sf_v8::sf_Sprite::MakeReference(Result, robot1);
     context->Global()->Set(v8::String::New("robot1"), Result);
 
     while (window.isOpen())
@@ -101,15 +107,15 @@ int main()
             }
         }
 
-        /*
         v8::Handle<v8::String> source = readFile(resourcePath() + "/js/robot1.js");
         v8::Handle<v8::Script> script = v8::Script::Compile(source);
         v8::Handle<v8::Value> result = script->Run();
-        */
 
         window.clear(sf::Color(255, 255, 255));
         window.draw(sprite);
         window.display();
+
+        sleep(1);
     }
 
     context.Dispose();
