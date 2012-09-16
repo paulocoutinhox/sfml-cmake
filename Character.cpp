@@ -15,13 +15,18 @@ sf::Sprite *Character::getSprite()
     return sprite;
 }
 
+void Character::walkForward()
+{
+    sprite->setPosition(90, 90);
+}
+
 void Character::loadSprite()
 {
-    sf::Texture texture;
-    if (!texture.loadFromFile(resourcePath() + "images/" + type + ".png"))
+    texture = new sf::Texture();
+    if (!texture->loadFromFile(resourcePath() + "images/" + type + ".png"))
     {
         throw new std::exception();
     }
-    sprite = new sf::Sprite(texture);
+    sprite = new sf::Sprite(*texture);
     sprite->setPosition(100, 200);
 }

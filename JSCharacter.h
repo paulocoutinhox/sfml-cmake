@@ -7,6 +7,10 @@
 class JSCharacter : public v8wrap::V8ClassTemplate<JSCharacter, Character>
 {
 
+    static v8::Handle<v8::Value> Method_walkForward(const v8::Arguments &args);
+    static v8::Handle<v8::Value> Object_copy(const v8::Arguments &args);
+    static v8::Handle<v8::Value> Object_delete(const v8::Arguments &args);
+
 public:
     static const char *Bases;
     static const char *ClassName;
@@ -18,8 +22,7 @@ public:
     static void Register(v8::Handle<v8::ObjectTemplate> target);
 
 private:
-    static v8::Handle<v8::Value> Object_copy(const v8::Arguments &args);
-    static v8::Handle<v8::Value> Object_delete(const v8::Arguments &args);
+
 
 };
 

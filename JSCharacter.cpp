@@ -85,8 +85,24 @@ v8::Handle<v8::Value> JSCharacter::Object_delete(const v8::Arguments &args)
     v8::Handle<v8::Value> result = v8::Undefined();
     MyClass *inst = ((MyClass*)v8::External::Unwrap(args.Holder()->GetInternalField(0)));
     bool IsWeak = args.Holder()->GetInternalField(1)->IsTrue();
-    if ( IsWeak ) {
+    if ( IsWeak )
+    {
         Delete(inst); args.Holder()->SetInternalField(1, v8::Boolean::New(false)); args.Holder()->SetInternalField(0, v8::External::Wrap(NULL));
     }
     return scope.Close(result);
 }
+
+v8::Handle<v8::Value> JSCharacter::Method_walkForward(const v8::Arguments &args)
+{
+    if ( args.Length() == 0 )
+    {
+        MyClass *inst = ((MyClass*)v8::External::Unwrap(args.Holder()->GetInternalField(0)));
+        inst->walkForward();
+        return v8::Undefined();
+    }
+    else
+    {
+        return v8::ThrowException(v8::Exception::Error(v8::String::New(v8wrap::sInvalidArgs)));
+    }
+}
+
