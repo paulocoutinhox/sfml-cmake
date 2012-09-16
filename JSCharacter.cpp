@@ -57,11 +57,13 @@ void JSCharacter::Register(v8::Handle<v8::ObjectTemplate> target)
 {
     target->Set("className", v8::String::New(ClassName));
     target->Set("_delete", v8::FunctionTemplate::New(Object_delete));
+    target->Set("walkForward", v8::FunctionTemplate::New(Method_walkForward));
+    target->Set("sleep", v8::FunctionTemplate::New(Method_sleep));
 }
 
 void JSCharacter::Register(v8::Handle<v8::FunctionTemplate> target)
 {
-    if ( PFT.IsEmpty() )
+    if (PFT.IsEmpty())
     {
         PFT = v8::Persistent<v8::FunctionTemplate>::New(v8::FunctionTemplate::New(Create));
         PFT->SetClassName(v8::String::New(ClassName));
@@ -90,6 +92,20 @@ v8::Handle<v8::Value> JSCharacter::Object_delete(const v8::Arguments &args)
         Delete(inst); args.Holder()->SetInternalField(1, v8::Boolean::New(false)); args.Holder()->SetInternalField(0, v8::External::Wrap(NULL));
     }
     return scope.Close(result);
+}
+
+v8::Handle<v8::Value> JSCharacter::Method_sleep(const v8::Arguments &args)
+{
+    if ( args.Length() == 0 )
+    {
+        MyClass *inst = ((MyClass*)v8::External::Unwrap(args.Holder()->GetInternalField(0)));
+        inst->sleep(5000);
+        return v8::Undefined();
+    }
+    else
+    {
+        return v8::ThrowException(v8::Exception::Error(v8::String::New(v8wrap::sInvalidArgs)));
+    }
 }
 
 v8::Handle<v8::Value> JSCharacter::Method_walkForward(const v8::Arguments &args)

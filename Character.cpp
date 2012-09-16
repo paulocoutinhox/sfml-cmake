@@ -2,6 +2,7 @@
 
 Character::Character()
 {
+    speed = 0.2f;
 }
 
 void Character::setType(std::string type)
@@ -17,7 +18,22 @@ sf::Sprite *Character::getSprite()
 
 void Character::walkForward()
 {
-    sprite->setPosition(90, 90);
+    float angleRADS = (3.1415926536/180) * (sprite->getRotation());
+
+    float x = 0.01f * cos(angleRADS);
+    float y = 0.01f * sin(angleRADS);
+
+    sprite->setPosition(x, y);
+}
+
+float Character::getSpeed()
+{
+    return speed;
+}
+
+void Character::sleep(int ms)
+{
+    sleep(ms);
 }
 
 void Character::loadSprite()

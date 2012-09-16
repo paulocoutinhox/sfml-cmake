@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "v8wrap.h"
+#include <math.h>
 
 #if __APPLE__
     #include "ResourcePath.hpp"
@@ -18,11 +19,15 @@ public:
     void setType(std::string type);
     sf::Sprite *getSprite();
     void walkForward();
+    float getSpeed();
+    void sleep(int ms);
 
 private:
     sf::Sprite *sprite;
     sf::Texture *texture;
     std::string type;
+    float speed;
+
     void loadSprite();
 
 };

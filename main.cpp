@@ -53,6 +53,11 @@ char *get(v8::Handle<v8::String> value, const char *fallback = "") {
     return str;
 }
 
+void fn_sleep(int ms)
+{
+    sleep(ms);
+}
+
 Character *robot1;
 
 int main()
@@ -61,7 +66,7 @@ int main()
     v8::Persistent<v8::Context> context = v8::Context::New();
     v8::Context::Scope contextScope(context);
 
-    context->Global()->Set(v8::String::New("sf"), sf_v8::sf::Init());
+    //context->Global()->Set(v8::String::New("sf"), sf_v8::sf::Init());
 
     /*
     // EXEMPLO - IMPRIMIR STRING
@@ -90,6 +95,7 @@ int main()
     v8::Handle<v8::Object> Result = JSCharacter::POT->NewInstance();
     JSCharacter::MakeReference(Result, robot1);
     context->Global()->Set(v8::String::New("robot1"), Result);
+    //context->Global()->Set(v8::String::New("sleep"), v8::FunctionTemplate::New(fn_sleep)->GetFunction() );
 
     /*
     // teste com sprite somente
