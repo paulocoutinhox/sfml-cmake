@@ -13,8 +13,6 @@
 class Character
 {
 
-    static v8::Handle<v8::Value> Method_moveForward(const v8::Arguments &args);
-
 public:
     Character();
     void setType(std::string type);
