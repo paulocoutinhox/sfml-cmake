@@ -3,4 +3,4 @@ var randomnumber2 = Math.floor(Math.random() * 200);
 
 robot1.walkForward();
 robot1.rotateRight();
-robot1.mssleep(10);
+//robot1.mssleep(5000);

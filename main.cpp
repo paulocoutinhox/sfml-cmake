@@ -1,3 +1,4 @@
+#include <iostream>
 #include <SFML/Graphics.hpp>
 #include <v8.h>
 #include <v8-debug.h>
@@ -58,15 +59,22 @@ sf::Mutex mutex;
 
 void start()
 {
+    v8::Locker locker;
+
     v8::HandleScope handleScope;
+    v8::Handle<v8::ObjectTemplate> global = v8::ObjectTemplate::New();
+    v8::Persistent<v8::Context> context = v8::Context::New(NULL, global);
+
     v8::Handle<v8::String> source = readFile(resourcePath() + "/js/robot1.js");
     v8::Handle<v8::Script> script = v8::Script::Compile(source);
-    v8::Handle<v8::Value> result = script->Run();
+    v8::Handle<v8::Value> result  = script->Run();
+
+    std::cout << "::start" << std::endl;
 }
 
 int main()
 {
-    bool useThread = false;
+    bool useThread = true;
 
     v8::HandleScope handleScope;
     v8::Persistent<v8::Context> context = v8::Context::New();
@@ -140,8 +148,9 @@ int main()
 
         if (useThread)
         {
-            sf::Thread Thread(&start);
-            Thread.launch();
+            std::cout << "::thread::launch" << std::endl;
+            sf::Thread thread(&start);
+            thread.launch();
         }
         else
         {
@@ -150,7 +159,7 @@ int main()
 
         if (useThread)
         {
-            mutex.lock();
+            //mutex.lock();
         }
 
         window.clear(sf::Color(255, 255, 255));
@@ -160,7 +169,7 @@ int main()
 
         if (useThread)
         {
-            mutex.unlock();
+            //mutex.unlock();
         }
 
         sleep(1);
