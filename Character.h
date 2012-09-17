@@ -18,9 +18,12 @@ public:
     Character();
     void setType(std::string type);
     sf::Sprite *getSprite();
+
     void walkForward();
-    float getSpeed();
     void mssleep(int ms);
+    void rotateLeft();
+    void rotateRight();
+    float getSpeed();
 
 private:
     sf::Sprite *sprite;

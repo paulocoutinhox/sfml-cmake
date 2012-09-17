@@ -59,6 +59,8 @@ void JSCharacter::Register(v8::Handle<v8::ObjectTemplate> target)
     target->Set("_delete", v8::FunctionTemplate::New(Object_delete));
     target->Set("walkForward", v8::FunctionTemplate::New(Method_walkForward));
     target->Set("mssleep", v8::FunctionTemplate::New(Method_mssleep));
+    target->Set("rotateLeft", v8::FunctionTemplate::New(Method_rotateLeft));
+    target->Set("rotateRight", v8::FunctionTemplate::New(Method_rotateRight));
 }
 
 void JSCharacter::Register(v8::Handle<v8::FunctionTemplate> target)
@@ -117,6 +119,34 @@ v8::Handle<v8::Value> JSCharacter::Method_mssleep(const v8::Arguments &args)
             }
         }
 
+        return v8::Undefined();
+    }
+    else
+    {
+        return v8::ThrowException(v8::Exception::Error(v8::String::New(v8wrap::sInvalidArgs)));
+    }
+}
+
+v8::Handle<v8::Value> JSCharacter::Method_rotateLeft(const v8::Arguments &args)
+{
+    if ( args.Length() == 0 )
+    {
+        MyClass *inst = ((MyClass*)v8::External::Unwrap(args.Holder()->GetInternalField(0)));
+        inst->rotateLeft();
+        return v8::Undefined();
+    }
+    else
+    {
+        return v8::ThrowException(v8::Exception::Error(v8::String::New(v8wrap::sInvalidArgs)));
+    }
+}
+
+v8::Handle<v8::Value> JSCharacter::Method_rotateRight(const v8::Arguments &args)
+{
+    if ( args.Length() == 0 )
+    {
+        MyClass *inst = ((MyClass*)v8::External::Unwrap(args.Holder()->GetInternalField(0)));
+        inst->rotateRight();
         return v8::Undefined();
     }
     else

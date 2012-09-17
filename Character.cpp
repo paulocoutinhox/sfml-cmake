@@ -2,7 +2,7 @@
 
 Character::Character()
 {
-    speed = 0.2f;
+    speed = 2.0f;
 }
 
 void Character::setType(std::string type)
@@ -35,6 +35,16 @@ void Character::mssleep(int ms)
 {
     sf::Time time = sf::milliseconds(ms);
     sf::sleep(time);
+}
+
+void Character::rotateLeft()
+{
+    sprite->setRotation(sprite->getRotation() - 1.0f);
+}
+
+void Character::rotateRight()
+{
+    sprite->setRotation(sprite->getRotation() + 1.0f);
 }
 
 void Character::loadSprite()

@@ -9,6 +9,8 @@ class JSCharacter : public v8wrap::V8ClassTemplate<JSCharacter, Character>
 
     static v8::Handle<v8::Value> Method_walkForward(const v8::Arguments &args);
     static v8::Handle<v8::Value> Method_mssleep(const v8::Arguments &args);
+    static v8::Handle<v8::Value> Method_rotateLeft(const v8::Arguments &args);
+    static v8::Handle<v8::Value> Method_rotateRight(const v8::Arguments &args);
 
     static v8::Handle<v8::Value> Object_copy(const v8::Arguments &args);
     static v8::Handle<v8::Value> Object_delete(const v8::Arguments &args);
