@@ -2,7 +2,8 @@
 
 Character::Character()
 {
-    speed = 2.0f;
+    speed     = 2.0f;
+    direction = 1;
 }
 
 void Character::setType(std::string type)
@@ -39,12 +40,34 @@ void Character::mssleep(int ms)
 
 void Character::rotateLeft()
 {
-    sprite->setRotation(sprite->getRotation() - 1.0f);
+    direction--;
+
+    if (direction > 8)
+    {
+        direction = 8;
+    }
+    else if (direction < 1)
+    {
+        direction = 1;
+    }
+
+    sprite->setRotation(getAngleForDirection(direction));
 }
 
 void Character::rotateRight()
 {
-    sprite->setRotation(sprite->getRotation() + 1.0f);
+    direction++;
+
+    if (direction > 8)
+    {
+        direction = 8;
+    }
+    else if (direction < 1)
+    {
+        direction = 1;
+    }
+
+    sprite->setRotation(getAngleForDirection(direction));
 }
 
 void Character::loadSprite()
@@ -57,4 +80,47 @@ void Character::loadSprite()
     }
     sprite = new sf::Sprite(*texture);
     sprite->setPosition(100, 200);
+}
+
+int Character::getAngleForDirection(int direction)
+{
+    int angle = 0;
+
+    switch(direction)
+    {
+        case 1: {
+            angle = 0;
+            break;
+        }
+        case 2: {
+            angle = 45;
+            break;
+        }
+        case 3: {
+            angle = 90;
+            break;
+        }
+        case 4: {
+            angle = 135;
+            break;
+        }
+        case 5: {
+            angle = 180;
+            break;
+        }
+        case 6: {
+            angle = 225;
+            break;
+        }
+        case 7: {
+            angle = 270;
+            break;
+        }
+        case 8: {
+            angle = 315;
+            break;
+        }
+    }
+
+    return angle;
 }

@@ -4,6 +4,8 @@
 #include <v8-debug.h>
 #include "sf_v8.h"
 
+#include "Engine.h"
+
 #if __APPLE__
     #include "ResourcePath.hpp"
 #else
@@ -74,6 +76,9 @@ void start(v8::Persistent<v8::Context> &context)
 
 int main()
 {
+    Engine *engine = new Engine();
+    engine->start();
+
     bool useThread = true;
 
     v8::HandleScope handleScope;

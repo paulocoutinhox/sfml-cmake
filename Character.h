@@ -30,8 +30,10 @@ private:
     sf::Texture *texture;
     std::string type;
     float speed;
+    int direction;
 
     void loadSprite();
+    int getAngleForDirection(int direction);
 
 };
 

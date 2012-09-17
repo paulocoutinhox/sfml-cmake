@@ -23,7 +23,9 @@ SOURCES += main.cpp \
     sf_v8.cpp \
     v8wrap.cpp \
     JSCharacter.cpp \
-    Character.cpp
+    Character.cpp \
+    Engine.cpp \
+    Util.cpp
 
 OTHER_FILES += \
     build.sh \
@@ -41,4 +43,6 @@ HEADERS += \
     sf_v8.h \
     ResourcePath.hpp \
     JSCharacter.h \
-    Character.h
+    Character.h \
+    Engine.h \
+    Util.h

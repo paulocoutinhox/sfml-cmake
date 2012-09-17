@@ -11,6 +11,8 @@ set(
     ../v8wrap.cpp
     ../JSCharacter.cpp
     ../Character.cpp
+    ../Engine.cpp
+    ../Util.cpp
 )
 
 if(APPLE)
