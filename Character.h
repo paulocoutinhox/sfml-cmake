@@ -20,7 +20,7 @@ public:
     sf::Sprite *getSprite();
     void walkForward();
     float getSpeed();
-    void sleep(int ms);
+    void mssleep(int ms);
 
 private:
     sf::Sprite *sprite;

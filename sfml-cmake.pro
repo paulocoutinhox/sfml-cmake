@@ -14,6 +14,11 @@ unix:!macx {
     CONFIG_PLATFORM_PATH  = unix
 }
 
+
+INCLUDEPATH += "$${PWD}/library/sfml/$${CONFIG_PLATFORM_PATH}/include"
+INCLUDEPATH += "$${PWD}/library/v8/$${CONFIG_PLATFORM_PATH}/include"
+INCLUDEPATH += "$${PWD}/library/sndfile/$${CONFIG_PLATFORM_PATH}/include"
+
 SOURCES += main.cpp \
     sf_v8.cpp \
     v8wrap.cpp \
@@ -36,7 +41,3 @@ HEADERS += \
     ResourcePath.hpp \
     JSCharacter.h \
     Character.h
-
-INCLUDEPATH += "$${PWD}/library/sfml/$${CONFIG_PLATFORM_PATH}/include"
-INCLUDEPATH += "$${PWD}/library/v8/$${CONFIG_PLATFORM_PATH}/include"
-INCLUDEPATH += "$${PWD}/library/sndfile/$${CONFIG_PLATFORM_PATH}/include"

@@ -53,15 +53,21 @@ char *get(v8::Handle<v8::String> value, const char *fallback = "") {
     return str;
 }
 
-void fn_sleep(int ms)
-{
-    sleep(ms);
-}
-
 Character *robot1;
+sf::Mutex mutex;
+
+void start()
+{
+    v8::HandleScope handleScope;
+    v8::Handle<v8::String> source = readFile(resourcePath() + "/js/robot1.js");
+    v8::Handle<v8::Script> script = v8::Script::Compile(source);
+    v8::Handle<v8::Value> result = script->Run();
+}
 
 int main()
 {
+    bool useThread = false;
+
     v8::HandleScope handleScope;
     v8::Persistent<v8::Context> context = v8::Context::New();
     v8::Context::Scope contextScope(context);
@@ -132,14 +138,32 @@ int main()
             }
         }
 
-        v8::Handle<v8::String> source = readFile(resourcePath() + "/js/robot1.js");
-        v8::Handle<v8::Script> script = v8::Script::Compile(source);
-        v8::Handle<v8::Value> result = script->Run();
+        if (useThread)
+        {
+            sf::Thread Thread(&start);
+            Thread.launch();
+        }
+        else
+        {
+            v8::Handle<v8::String> source = readFile(resourcePath() + "/js/robot1.js");
+            v8::Handle<v8::Script> script = v8::Script::Compile(source);
+            v8::Handle<v8::Value> result = script->Run();
+        }
+
+        if (useThread)
+        {
+            mutex.lock();
+        }
 
         window.clear(sf::Color(255, 255, 255));
         window.draw(*robot1->getSprite());
         window.draw(*sprite);
         window.display();
+
+        if (useThread)
+        {
+            mutex.unlock();
+        }
 
         sleep(1);
     }

@@ -58,7 +58,7 @@ void JSCharacter::Register(v8::Handle<v8::ObjectTemplate> target)
     target->Set("className", v8::String::New(ClassName));
     target->Set("_delete", v8::FunctionTemplate::New(Object_delete));
     target->Set("walkForward", v8::FunctionTemplate::New(Method_walkForward));
-    target->Set("sleep", v8::FunctionTemplate::New(Method_sleep));
+    target->Set("mssleep", v8::FunctionTemplate::New(Method_mssleep));
 }
 
 void JSCharacter::Register(v8::Handle<v8::FunctionTemplate> target)
@@ -94,12 +94,12 @@ v8::Handle<v8::Value> JSCharacter::Object_delete(const v8::Arguments &args)
     return scope.Close(result);
 }
 
-v8::Handle<v8::Value> JSCharacter::Method_sleep(const v8::Arguments &args)
+v8::Handle<v8::Value> JSCharacter::Method_mssleep(const v8::Arguments &args)
 {
     if ( args.Length() == 0 )
     {
         MyClass *inst = ((MyClass*)v8::External::Unwrap(args.Holder()->GetInternalField(0)));
-        inst->sleep(5000);
+        inst->mssleep(5000);
         return v8::Undefined();
     }
     else

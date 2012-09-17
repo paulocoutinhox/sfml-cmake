@@ -31,9 +31,10 @@ float Character::getSpeed()
     return speed;
 }
 
-void Character::sleep(int ms)
+void Character::mssleep(int ms)
 {
-    sleep(ms);
+    sf::Time time = sf::milliseconds(ms);
+    sf::sleep(time);
 }
 
 void Character::loadSprite()
