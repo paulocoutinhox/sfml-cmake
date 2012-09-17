@@ -145,9 +145,7 @@ int main()
         }
         else
         {
-            v8::Handle<v8::String> source = readFile(resourcePath() + "/js/robot1.js");
-            v8::Handle<v8::Script> script = v8::Script::Compile(source);
-            v8::Handle<v8::Value> result = script->Run();
+            start();
         }
 
         if (useThread)
