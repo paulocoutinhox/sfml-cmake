@@ -96,10 +96,27 @@ v8::Handle<v8::Value> JSCharacter::Object_delete(const v8::Arguments &args)
 
 v8::Handle<v8::Value> JSCharacter::Method_mssleep(const v8::Arguments &args)
 {
-    if ( args.Length() == 0 )
+    if ( args.Length() == 1 )
     {
         MyClass *inst = ((MyClass*)v8::External::Unwrap(args.Holder()->GetInternalField(0)));
-        inst->mssleep(5000);
+
+        const v8wrap::FunctionEntry Func[] = {
+        { 1, 1, {{ PT_NUMBER, "index" }}}
+        };
+        int FuncSize = 1;
+        v8wrap::Match<1> ParamMatch(&Func[0], FuncSize, args);
+        switch ( ParamMatch.Entry ) {
+            case 1: {
+                int p0 = v8wrap::CastToCPP<int>(ParamMatch.Params[0]);
+                inst->mssleep(p0);
+                break;
+            }
+            default: {
+                return v8::ThrowException(v8::Exception::Error(v8::String::New(v8wrap::sInvalidArgs)));
+                break;
+            }
+        }
+
         return v8::Undefined();
     }
     else
