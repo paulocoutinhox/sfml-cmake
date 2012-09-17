@@ -50,6 +50,7 @@ void Character::rotateRight()
 void Character::loadSprite()
 {
     texture = new sf::Texture();
+    texture->setSmooth(true);
     if (!texture->loadFromFile(resourcePath() + "images/" + type + ".png"))
     {
         throw new std::exception();
