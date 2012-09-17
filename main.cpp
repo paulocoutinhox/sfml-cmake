@@ -57,17 +57,17 @@ char *get(v8::Handle<v8::String> value, const char *fallback = "") {
 Character *robot1;
 sf::Mutex mutex;
 
-void start()
+void start(v8::Persistent<v8::Context> &context)
 {
     v8::Locker locker;
 
-    v8::HandleScope handleScope;
-    v8::Handle<v8::ObjectTemplate> global = v8::ObjectTemplate::New();
-    v8::Persistent<v8::Context> context = v8::Context::New(NULL, global);
+    v8::Context::Scope scope(context);
 
     v8::Handle<v8::String> source = readFile(resourcePath() + "/js/robot1.js");
     v8::Handle<v8::Script> script = v8::Script::Compile(source);
     v8::Handle<v8::Value> result  = script->Run();
+
+    context.Dispose();
 
     std::cout << "::start" << std::endl;
 }
@@ -78,7 +78,7 @@ int main()
 
     v8::HandleScope handleScope;
     v8::Persistent<v8::Context> context = v8::Context::New();
-    v8::Context::Scope contextScope(context);
+    v8::Context::Scope scope(context);
 
     //context->Global()->Set(v8::String::New("sf"), sf_v8::sf::Init());
 
@@ -99,7 +99,6 @@ int main()
     */
 
     sf::RenderWindow window(sf::VideoMode(800, 600, 32), "SFML Sample Application");
-
 
     // teste com classe customizada
     robot1 = new Character();
@@ -149,28 +148,18 @@ int main()
         if (useThread)
         {
             std::cout << "::thread::launch" << std::endl;
-            sf::Thread thread(&start);
+            sf::Thread thread(&start, context);
             thread.launch();
         }
         else
         {
-            start();
-        }
-
-        if (useThread)
-        {
-            //mutex.lock();
+            start(context);
         }
 
         window.clear(sf::Color(255, 255, 255));
         window.draw(*robot1->getSprite());
         window.draw(*sprite);
         window.display();
-
-        if (useThread)
-        {
-            //mutex.unlock();
-        }
 
         sleep(1);
     }
