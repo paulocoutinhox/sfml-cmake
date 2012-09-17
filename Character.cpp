@@ -20,10 +20,10 @@ void Character::walkForward()
 {
     float angleRADS = (3.1415926536/180) * (sprite->getRotation());
 
-    float x = 0.01f * cos(angleRADS);
-    float y = 0.01f * sin(angleRADS);
+    float x = speed * cos(angleRADS);
+    float y = speed * sin(angleRADS);
 
-    sprite->setPosition(x, y);
+    sprite->move(x, y);
 }
 
 float Character::getSpeed()
