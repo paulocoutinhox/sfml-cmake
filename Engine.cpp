@@ -72,7 +72,7 @@ void Engine::runInThread()
 
         window->clear(sf::Color(255, 255, 255));
 
-        if (timer.getElapsedTime() > sf::milliseconds(100))
+        if (timer.getElapsedTime() > sf::milliseconds(500))
         {
             threadPlayer.launch();
             timer.restart();
@@ -97,14 +97,24 @@ void Engine::loadScript(Engine *engine)
     v8::Handle<v8::Value> result;
 
     // robot 1
-    source = readFile(resourcePath() + "/js/" + engine->robot1->getType() + ".js");
-    script = v8::Script::Compile(source);
-    result = script->Run();
+    if (engine->robot1->getCanExecute())
+    {
+        source = readFile(resourcePath() + "/js/" + engine->robot1->getType() + ".js");
+        script = v8::Script::Compile(source);
+        result = script->Run();
+    }
+
+    engine->robot1->update();
 
     // robot 2
-    source = readFile(resourcePath() + "/js/" + engine->robot2->getType() + ".js");
-    script = v8::Script::Compile(source);
-    result = script->Run();
+    if (engine->robot2->getCanExecute())
+    {
+        source = readFile(resourcePath() + "/js/" + engine->robot2->getType() + ".js");
+        script = v8::Script::Compile(source);
+        result = script->Run();
+    }
+
+    engine->robot2->update();
 
     Util::log("Engine::loadScript::end");
 }

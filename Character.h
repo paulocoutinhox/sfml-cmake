@@ -27,6 +27,8 @@ public:
     float getSpeed();
     std::string getType();
     void say(std::string msg);
+    bool getCanExecute();
+    void update();
 
 private:
     sf::Sprite *sprite;
@@ -34,6 +36,10 @@ private:
     std::string type;
     float speed;
     int direction;
+    bool canExecute;
+
+    float destX;
+    float destY;
 
     void loadSprite();
     int getAngleForDirection(int direction);    

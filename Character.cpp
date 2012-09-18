@@ -2,8 +2,9 @@
 
 Character::Character()
 {
-    speed     = 2.0f;
-    direction = 1;
+    canExecute = false;
+    speed      = 2.0f;
+    direction  = 1;
 }
 
 void Character::setType(std::string type)
@@ -40,6 +41,15 @@ std::string Character::getType()
 void Character::say(std::string msg)
 {
     Util::log(this->getType() + " say: " + msg);
+}
+
+bool Character::getCanExecute()
+{
+    return canExecute;
+}
+
+void Character::update()
+{
 }
 
 void Character::mssleep(int ms)
@@ -91,6 +101,8 @@ void Character::loadSprite()
     sprite = new sf::Sprite(*texture);
     sprite->setOrigin(sprite->getGlobalBounds().width / 2, sprite->getGlobalBounds().height / 2);
     sprite->setRotation(getAngleForDirection(direction));
+
+    canExecute = true;
 }
 
 int Character::getAngleForDirection(int direction)
