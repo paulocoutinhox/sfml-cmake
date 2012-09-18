@@ -79,7 +79,6 @@ void Character::loadSprite()
         throw new std::exception();
     }
     sprite = new sf::Sprite(*texture);
-    sprite->setPosition(100, 200);
     sprite->setOrigin(sprite->getGlobalBounds().width / 2, sprite->getGlobalBounds().height / 2);
 }
 
