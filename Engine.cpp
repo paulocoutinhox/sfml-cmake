@@ -36,11 +36,17 @@ void Engine::run()
 
     initializeGraphics();
 
+    sf::Clock timer;
+
     while (window->isOpen())
     {
         checkEvents();
 
-        Engine::loadScript(this);
+        if (timer.getElapsedTime() > sf::milliseconds(100))
+        {
+            Engine::loadScript(this);
+            timer.restart();
+        }
 
         window->clear(sf::Color(255, 255, 255));
         window->draw(*robot1->getSprite());
