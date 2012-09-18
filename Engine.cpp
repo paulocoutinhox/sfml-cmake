@@ -79,7 +79,7 @@ void Engine::runInThread()
         window->draw(*robot2->getSprite());
         window->display();
 
-        sleep(1);
+        sf::sleep(sf::milliseconds(1));
     }
 }
 
@@ -95,7 +95,7 @@ void Engine::loadScript(v8::Persistent<v8::Context> &context)
     v8::Handle<v8::Script> script = v8::Script::Compile(source);
     v8::Handle<v8::Value> result  = script->Run();
 
-    context.Dispose();
+    sf::sleep(sf::milliseconds(100));
 
     Util::log("Engine::loadScript::end");
 }
@@ -129,7 +129,13 @@ v8::Handle<v8::String> Engine::readFile(const std::string& name)
 void Engine::initializeGraphics()
 {
     Util::log("Engine::initializeGraphics");
-    window = new sf::RenderWindow(sf::VideoMode(800, 600, 32), "SFML Sample Application");
+
+    sf::ContextSettings settings;
+    settings.depthBits = 0;
+    settings.stencilBits = 0;
+    settings.antialiasingLevel = 0;
+
+    window = new sf::RenderWindow(sf::VideoMode(800, 600, 32), "SFML Sample Application", sf::Style::Close, settings);
 }
 
 void Engine::checkEvents()
@@ -161,8 +167,8 @@ void Engine::initializePlayers()
     robot2 = new Character();
     robot2->setType("robot1");
 
-    robot1->getSprite()->move(Util::randomInt(0, 900), Util::randomInt(0, 500));
-    robot2->getSprite()->move(Util::randomInt(0, 900), Util::randomInt(0, 500));
+    robot1->getSprite()->move(Util::randomInt(0, 750), Util::randomInt(0, 500));
+    robot2->getSprite()->move(Util::randomInt(0, 750), Util::randomInt(0, 500));
 }
 
 void Engine::initializeV8()
