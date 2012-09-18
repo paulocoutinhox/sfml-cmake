@@ -3,6 +3,7 @@
 Engine::Engine()
 {
     Util::log("Engine::Engine");
+    srand(time(NULL));
     useThread = true;
 }
 

@@ -44,11 +44,11 @@ void Character::rotateLeft()
 
     if (direction > 8)
     {
-        direction = 8;
+        direction = 1;
     }
     else if (direction < 1)
     {
-        direction = 1;
+        direction = 8;
     }
 
     sprite->setRotation(getAngleForDirection(direction));
@@ -60,11 +60,11 @@ void Character::rotateRight()
 
     if (direction > 8)
     {
-        direction = 8;
+        direction = 1;
     }
     else if (direction < 1)
     {
-        direction = 1;
+        direction = 8;
     }
 
     sprite->setRotation(getAngleForDirection(direction));
@@ -80,6 +80,7 @@ void Character::loadSprite()
     }
     sprite = new sf::Sprite(*texture);
     sprite->setPosition(100, 200);
+    sprite->setOrigin(sprite->getGlobalBounds().width / 2, sprite->getGlobalBounds().height / 2);
 }
 
 int Character::getAngleForDirection(int direction)
