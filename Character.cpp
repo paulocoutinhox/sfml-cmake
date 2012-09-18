@@ -32,6 +32,16 @@ float Character::getSpeed()
     return speed;
 }
 
+std::string Character::getType()
+{
+    return type;
+}
+
+void Character::say(std::string msg)
+{
+    Util::log(this->getType() + " say: " + msg);
+}
+
 void Character::mssleep(int ms)
 {
     sf::Time time = sf::milliseconds(ms);
@@ -76,7 +86,7 @@ void Character::loadSprite()
     texture->setSmooth(true);
     if (!texture->loadFromFile(resourcePath() + "images/" + type + ".png"))
     {
-        throw new std::exception();
+        throw std::exception();
     }
     sprite = new sf::Sprite(*texture);
     sprite->setOrigin(sprite->getGlobalBounds().width / 2, sprite->getGlobalBounds().height / 2);

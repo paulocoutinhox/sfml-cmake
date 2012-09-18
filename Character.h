@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "v8wrap.h"
 #include <math.h>
+#include "Util.h"
 
 #if __APPLE__
     #include "ResourcePath.hpp"
@@ -24,6 +25,8 @@ public:
     void rotateLeft();
     void rotateRight();
     float getSpeed();
+    std::string getType();
+    void say(std::string msg);
 
 private:
     sf::Sprite *sprite;
@@ -33,7 +36,7 @@ private:
     int direction;
 
     void loadSprite();
-    int getAngleForDirection(int direction);
+    int getAngleForDirection(int direction);    
 
 };
 

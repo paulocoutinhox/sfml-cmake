@@ -55,12 +55,13 @@ void JSCharacter::InitPFT(v8::Handle<v8::ObjectTemplate> target)
 
 void JSCharacter::Register(v8::Handle<v8::ObjectTemplate> target)
 {
-    target->Set("className", v8::String::New(ClassName));
-    target->Set("_delete", v8::FunctionTemplate::New(Object_delete));
-    target->Set("walkForward", v8::FunctionTemplate::New(Method_walkForward));
-    target->Set("mssleep", v8::FunctionTemplate::New(Method_mssleep));
-    target->Set("rotateLeft", v8::FunctionTemplate::New(Method_rotateLeft));
-    target->Set("rotateRight", v8::FunctionTemplate::New(Method_rotateRight));
+    target->Set("className"   , v8::String::New(ClassName));
+    target->Set("_delete"     , v8::FunctionTemplate::New(Object_delete));
+    target->Set("walkForward" , v8::FunctionTemplate::New(Method_walkForward));
+    target->Set("mssleep"     , v8::FunctionTemplate::New(Method_mssleep));
+    target->Set("rotateLeft"  , v8::FunctionTemplate::New(Method_rotateLeft));
+    target->Set("rotateRight" , v8::FunctionTemplate::New(Method_rotateRight));
+    target->Set("say"         , v8::FunctionTemplate::New(Method_say));
 }
 
 void JSCharacter::Register(v8::Handle<v8::FunctionTemplate> target)
@@ -103,7 +104,7 @@ v8::Handle<v8::Value> JSCharacter::Method_mssleep(const v8::Arguments &args)
         MyClass *inst = ((MyClass*)v8::External::Unwrap(args.Holder()->GetInternalField(0)));
 
         const v8wrap::FunctionEntry Func[] = {
-        { 1, 1, {{ PT_NUMBER, "index" }}}
+        { 1, 1, {{ PT_NUMBER, "ms" }}}
         };
         int FuncSize = 1;
         v8wrap::Match<1> ParamMatch(&Func[0], FuncSize, args);
@@ -169,3 +170,33 @@ v8::Handle<v8::Value> JSCharacter::Method_walkForward(const v8::Arguments &args)
     }
 }
 
+v8::Handle<v8::Value> JSCharacter::Method_say(const v8::Arguments &args)
+{
+    if ( args.Length() == 1 )
+    {
+        MyClass *inst = ((MyClass*)v8::External::Unwrap(args.Holder()->GetInternalField(0)));
+
+        const v8wrap::FunctionEntry Func[] = {
+        { 1, 1, {{ PT_STRING, "msg" }}}
+        };
+        int FuncSize = 1;
+        v8wrap::Match<1> ParamMatch(&Func[0], FuncSize, args);
+        switch ( ParamMatch.Entry ) {
+            case 1: {
+                std::string p0 = v8wrap::CastToCPP<std::string>(ParamMatch.Params[0]);
+                inst->say(p0);
+                break;
+            }
+            default: {
+                return v8::ThrowException(v8::Exception::Error(v8::String::New(v8wrap::sInvalidArgs)));
+                break;
+            }
+        }
+
+        return v8::Undefined();
+    }
+    else
+    {
+        return v8::ThrowException(v8::Exception::Error(v8::String::New(v8wrap::sInvalidArgs)));
+    }
+}

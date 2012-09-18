@@ -36,27 +36,19 @@ void Engine::run()
 
     initializeGraphics();
 
-    sf::Texture texture;
-
-    if (!texture.loadFromFile(resourcePath() + "images/robot1.png"))
-    {
-        throw std::exception();
-    }
-
-    sf::Sprite *sprite = new sf::Sprite(texture);
-
     while (window->isOpen())
     {
         checkEvents();
 
+        Engine::loadScript(this);
+
         window->clear(sf::Color(255, 255, 255));
-        window->draw(*sprite);
+        window->draw(*robot1->getSprite());
+        window->draw(*robot2->getSprite());
         window->display();
 
-        sleep(1);
+        sf::sleep(sf::milliseconds(1));
     }
-
-    delete sprite;
 }
 
 void Engine::runInThread()
@@ -64,8 +56,9 @@ void Engine::runInThread()
     Util::log("Engine::runInThread");
 
     initializeGraphics();
+    sf::Thread threadPlayer(&Engine::loadScript, this);
 
-    sf::Thread thread(&Engine::loadScript, context);
+    sf::Clock timer;
 
     while (window->isOpen())
     {
@@ -73,7 +66,11 @@ void Engine::runInThread()
 
         window->clear(sf::Color(255, 255, 255));
 
-        thread.launch();
+        if (timer.getElapsedTime() > sf::milliseconds(100))
+        {
+            threadPlayer.launch();
+            timer.restart();
+        }
 
         window->draw(*robot1->getSprite());
         window->draw(*robot2->getSprite());
@@ -83,19 +80,25 @@ void Engine::runInThread()
     }
 }
 
-void Engine::loadScript(v8::Persistent<v8::Context> &context)
+void Engine::loadScript(Engine *engine)
 {
     Util::log("Engine::loadScript");
 
     v8::Locker locker;
 
-    v8::Context::Scope scope(context);
+    v8::Handle<v8::String> source;
+    v8::Handle<v8::Script> script;
+    v8::Handle<v8::Value> result;
 
-    v8::Handle<v8::String> source = readFile(resourcePath() + "/js/robot1.js");
-    v8::Handle<v8::Script> script = v8::Script::Compile(source);
-    v8::Handle<v8::Value> result  = script->Run();
+    // robot 1
+    source = readFile(resourcePath() + "/js/" + engine->robot1->getType() + ".js");
+    script = v8::Script::Compile(source);
+    result = script->Run();
 
-    sf::sleep(sf::milliseconds(100));
+    // robot 2
+    source = readFile(resourcePath() + "/js/" + engine->robot2->getType() + ".js");
+    script = v8::Script::Compile(source);
+    result = script->Run();
 
     Util::log("Engine::loadScript::end");
 }
@@ -165,7 +168,7 @@ void Engine::initializePlayers()
     robot1->setType("robot1");
 
     robot2 = new Character();
-    robot2->setType("robot1");
+    robot2->setType("robot2");
 
     robot1->getSprite()->move(Util::randomInt(0, 750), Util::randomInt(0, 500));
     robot2->getSprite()->move(Util::randomInt(0, 750), Util::randomInt(0, 500));
@@ -185,11 +188,11 @@ void Engine::initializeV8Binding()
 
     JSCharacter::InitPOT(JSCharacter::POT);
 
-    v8::Handle<v8::Object> Result1 = JSCharacter::POT->NewInstance();
-    JSCharacter::MakeReference(Result1, robot1);
-    context->Global()->Set(v8::String::New("robot1"), Result1);
+    jsPlayer1 = JSCharacter::POT->NewInstance();
+    JSCharacter::MakeReference(jsPlayer1, robot1);
+    context->Global()->Set(v8::String::New("robot1"), jsPlayer1);
 
-    v8::Handle<v8::Object> Result2 = JSCharacter::POT->NewInstance();
-    JSCharacter::MakeReference(Result2, robot2);
-    context->Global()->Set(v8::String::New("robot2"), Result2);
+    jsPlayer2 = JSCharacter::POT->NewInstance();
+    JSCharacter::MakeReference(jsPlayer2, robot2);
+    context->Global()->Set(v8::String::New("robot2"), jsPlayer2);
 }

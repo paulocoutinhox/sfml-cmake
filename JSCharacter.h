@@ -11,6 +11,7 @@ class JSCharacter : public v8wrap::V8ClassTemplate<JSCharacter, Character>
     static v8::Handle<v8::Value> Method_mssleep(const v8::Arguments &args);
     static v8::Handle<v8::Value> Method_rotateLeft(const v8::Arguments &args);
     static v8::Handle<v8::Value> Method_rotateRight(const v8::Arguments &args);
+    static v8::Handle<v8::Value> Method_say(const v8::Arguments &args);
 
     static v8::Handle<v8::Value> Object_copy(const v8::Arguments &args);
     static v8::Handle<v8::Value> Object_delete(const v8::Arguments &args);
@@ -24,9 +25,6 @@ public:
     static void InitPFT(v8::Handle<v8::ObjectTemplate> target);
     static void Register(v8::Handle<v8::FunctionTemplate> target);
     static void Register(v8::Handle<v8::ObjectTemplate> target);
-
-private:
-
 
 };
 

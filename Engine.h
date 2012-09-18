@@ -21,17 +21,20 @@ public:
     void start();
     void run();
     void runInThread();
-    static void loadScript(v8::Persistent<v8::Context> &context);
+    static void loadScript(Engine *engine);
 
 private:
     Character *robot1;
     Character *robot2;
 
-    sf::Thread *thread;
+    v8::Handle<v8::Object> jsPlayer1;
+    v8::Handle<v8::Object> jsPlayer2;
 
     v8::HandleScope handleScope;
     v8::Persistent<v8::Context> context;
     v8::Context::Scope *scope;
+
+    sf::Mutex mutex;
 
     bool useThread;
 
