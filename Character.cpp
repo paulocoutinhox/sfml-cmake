@@ -90,6 +90,7 @@ void Character::loadSprite()
     }
     sprite = new sf::Sprite(*texture);
     sprite->setOrigin(sprite->getGlobalBounds().width / 2, sprite->getGlobalBounds().height / 2);
+    sprite->setRotation(getAngleForDirection(direction));
 }
 
 int Character::getAngleForDirection(int direction)
