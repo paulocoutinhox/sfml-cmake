@@ -27,6 +27,7 @@ OTHER_FILES += \
     build/build.sh \
     build/clean.sh \
     build/rebuild.sh \
+    build/camke/modules/FindSFML.cmake \
     CMakeLists.txt \
     .gitignore \
     build/cmake/modules/FindSFML.cmake \

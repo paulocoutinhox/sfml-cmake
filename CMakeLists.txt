@@ -28,13 +28,12 @@ endif()
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/build/cmake/modules")
 
 set(RESOURCES_DIR "${CMAKE_SOURCE_DIR}/resources")
-set(JS_DIR "${CMAKE_SOURCE_DIR}/js")
 
 set(SFML_ROOT "${CMAKE_SOURCE_DIR}/library/sfml/${TARGET_SYSTEM}/lib")
 set(SFML_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/library/sfml/${TARGET_SYSTEM}/include")
 set(SFML_LIBRARY_DIR "${CMAKE_SOURCE_DIR}/library/sfml/${TARGET_SYSTEM}/lib")
-set(SNDFILE_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/library/sndfile/${TARGET_SYSTEM}/include")
 set(SNDFILE_LIBRARY_DIR "${CMAKE_SOURCE_DIR}/library/sndfile/${TARGET_SYSTEM}/lib")
+set(FREETYPE_LIBRARY_DIR "${CMAKE_SOURCE_DIR}/library/freetype/${TARGET_SYSTEM}/lib")
 
 # setup project name
 project(${PROJECT_NAME})
@@ -56,11 +55,10 @@ include_directories(
 )
 
 # setup library SNDFILE
-include_directories(
-    ${SNDFILE_INCLUDE_DIR}
-)
-
 find_library(SNDFILE_LIBRARY sndfile ${SNDFILE_LIBRARY_DIR})
+
+# setup library FREETYPE
+find_library(FREETYPE_LIBRARY freetype ${FREETYPE_LIBRARY_DIR})
 
 # setup library Core Foundation
 if(APPLE)
@@ -74,12 +72,13 @@ add_executable(
     ${GAME_ALL_SOURCES}
     ${SFML_LIBRARIES}
     ${SNDFILE_LIBRARY}
+    ${FREETYPE_LIBRARY}
 )
 
 #set_target_properties(${PROJECT_NAME} PROPERTIES RESOURCE "${RESOURCES_DIR}")
 
 # setup library links
-target_link_libraries(${PROJECT_NAME} ${SFML_LIBRARIES} ${SNDFILE_LIBRARY})
+target_link_libraries(${PROJECT_NAME} ${SFML_LIBRARIES} ${SNDFILE_LIBRARY} ${FREETYPE_LIBRARY})
 
 # copy files
 if(APPLE)
@@ -93,11 +92,11 @@ if(APPLE)
     )
     add_custom_command(
         TARGET ${PROJECT_NAME} POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_SOURCE_DIR}/build/${PROJECT_NAME}.app/Contents/Resources/js"
+        COMMAND ${CMAKE_COMMAND} -E copy_directory "${FREETYPE_LIBRARY_DIR}" "${CMAKE_SOURCE_DIR}/build/${PROJECT_NAME}.app/Contents/Frameworks"
     )
     add_custom_command(
         TARGET ${PROJECT_NAME} POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_directory "${JS_DIR}" "${CMAKE_SOURCE_DIR}/build/${PROJECT_NAME}.app/Contents/Resources/js"
+        COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_SOURCE_DIR}/build/${PROJECT_NAME}.app/Contents/Resources/js"
     )
     add_custom_command(
         TARGET ${PROJECT_NAME} POST_BUILD
