@@ -8,6 +8,7 @@ To build the project you only have to call one thing!!
 # ON MAC:
 
 cd build
+
 sh rebuild.sh
 
 # ON LINUX:
