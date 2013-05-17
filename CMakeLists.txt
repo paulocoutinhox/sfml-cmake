@@ -1,7 +1,7 @@
-# versao minima requerida
+# set minimum version required for CMake
 cmake_minimum_required(VERSION 2.8)
 
-# variaveis do projeto
+# project variables
 set(PROJECT_NAME "sfml-project")
 
 set(
@@ -15,7 +15,7 @@ if(APPLE)
     list(APPEND GAME_ALL_SOURCES ../ResourcePath.mm)
 endif()
 
-# define target
+# setup target
 if(APPLE)
     set(TARGET_SYSTEM "mac")
     set(MACOSX_BUNDLE true)
@@ -36,38 +36,38 @@ set(SFML_LIBRARY_DIR "${CMAKE_SOURCE_DIR}/library/sfml/${TARGET_SYSTEM}/lib")
 set(SNDFILE_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/library/sndfile/${TARGET_SYSTEM}/include")
 set(SNDFILE_LIBRARY_DIR "${CMAKE_SOURCE_DIR}/library/sndfile/${TARGET_SYSTEM}/lib")
 
-# nome do projeto
+# setup project name
 project(${PROJECT_NAME})
 
-# icone do projeto
+# setup project icon
 if(APPLE)
     set(MACOSX_BUNDLE_ICON_FILE "${RESOURCES_DIR}/icons/osx.icns")
 elseif(WIN32)
-    # implementar
+    # NOT IMPLEMENTED - CAN YOU DO IT AND HELP THE PROJECT?
 else()
-    # implementar
+    # NOT IMPLEMENTED - CAN YOU DO IT AND HELP THE PROJECT?
 endif()
 
-# biblioteca SFML
+# setup library SFML
 find_package(SFML COMPONENTS system window graphics network audio REQUIRED)
 
 include_directories(
     ${SFML_INCLUDE_DIR}
 )
 
-# biblioteca SNDFILE
+# setup library SNDFILE
 include_directories(
     ${SNDFILE_INCLUDE_DIR}
 )
 
 find_library(SNDFILE_LIBRARY sndfile ${SNDFILE_LIBRARY_DIR})
 
-# biblioteca core foundation
+# setup library Core Foundation
 if(APPLE)
     set(CMAKE_EXE_LINKER_FLAGS "-framework Foundation -w")
 endif()
 
-# compila
+# setup compile process
 add_executable(
     ${PROJECT_NAME}
     MACOSX_BUNDLE
@@ -78,10 +78,10 @@ add_executable(
 
 #set_target_properties(${PROJECT_NAME} PROPERTIES RESOURCE "${RESOURCES_DIR}")
 
-# link de bibliotecas
+# setup library links
 target_link_libraries(${PROJECT_NAME} ${SFML_LIBRARIES} ${SNDFILE_LIBRARY})
 
-# copia arquivos
+# copy files
 if(APPLE)
     add_custom_command(
         TARGET ${PROJECT_NAME} POST_BUILD
@@ -104,12 +104,12 @@ if(APPLE)
         COMMAND ${CMAKE_COMMAND} -E copy_directory "${RESOURCES_DIR}" "${CMAKE_SOURCE_DIR}/build/${PROJECT_NAME}.app/Contents/Resources"
     )
 elseif(WIN32)
-    # implementar
+    # NOT IMPLEMENTED - CAN YOU DO IT AND HELP THE PROJECT?
 else()
-    # implementar
+    # NOT IMPLEMENTED - CAN YOU DO IT AND HELP THE PROJECT?
 endif()
 
-# define target mode "debug" ou "release"
+# setup target mode ("debug" or "release")
 set(TARGET_MODE "debug")
 
 if(TARGET_MODE STREQUAL "debug")
