@@ -7,10 +7,6 @@ set(PROJECT_NAME "sfml-project")
 set(
     GAME_ALL_SOURCES
     ../main.cpp
-    ../sf_v8.cpp
-    ../v8wrap.cpp
-    ../JSCharacter.cpp
-    ../Character.cpp
     ../Engine.cpp
     ../Util.cpp
 )
@@ -39,8 +35,6 @@ set(SFML_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/library/sfml/${TARGET_SYSTEM}/include"
 set(SFML_LIBRARY_DIR "${CMAKE_SOURCE_DIR}/library/sfml/${TARGET_SYSTEM}/lib")
 set(SNDFILE_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/library/sndfile/${TARGET_SYSTEM}/include")
 set(SNDFILE_LIBRARY_DIR "${CMAKE_SOURCE_DIR}/library/sndfile/${TARGET_SYSTEM}/lib")
-set(V8_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/library/v8/${TARGET_SYSTEM}/include")
-set(V8_LIBRARY_DIR "${CMAKE_SOURCE_DIR}/library/v8/${TARGET_SYSTEM}/lib")
 
 # nome do projeto
 project(${PROJECT_NAME})
@@ -68,13 +62,6 @@ include_directories(
 
 find_library(SNDFILE_LIBRARY sndfile ${SNDFILE_LIBRARY_DIR})
 
-# biblioteca V8
-include_directories(
-    ${V8_INCLUDE_DIR}
-)
-
-find_library(V8_LIBRARIES v8 ${V8_LIBRARY_DIR})
-
 # biblioteca core foundation
 if(APPLE)
     set(CMAKE_EXE_LINKER_FLAGS "-framework Foundation -w")
@@ -87,13 +74,12 @@ add_executable(
     ${GAME_ALL_SOURCES}
     ${SFML_LIBRARIES}
     ${SNDFILE_LIBRARY}
-    ${V8_LIBRARIES}
 )
 
 #set_target_properties(${PROJECT_NAME} PROPERTIES RESOURCE "${RESOURCES_DIR}")
 
 # link de bibliotecas
-target_link_libraries(${PROJECT_NAME} ${SFML_LIBRARIES} ${SNDFILE_LIBRARY} ${V8_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${SFML_LIBRARIES} ${SNDFILE_LIBRARY})
 
 # copia arquivos
 if(APPLE)

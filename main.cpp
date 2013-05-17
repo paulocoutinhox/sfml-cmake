@@ -3,7 +3,7 @@
 int main()
 {
     Engine *engine = new Engine();
-    engine->start();
+    engine->run();
 
     return EXIT_SUCCESS;
 }

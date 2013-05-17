@@ -7,6 +7,5 @@ int Util::randomInt(int min, int max)
 
 void Util::log(std::string msg)
 {
-    // show debug log
     std::cout << "DEBUG: " << msg << std::endl;
 }

@@ -16,14 +16,9 @@ unix:!macx {
 
 
 INCLUDEPATH += "$${PWD}/library/sfml/$${CONFIG_PLATFORM_PATH}/include"
-INCLUDEPATH += "$${PWD}/library/v8/$${CONFIG_PLATFORM_PATH}/include"
 INCLUDEPATH += "$${PWD}/library/sndfile/$${CONFIG_PLATFORM_PATH}/include"
 
 SOURCES += main.cpp \
-    sf_v8.cpp \
-    v8wrap.cpp \
-    JSCharacter.cpp \
-    Character.cpp \
     Engine.cpp \
     Util.cpp
 
@@ -40,10 +35,6 @@ OTHER_FILES += \
     js/robot2.js
 
 HEADERS += \
-    v8wrap.h \
-    sf_v8.h \
     ResourcePath.hpp \
-    JSCharacter.h \
-    Character.h \
     Engine.h \
     Util.h
