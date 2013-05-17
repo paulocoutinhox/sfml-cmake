@@ -4,6 +4,7 @@ build/*
 !build/clean.sh
 !build/rebuild.sh
 !build/clean-dsstore.sh
+!build/remove-deleted-files-from-git.sh
 !build/cmake
 !library
 
