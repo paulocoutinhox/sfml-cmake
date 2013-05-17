@@ -21,8 +21,6 @@ void Engine::run()
 
     initializeGraphics();
 
-    sf::Clock timer;
-
     sf::Sprite sampleSprite;
     sf::Texture sampleTexture;
 
@@ -41,11 +39,6 @@ void Engine::run()
     while (window->isOpen())
     {
         checkEvents();
-
-        if (timer.getElapsedTime() > sf::milliseconds(100))
-        {
-            timer.restart();
-        }
 
         window->clear(backgroundColor);
 
