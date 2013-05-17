@@ -58,20 +58,12 @@ include_directories(
     ${SFML_INCLUDE_DIR}
 )
 
-# setup library SNDFILE
-find_library(SNDFILE_LIBRARY sndfile ${SNDFILE_LIBRARY_DIR})
-
-# setup library FREETYPE
-find_library(FREETYPE_LIBRARY freetype ${FREETYPE_LIBRARY_DIR})
-
 # setup compile process
 add_executable(
     ${PROJECT_NAME}
     MACOSX_BUNDLE
     ${SRC}
     ${SFML_LIBRARIES}
-    ${SNDFILE_LIBRARY}
-    ${FREETYPE_LIBRARY}
 )
 
 # setup target links
@@ -81,7 +73,7 @@ else()
     set(EXTRA_TARGET_LINK_LIBRARIES "")
 endif()
 
-target_link_libraries(${PROJECT_NAME} ${EXTRA_TARGET_LINK_LIBRARIES} ${SFML_LIBRARIES} ${SNDFILE_LIBRARY} ${FREETYPE_LIBRARY})
+target_link_libraries(${PROJECT_NAME} ${EXTRA_TARGET_LINK_LIBRARIES} ${SFML_LIBRARIES} ${SNDFILE_LIBRARY})
 
 # copy files
 if(APPLE)
