@@ -4,15 +4,19 @@ cmake_minimum_required(VERSION 2.8)
 # project variables
 set(PROJECT_NAME "sfml-project")
 
+# project source files
 set(
-    GAME_ALL_SOURCES
+    SRC
     ../main.cpp
+    ../Engine.h
     ../Engine.cpp
+    ../Util.h
     ../Util.cpp
 )
 
 if(APPLE)
-    list(APPEND GAME_ALL_SOURCES ../ResourcePath.mm)
+    list(APPEND SRC ../ResourcePath.hpp)
+    list(APPEND SRC ../ResourcePath.mm)
 endif()
 
 # setup target
@@ -46,31 +50,28 @@ else()
 endif()
 
 # setup library SFML
-find_package(SFML COMPONENTS system window graphics network audio REQUIRED)
+find_package(SFML 2 REQUIRED audio graphics network system window)
 
 include_directories(
     ${SFML_INCLUDE_DIR}
 )
 
-# setup libraries
+# setup target links
 if(APPLE)
-    set(CMAKE_EXE_LINKER_FLAGS "-framework Foundation -w")
+    set(EXTRA_TARGET_LINK_LIBRARIES "-framework Foundation")
+else()
+    set(EXTRA_TARGET_LINK_LIBRARIES "")
 endif()
+
+target_link_libraries(${PROJECT_NAME} ${EXTRA_TARGET_LINK_LIBRARIES} ${SFML_LIBRARIES})
 
 # setup compile process
 add_executable(
     ${PROJECT_NAME}
     MACOSX_BUNDLE
-    ${GAME_ALL_SOURCES}
+    ${SRC}
     ${SFML_LIBRARIES}
-    ${SNDFILE_LIBRARY}
-    ${FREETYPE_LIBRARY}
 )
-
-#set_target_properties(${PROJECT_NAME} PROPERTIES RESOURCE "${RESOURCES_DIR}")
-
-# setup library links
-target_link_libraries(${PROJECT_NAME} ${SFML_LIBRARIES})
 
 # copy files
 if(APPLE)
