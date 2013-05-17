@@ -6,6 +6,8 @@ Engine::Engine()
     resetRandom();
     setupScreen();
     setupBackgroundColor();
+
+    showSampleContent = true;
 }
 
 Engine::~Engine()
@@ -21,16 +23,20 @@ void Engine::run()
 
     sf::Clock timer;
 
-    sf::Texture texture;
+    sf::Sprite sampleSprite;
+    sf::Texture sampleTexture;
 
-    if (texture.loadFromFile(resourcePath() + "images/logo.png") != true)
+    if (showSampleContent)
     {
-        Util::log("Cannot load texture: logo.png");
-        return;
-    }
+        if (sampleTexture.loadFromFile(resourcePath() + "images/logo.png") != true)
+        {
+            Util::log("Cannot load texture: logo.png");
+            return;
+        }
 
-    sf::Sprite sprite(texture);
-    sprite.setPosition((screenWidth / 2) - (sprite.getLocalBounds().width / 2), (screenHeight / 2) - (sprite.getLocalBounds().height / 2));
+        sampleSprite.setTexture(sampleTexture);
+        sampleSprite.setPosition((screenWidth / 2) - (sampleSprite.getLocalBounds().width / 2), (screenHeight / 2) - (sampleSprite.getLocalBounds().height / 2));
+    }
 
     while (window->isOpen())
     {
@@ -42,7 +48,12 @@ void Engine::run()
         }
 
         window->clear(backgroundColor);
-        window->draw(sprite);
+
+        if (showSampleContent)
+        {
+            window->draw(sampleSprite);
+        }
+
         window->display();
 
         sf::sleep(sf::milliseconds(1));

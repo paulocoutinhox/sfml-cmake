@@ -26,6 +26,7 @@ private:
     int screenBitsPerPixel;
     std::string screenTitle;
     sf::Color backgroundColor;
+    bool showSampleContent;
 
     sf::RenderWindow *window;
 
