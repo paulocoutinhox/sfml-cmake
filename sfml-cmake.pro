@@ -31,8 +31,7 @@ OTHER_FILES += \
     .gitignore \
     build/cmake/modules/FindSFML.cmake \
     ResourcePath.mm \
-    js/robot1.js \
-    js/robot2.js
+    README.md
 
 HEADERS += \
     ResourcePath.hpp \
