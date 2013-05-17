@@ -63,6 +63,7 @@ void Engine::initializeGraphics()
     settings.antialiasingLevel = 0;
 
     window = new sf::RenderWindow(sf::VideoMode(screenWidth, screenHeight, screenBitsPerPixel), screenTitle, sf::Style::Close, settings);
+    window.setVerticalSyncEnabled(true);
 }
 
 void Engine::checkEvents()
