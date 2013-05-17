@@ -32,8 +32,6 @@ set(RESOURCES_DIR "${CMAKE_SOURCE_DIR}/resources")
 set(SFML_ROOT "${CMAKE_SOURCE_DIR}/library/sfml/${TARGET_SYSTEM}/lib")
 set(SFML_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/library/sfml/${TARGET_SYSTEM}/include")
 set(SFML_LIBRARY_DIR "${CMAKE_SOURCE_DIR}/library/sfml/${TARGET_SYSTEM}/lib")
-set(SNDFILE_LIBRARY_DIR "${CMAKE_SOURCE_DIR}/library/sndfile/${TARGET_SYSTEM}/lib")
-set(FREETYPE_LIBRARY_DIR "${CMAKE_SOURCE_DIR}/library/freetype/${TARGET_SYSTEM}/lib")
 
 # setup project name
 project(${PROJECT_NAME})
@@ -54,13 +52,7 @@ include_directories(
     ${SFML_INCLUDE_DIR}
 )
 
-# setup library SNDFILE
-find_library(SNDFILE_LIBRARY sndfile ${SNDFILE_LIBRARY_DIR})
-
-# setup library FREETYPE
-find_library(FREETYPE_LIBRARY freetype ${FREETYPE_LIBRARY_DIR})
-
-# setup library Core Foundation
+# setup libraries
 if(APPLE)
     set(CMAKE_EXE_LINKER_FLAGS "-framework Foundation -w")
 endif()
@@ -78,7 +70,7 @@ add_executable(
 #set_target_properties(${PROJECT_NAME} PROPERTIES RESOURCE "${RESOURCES_DIR}")
 
 # setup library links
-target_link_libraries(${PROJECT_NAME} ${SFML_LIBRARIES} ${SNDFILE_LIBRARY} ${FREETYPE_LIBRARY})
+target_link_libraries(${PROJECT_NAME} ${SFML_LIBRARIES})
 
 # copy files
 if(APPLE)
